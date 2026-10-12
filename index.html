@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Your personal JARVIS voice assistant. Talk, get AI answers, and hear them aloud with your Sarvam API key.">
+<meta name="theme-color" content="#030d10">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src https://api.sarvam.ai; media-src blob:; img-src data:; base-uri 'none'; form-action 'none'">
+<title>JARVIS · Direct AI & Voice</title>
+<style>
+:root{color-scheme:dark;--bg:#030d10;--panel:#07191e;--line:#21464a;--cyan:#71ffdf;--text:#e8faf7;--muted:#a3bebb}*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;color:var(--text);font:16px/1.5 system-ui,Segoe UI,sans-serif;background:radial-gradient(ellipse at 10% 0,#11393d,transparent 55%),var(--bg)}button,input,textarea,select{font:inherit}button,a,input,textarea,select{outline-offset:4px}button,a.button{cursor:pointer;border:1px solid #366c6b;border-radius:9px;padding:10px 15px;background:#103b3d;color:var(--text);text-decoration:none}button:hover,a.button:hover{background:#195053}button.primary{background:var(--cyan);color:#032421;font-weight:700}button:disabled{opacity:.4;cursor:default}input,textarea,select{background:#031115;color:var(--text);border:1px solid #34595d;border-radius:8px;padding:10px}label{display:block}small,.muted{color:var(--muted)}.wrap{max-width:1160px;margin:auto;padding:26px 24px}header{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:20px}.brand{font-size:20px;letter-spacing:.24em;font-weight:700}.brand small{display:block;font:11px/2 ui-monospace,monospace;letter-spacing:.14em}.badge{font:12px ui-monospace,monospace;padding:9px 12px;border:1px solid #35635d;border-radius:30px;color:var(--cyan)}.layout{display:grid;grid-template-columns:300px 1fr;gap:22px;margin-top:22px}.panel{border:1px solid var(--line);border-radius:15px;background:linear-gradient(130deg,#0c2329,#061419);padding:22px}.side{align-self:start;display:grid;gap:18px}h1{font-size:26px;margin:0 0 5px}h2{font-size:16px;margin:0 0 9px}.intro{margin:0;color:var(--muted);font-size:14px}.field{margin-top:12px}.field input,.field select{width:100%;margin-top:5px}.field label{font-size:13px;color:#bdd8d2}.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.hint{font-size:12px;line-height:1.55;color:var(--muted);margin:10px 0 0}.status{font-size:13px;color:var(--cyan);overflow-wrap:anywhere}.error{color:#ffc1a3}.core{height:140px;display:grid;place-items:center;position:relative;overflow:hidden}.ring{width:120px;height:120px;border:1px dashed #5dc2b6;border-radius:50%;animation:orbit 22s linear infinite;position:absolute}.ring.two{width:170px;height:58px;animation:orbit 16s linear infinite reverse;border-style:solid;border-color:#448b83}.orb{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#e1fff7,#53bdaf 19%,#074846 46%,#02171a 74%);box-shadow:0 0 32px #41c8b847,inset -8px -8px 18px #0008}@keyframes orbit{to{transform:rotate(360deg)}}.chat{min-height:260px;max-height:460px;overflow:auto;overscroll-behavior:contain;margin:20px 0;padding:5px 8px 5px 0;display:flex;flex-direction:column;gap:14px}.empty{margin:auto;text-align:center;color:var(--muted);max-width:350px}.message{padding:14px 16px;border:1px solid #245154;border-radius:12px;max-width:94%;white-space:pre-wrap;overflow-wrap:anywhere}.message.user{align-self:flex-end;background:#0f3638}.message.assistant{align-self:flex-start;background:#0b2228}.message strong{display:block;font:11px ui-monospace,monospace;letter-spacing:.16em;color:var(--cyan);margin-bottom:7px}.composer{display:flex;gap:10px;align-items:stretch}.composer textarea{width:100%;resize:vertical;min-height:70px;max-height:200px}.composer button{align-self:stretch}.bar{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;align-items:center;margin-top:12px}.check{font-size:14px;display:flex;gap:8px;align-items:center}.voice{margin-top:22px;border-top:1px solid var(--line);padding-top:18px}.player{margin-top:12px;background:#041013;padding:12px;border-radius:10px;border:1px solid #2e5c58}audio{width:100%;display:block}.player a{display:inline-block;font-size:13px;margin-top:8px;color:var(--cyan)}.voice-options{display:flex;gap:10px;margin-top:10px}.voice-options label{font-size:12px;flex:1}.voice-options select{width:100%;margin-top:4px}.footer{font:11px/1.8 ui-monospace,monospace;color:#8caeaa;text-align:center;margin-top:20px}.footer a{color:#a2d7cc}@media(max-width:760px){.layout{grid-template-columns:1fr}.wrap{padding:18px 14px}.core{display:none}.side{order:0}.panel{padding:16px}.brand{font-size:16px}.badge{font-size:10px}.chat{min-height:200px}.composer{flex-wrap:wrap}.composer button{width:100%}}@media(prefers-reduced-motion:reduce){.ring{animation:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header><div class="brand">J.A.R.V.I.S.<small>PERSONAL ASSISTANT / DIRECT EDITION 2.1</small></div><span class="badge" id="connection">ADD SARVAM KEY</span></header>
+<div class="layout">
+<aside class="side panel">
+<div class="core" aria-hidden="true"><div class="ring"></div><div class="ring two"></div><div class="orb"></div></div>
+<section><h2>Connect your assistant</h2><p class="intro">Enter your Sarvam API key, then type or use Talk to JARVIS.</p>
+<form id="key-form"><div class="field"><label for="api-key">Sarvam API key</label><input id="api-key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your API key" required></div><div class="buttons"><button class="primary" id="use-key">Use key</button><button type="button" id="forget-key" disabled>Forget key</button></div></form>
+<p class="hint">Your key stays in this tab’s memory and goes only to api.sarvam.ai. Enter it again after reopening. Internet and Sarvam API credits are required.</p>
+<p class="status" id="key-status" role="status">A Sarvam subscription key is needed for chat and voice.</p>
+<a href="https://dashboard.sarvam.ai/key-management" target="_blank" rel="noopener noreferrer" style="color:var(--cyan);font-size:13px">Get a Sarvam API key ↗</a></section>
+<section><h2>Conversation</h2><p class="hint">Messages stay in this tab. Recent messages go to Sarvam when you send a request.</p><div class="buttons"><button type="button" id="new-chat">New chat</button><button type="button" id="export">Export text</button></div></section>
+</aside>
+<section class="panel"><h1>At your service.</h1><p class="intro">Ask a question. Hear the answer.</p>
+<div class="chat" id="chat" role="log" aria-label="Conversation"><p class="empty">Connect your key to begin.<br>Try: “Explain atoms in two sentences.”</p></div>
+<form id="chat-form" class="composer"><textarea id="message" aria-label="Message JARVIS" placeholder="Type your message…" maxlength="6000" rows="2"></textarea><button class="primary" id="send">Send ↗</button></form>
+<div class="buttons"><button type="button" id="talk">🎙 Talk to JARVIS</button><button type="button" id="cancel-mic" hidden>Cancel recording</button></div>
+<p id="mic-status" class="status" role="status">Click Talk, allow your microphone, speak, then click Finish & send.</p>
+<p class="hint">Recording starts only when you click Talk. Audio goes to Sarvam when you finish, or automatically after 25 seconds. Keep Speak replies checked to hear the answer.</p>
+<div class="bar"><label class="check"><input id="auto-voice" type="checkbox" checked>Speak replies</label><button type="button" id="cancel-chat" hidden>Cancel reply</button></div>
+<p id="chat-status" class="status" role="status">Enter your key to enable AI replies.</p>
+<section class="voice" aria-label="Voice replies"><h2>Voice replies</h2><p class="hint">Sarvam generates the audio. Use the player to pause or replay it.</p>
+<div class="voice-options"><label for="voice">Voice<select id="voice"><option value="shubh">Shubh</option><option value="ratan">Ratan</option><option value="priya">Priya</option></select></label><label for="language">Language<select id="language"><option value="auto">Auto detect script</option><option value="en-IN">English</option><option value="hi-IN">Hindi</option><option value="mr-IN">Marathi</option><option value="bn-IN">Bengali</option><option value="ta-IN">Tamil</option><option value="te-IN">Telugu</option><option value="kn-IN">Kannada</option><option value="ml-IN">Malayalam</option><option value="gu-IN">Gujarati</option><option value="pa-IN">Punjabi</option><option value="od-IN">Odia</option></select></label></div>
+<div class="buttons"><button id="test-voice" type="button">Test voice</button><button id="read-reply" type="button" disabled>Read reply</button><button id="stop-voice" type="button">Stop voice</button></div>
+<p id="voice-status" class="status" role="status">Connect your key, then click Test voice.</p>
+<div class="player" id="player-wrap" hidden><audio id="audio" controls preload="auto" aria-label="JARVIS audio reply"></audio><div class="buttons"><button type="button" id="play-audio">▶ Play audio</button></div><a id="download-audio" download="jarvis-voice.wav">Download this audio section</a></div>
+</section></section></div>
+<p class="footer">DIRECT CONNECTION · SARVAM CHAT + BULBUL VOICE · NO INSTALLATION<br><a href="https://docs.sarvam.ai/api-reference/text-to-speech/convert" target="_blank" rel="noopener noreferrer">Sarvam voice documentation</a></p>
+</main>
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const API = 'https://api.sarvam.ai';
+const SYSTEM = 'You are JARVIS, a helpful personal assistant. Be clear, warm and concise. Reply in the user\'s language. This app transcribes microphone recordings into user messages and converts your final text to spoken audio. Answer voice messages naturally and directly. Do not claim playback happened: the app controls it. You receive transcripts, not ambient sounds, and have no computer control or live web access. Never claim to perform actions beyond answering.';
+let apiKey = '', messages = [], lastReply = '', chatController = null;
+let micSession = null;
+let voiceController = null, voiceEpoch = 0, voiceUrl = '', voiceQueue = [], voiceIndex = 0;
+const audio = $('audio');
+function status(id, text, error = false) { $(id).textContent = text; $(id).classList.toggle('error', error); }
+function needKey() {
+  if (apiKey) return true;
+  status('key-status', 'Paste your Sarvam API key and click Use key first.', true);
+  $('api-key').focus(); return false;
+}
+function addMessage(role, text) {
+  $('chat').querySelector('.empty')?.remove();
+  const box = document.createElement('div'); box.className = 'message ' + role;
+  const label = document.createElement('strong'); label.textContent = role === 'user' ? 'YOU' : 'J.A.R.V.I.S.';
+  const body = document.createElement('div'); body.textContent = text; box.append(label, body);
+  $('chat').append(box); $('chat').scrollTop = $('chat').scrollHeight;
+}
+function errorText(code) {
+  if (code === 401 || code === 403) return 'Sarvam rejected the key or API access. Enter a valid Sarvam subscription key.';
+  if (code === 402 || code === 429) return 'Sarvam credits or request limit reached. Check your Sarvam account, then try again.';
+  if (code === 400 || code === 422) return 'Sarvam rejected the request. Try a shorter message or another voice.';
+  return 'Sarvam is unavailable (HTTP ' + code + '). Please try again.';
+}
+async function request(path, body, parentSignal) {
+  const requestKey = apiKey;
+  if (!requestKey) throw Error('Enter your Sarvam API key first.');
+  const controller = new AbortController(); let timedOut = false;
+  const abort = () => controller.abort();
+  if (parentSignal?.aborted) abort(); else parentSignal?.addEventListener('abort', abort, {once:true});
+  const timer = setTimeout(() => { timedOut = true; controller.abort(); }, 90000);
+  try {
+    const multipart = body instanceof FormData;
+    const response = await fetch(API + path, {method:'POST', mode:'cors', credentials:'omit', redirect:'error',
+      headers:{...(multipart ? {} : {'Content-Type':'application/json'}), 'api-subscription-key':requestKey}, body:multipart ? body : JSON.stringify(body), signal:controller.signal});
+    if (!response.ok) throw Error(errorText(response.status));
+    return await response.json();
+  } catch (error) {
+    if (timedOut) throw Error('Sarvam took too long to respond. Please try again.');
+    if (parentSignal?.aborted) throw new DOMException('Request stopped.', 'AbortError');
+    if (error instanceof TypeError) throw Error('Cannot reach Sarvam. Check internet access. If this preview blocks connections, open this website directly in Chrome or Edge.');
+    throw error;
+  } finally { clearTimeout(timer); parentSignal?.removeEventListener('abort', abort); }
+}
+function busy(value) {
+  $('send').disabled = value; $('message').disabled = value; $('new-chat').disabled = value;
+  $('use-key').disabled = value; $('cancel-chat').hidden = !value;
+  $('talk').disabled = value;
+}
+function chatBody(input) { return {model:'sarvam-105b',messages:[{role:'system',content:SYSTEM},...input],max_tokens:1400,stream:false,reasoning_effort:null}; }
+$('key-form').onsubmit = event => {
+  event.preventDefault(); if (chatController || micSession) return;
+  const key = $('api-key').value.trim();
+  if (!/^[A-Za-z0-9_-]{20,4096}$/.test(key)) { status('key-status', 'Paste the complete Sarvam API subscription key.', true); return; }
+  stopVoice(true); apiKey = key; $('api-key').value = ''; $('forget-key').disabled = false;
+  $('connection').textContent = 'KEY LOADED';
+  status('key-status', 'Key loaded for this tab. Send a message or test voice to check it.');
+  status('chat-status', 'Ready for your message.'); status('voice-status', 'Ready. Click Test voice to generate a sample.');
+};
+$('forget-key').onclick = () => {
+  chatController?.abort(); cancelMic(); stopVoice(true); apiKey = ''; $('api-key').value = ''; $('forget-key').disabled = true;
+  $('connection').textContent = 'ADD SARVAM KEY'; status('key-status', 'Key removed from this tab.'); status('voice-status', 'Key required for voice.');
+};
+$('chat-form').onsubmit = async event => {
+  event.preventDefault(); if (chatController || micSession || !needKey()) return;
+  const text = $('message').value.trim(); if (!text) return;
+  const controller = new AbortController(); chatController = controller; stopVoice(true); busy(true);
+  status('chat-status', 'JARVIS is thinking…');
+  try {
+    const data = await request('/v1/chat/completions', chatBody([...messages.slice(-12), {role:'user',content:text}]), controller.signal);
+    if (controller.signal.aborted) return;
+    const answer = data.choices?.[0]?.message?.content;
+    if (typeof answer !== 'string' || !answer.trim()) throw Error('Sarvam returned no answer. Please try again.');
+    messages.push({role:'user',content:text}, {role:'assistant',content:answer.trim()});
+    addMessage('user', text); addMessage('assistant', answer.trim()); lastReply = answer.trim();
+    $('message').value = ''; $('read-reply').disabled = false; $('connection').textContent = 'AI CONNECTED';
+    status('chat-status', data.choices[0].finish_reason === 'length' ? 'Reply reached the limit. Ask JARVIS to continue.' : 'Reply received from Sarvam.');
+    if ($('auto-voice').checked) void speak(lastReply);
+  } catch (error) { status('chat-status', error.name === 'AbortError' ? 'Reply cancelled. Your message is still below.' : error.message, error.name !== 'AbortError'); }
+  finally { if (chatController === controller) { chatController = null; busy(false); $('message').focus(); } }
+};
+$('message').addEventListener('keydown', event => { if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) { event.preventDefault(); $('chat-form').requestSubmit(); } });
+$('cancel-chat').onclick = () => chatController?.abort();
+$('new-chat').onclick = () => {
+  if (chatController || micSession) return; stopVoice(true); messages = []; lastReply = ''; $('chat').replaceChildren();
+  $('read-reply').disabled = true; status('chat-status', 'New conversation.');
+};
+$('export').onclick = () => {
+  if (!messages.length) { status('chat-status', 'There are no messages to export yet.'); return; }
+  const url = URL.createObjectURL(new Blob([messages.map(m => m.role.toUpperCase()+'\n'+m.content).join('\n\n')], {type:'text/plain'}));
+  const link = document.createElement('a'); link.href = url; link.download = 'jarvis-conversation.txt'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+};
+function speechChunks(text) {
+  let rest = text.replace(/```[\s\S]*?```/g, ' Code is available in the text reply. ').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/[*#`]/g, '').trim();
+  const parts = [];
+  while (rest.length) {
+    let end = Math.min(2000, rest.length);
+    if (end < rest.length) { const candidate = rest.slice(0,end); const boundary = Math.max(candidate.lastIndexOf('. ')+1, candidate.lastIndexOf('।')+1, candidate.lastIndexOf('\n')); end = boundary > 700 ? boundary : Math.max(700, candidate.lastIndexOf(' ')); }
+    if (/[\uD800-\uDBFF]/.test(rest[end-1] || '')) end--;
+    parts.push(rest.slice(0,end).trim()); rest = rest.slice(end).trim();
+  }
+  return parts.filter(Boolean);
+}
+function languageFor(text) {
+  if ($('language').value !== 'auto') return $('language').value;
+  const scripts = [[/[\u0900-\u097f]/,'hi-IN'],[/[\u0980-\u09ff]/,'bn-IN'],[/[\u0a00-\u0a7f]/,'pa-IN'],[/[\u0a80-\u0aff]/,'gu-IN'],[/[\u0b00-\u0b7f]/,'od-IN'],[/[\u0b80-\u0bff]/,'ta-IN'],[/[\u0c00-\u0c7f]/,'te-IN'],[/[\u0c80-\u0cff]/,'kn-IN'],[/[\u0d00-\u0d7f]/,'ml-IN']];
+  return scripts.find(([pattern]) => pattern.test(text))?.[1] || 'en-IN';
+}
+function stopVoice(quiet = false) {
+  voiceEpoch++; voiceController?.abort(); voiceController = null; voiceQueue = []; voiceIndex = 0;
+  audio.onended = audio.onplay = audio.onerror = null; audio.pause(); audio.removeAttribute('src'); audio.load();
+  $('player-wrap').hidden = true; $('download-audio').removeAttribute('href');
+  if (voiceUrl) URL.revokeObjectURL(voiceUrl); voiceUrl = '';
+  status('voice-status', quiet ? 'Voice ready.' : 'Voice stopped.');
+}
+function wavBlob(encoded) {
+  if (typeof encoded !== 'string' || encoded.length > 24000000) throw Error('Sarvam returned no usable audio.');
+  const raw = atob(encoded); if (raw.length < 44 || raw.slice(0,4) !== 'RIFF' || raw.slice(8,12) !== 'WAVE') throw Error('Sarvam returned invalid audio.');
+  return new Blob([Uint8Array.from(raw, character => character.charCodeAt(0))], {type:'audio/wav'});
+}
+async function playAudio(epoch = voiceEpoch) {
+  if (!audio.getAttribute('src')) return;
+  try { await audio.play(); } catch (error) { if (epoch === voiceEpoch) status('voice-status', error.name === 'NotAllowedError' ? 'Audio is ready. Click ▶ Play audio below to hear it.' : 'Audio could not play here. Download the audio section to listen.', true); }
+}
+async function playSection(epoch, options) {
+  if (epoch !== voiceEpoch) return;
+  if (voiceIndex >= voiceQueue.length) { status('voice-status', 'Finished. Use Play audio to replay the last section.'); return; }
+  const controller = new AbortController(); voiceController = controller;
+  status('voice-status', 'Generating audio · section '+(voiceIndex+1)+' of '+voiceQueue.length+'…');
+  try {
+    const text = voiceQueue[voiceIndex];
+    const data = await request('/text-to-speech', {text,model:'bulbul:v3',speaker:options.speaker,language_code:options.language === 'auto' ? languageFor(text) : options.language,output_audio_codec:'wav',speech_sample_rate:24000,pace:1}, controller.signal);
+    if (epoch !== voiceEpoch) return;
+    const blob = wavBlob(data.audios?.[0]);
+    if (voiceUrl) URL.revokeObjectURL(voiceUrl); voiceUrl = URL.createObjectURL(blob);
+    audio.src = voiceUrl; audio.muted = false; audio.volume = 1;
+    $('download-audio').href = voiceUrl; $('download-audio').download = 'jarvis-voice-'+(voiceIndex+1)+'.wav'; $('player-wrap').hidden = false;
+    audio.onplay = () => { if (epoch === voiceEpoch) status('voice-status', 'Playing audio · section '+Math.min(voiceIndex+1,voiceQueue.length)+' of '+voiceQueue.length); };
+    audio.onerror = () => { if (epoch === voiceEpoch) status('voice-status', 'Your browser could not play this audio. Use Download this audio section.', true); };
+    audio.onended = () => { if (epoch === voiceEpoch) { voiceIndex++; void playSection(epoch, options); } };
+    await playAudio(epoch);
+  } catch (error) { if (epoch === voiceEpoch && error.name !== 'AbortError') status('voice-status', error.message + ' Your text reply is still available.', true); }
+  finally { if (voiceController === controller) voiceController = null; }
+}
+async function speak(text) {
+  if (!needKey()) return;
+  if (!text?.trim()) { status('voice-status', 'There is no reply to read yet.'); return; }
+  stopVoice(true); voiceQueue = speechChunks(text); voiceIndex = 0;
+  await playSection(voiceEpoch, {speaker:$('voice').value, language:$('language').value});
+}
+$('test-voice').onclick = () => speak('At your service. Your JARVIS voice connection is ready.');
+$('read-reply').onclick = () => speak(lastReply);
+$('stop-voice').onclick = () => stopVoice();
+$('play-audio').onclick = () => playAudio();
+$('auto-voice').onchange = () => { if (!$('auto-voice').checked) stopVoice(); };
+function releaseMicrophone(session) {
+  clearTimeout(session.timer);
+  session.stream?.getTracks().forEach(track => track.stop());
+}
+function micControls(active) {
+  for (const id of ['send','message','use-key','new-chat','read-reply','test-voice']) $(id).disabled = active;
+  if (!active) $('read-reply').disabled = !lastReply;
+  $('talk').disabled = false; $('cancel-mic').hidden = !active;
+  $('talk').textContent = active ? 'Finish & send' : '🎙 Talk to JARVIS';
+}
+function cancelMic(quiet = false) {
+  const session = micSession; if (!session) return;
+  session.cancelled = true; session.controller.abort();
+  if (session.recorder?.state === 'recording') session.recorder.stop();
+  releaseMicrophone(session); micSession = null; micControls(false);
+  if (!quiet) status('mic-status', 'Recording cancelled. No message was sent.');
+}
+async function transcribeRecording(session) {
+  releaseMicrophone(session);
+  if (session.cancelled || micSession !== session) return;
+  $('talk').disabled = true; $('cancel-mic').textContent = 'Cancel transcription';
+  status('mic-status', 'Turning your voice into text…');
+  try {
+    const type = session.recorder.mimeType || session.parts[0]?.type || 'audio/webm';
+    const blob = new Blob(session.parts, {type});
+    if (!blob.size) throw Error('No audio was recorded. Check your microphone and try again.');
+    if (blob.size > 8000000) throw Error('Recording is too large. Try a shorter message.');
+    const form = new FormData();
+    const extension = /mp4/.test(type) ? 'm4a' : /ogg/.test(type) ? 'ogg' : /wav/.test(type) ? 'wav' : 'webm';
+    form.append('file', blob, 'jarvis-recording.'+extension);
+    form.append('model', 'saaras:v3'); form.append('mode', 'transcribe'); form.append('language_code', session.language === 'auto' ? 'unknown' : session.language);
+    const data = await request('/speech-to-text', form, session.controller.signal);
+    if (session.cancelled || micSession !== session) return;
+    const transcript = typeof data.transcript === 'string' ? data.transcript.trim() : '';
+    if (!transcript) throw Error('No speech was detected. Move closer to the microphone and try again.');
+    const text = [session.draft, transcript].filter(Boolean).join('\n');
+    $('message').value = text;
+    micSession = null; micControls(false);
+    if (text.length > 6000) { status('mic-status', 'Speech transcribed. Shorten the text below to 6,000 characters before sending.', true); return; }
+    status('mic-status', 'Heard: '+transcript);
+    $('chat-form').requestSubmit();
+  } catch (error) {
+    if (!session.cancelled && micSession === session) status('mic-status', error.name === 'AbortError' ? 'Transcription cancelled.' : error.message, error.name !== 'AbortError');
+  } finally {
+    if (micSession === session) { micSession = null; micControls(false); }
+    session.parts = [];
+  }
+}
+async function startMicrophone() {
+  if (chatController || micSession || !needKey()) return;
+  if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === 'undefined') {
+    status('mic-status', 'Microphone recording is unavailable in this preview. Open this website directly in Chrome or Edge, then allow microphone access.', true); return;
+  }
+  stopVoice(true);
+  const session = {controller:new AbortController(),cancelled:false,parts:[],stream:null,recorder:null,timer:null,draft:$('message').value.trim(),language:$('language').value};
+  micSession = session; micControls(true); $('talk').disabled = true; $('cancel-mic').textContent = 'Cancel recording';
+  status('mic-status', 'Waiting for microphone permission. Choose Allow in your browser.');
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,channelCount:1},video:false});
+    session.stream = stream;
+    if (session.cancelled || micSession !== session) { releaseMicrophone(session); return; }
+    const mimeType = ['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg;codecs=opus'].find(type => MediaRecorder.isTypeSupported(type));
+    const recorder = new MediaRecorder(stream, mimeType ? {mimeType} : undefined); session.recorder = recorder;
+    recorder.ondataavailable = event => { if (!session.cancelled && event.data.size) session.parts.push(event.data); };
+    recorder.onstop = () => { void transcribeRecording(session); };
+    recorder.onerror = () => { if (micSession === session) { cancelMic(true); status('mic-status', 'Microphone recording failed. Check the selected input device and try again.', true); } };
+    recorder.start(1000); $('talk').disabled = false;
+    status('mic-status', '● Recording — speak now. Click Finish & send when done. Auto-sends after 25 seconds.');
+    session.timer = setTimeout(() => { if (micSession === session && recorder.state === 'recording') finishRecording(); }, 25000);
+  } catch (error) {
+    releaseMicrophone(session);
+    if (session.cancelled || micSession !== session) return;
+    micSession = null; micControls(false);
+    const description = error.name === 'NotAllowedError' ? 'Microphone permission was denied. Allow microphone access in your browser, then click Talk again.' : error.name === 'NotFoundError' ? 'No microphone found. Connect or enable a microphone and try again.' : 'Could not open the microphone. Close other recording apps or open this website in Chrome or Edge.';
+    status('mic-status', description, true);
+  }
+}
+function finishRecording() {
+  const session = micSession;
+  if (!session || session.recorder?.state !== 'recording') return;
+  clearTimeout(session.timer); $('talk').disabled = true;
+  status('mic-status', 'Finishing recording…'); session.recorder.stop();
+}
+$('talk').onclick = () => micSession ? finishRecording() : startMicrophone();
+$('cancel-mic').onclick = () => cancelMic();
+window.addEventListener('pagehide', () => { chatController?.abort(); cancelMic(true); stopVoice(true); apiKey = ''; });
+</script>
+</body>
+</html>
