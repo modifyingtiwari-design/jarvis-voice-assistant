@@ -1,42 +1,33 @@
-# JARVIS Voice Assistant · Mark III
+# JARVIS Command Center · Mark IV
 
-A futuristic browser assistant with text chat, microphone input, and spoken replies powered by your own Sarvam API key.
+A buildless, single-file personal assistant with a holographic dashboard and your own Sarvam API key.
 
-## Use
+## Start
 
-1. Open `index.html` in Chrome or Edge, or visit the GitHub Pages website when enabled.
-2. Enter your Sarvam API subscription key and select **Use key**.
-3. Select **Talk to JARVIS**, allow microphone access, and speak. Automatic mode uses browser speech where available and sends when recognition ends. In Sarvam mode, pause after your instruction or select **Finish & send**.
-4. Keep **Speak replies** enabled. If autoplay is blocked, select **Play audio**.
+Open the published HTTPS site in Chrome or Edge. Go to **Settings**, connect your Sarvam subscription key, choose your spoken language, then select **Enable voice mode** and allow the microphone.
 
-You can also type messages. No local backend or package installation is required. Internet access and Sarvam API credits are required. An Indus account alone is not an API subscription key.
+Voice mode automatically takes turns: listen, send your instruction, speak the response, then listen again. Say **stop listening** or press the voice-mode button to stop. During a reply, use **Interrupt & talk**. Keep this page visible; switching away stops voice mode and releases the microphone. It is not full-duplex audio or a background wake-word service. Network and speech-provider latency still apply.
 
-Get your key at https://dashboard.sarvam.ai/key-management.
+## Tasks
 
-## Privacy and limitations
+- Up to three AI requests run concurrently. Further requests queue, with individual cancel/retry controls. Send another command while earlier ones run.
+- Separate independent commands with a semicolon or “and also” (maximum six per submission, fifteen active tasks total).
+- Spoken replies play one at a time. Read any previous response aloud from its conversation entry.
+- Local commands: “Set a timer for 5 minutes”, “Note: call Alex”, “Read my notes”, “What time is it?”. These commands use English phrases; AI chat supports other languages.
+- Timers and notes work without an API key. Device speech is used for local replies without a key. Timers require this tab to remain open; suspended devices or throttled tabs can delay alerts.
+- Voice, cognition, creative and utility channels use distinct activity waveforms. These are visual task signatures, not measured sound frequencies. The central audio meter uses available microphone/playback levels.
+- Select JARVIS dry wit or focused personality in Settings.
 
-- No API key is included in this repository. Your key stays in the open tab's memory and is sent only to `api.sarvam.ai`.
-- Browser speech may use the browser vendor's speech service and shows a live transcript. Set the Language control to your spoken language; Auto uses English (India) for browser recognition.
-- In Sarvam mode, microphone recordings are sent to Sarvam for transcription. Compatible recordings are converted to mono 16 kHz WAV. Recording stops on a pause after speech, after 25 seconds, or when you finish/cancel.
-- Chat messages are sent to Sarvam for AI replies and spoken audio. Browser dictation works before adding a key, but AI replies require a Sarvam key.
-- Refreshing clears your key and conversation. Use **Export text** to save a conversation.
-- Microphone access depends on your browser and permissions; use HTTPS hosting for other devices.
-- This assistant supports chat and voice. It does not control your computer or browse the live web.
+## Privacy and limits
 
-## Host with GitHub Pages
+The API key is stored only in tab memory and sent only to api.sarvam.ai. It is never included in this repository. Refreshing removes the key, conversation, notes and timers; export the session to keep text.
 
-In repository **Settings → Pages**, select **Deploy from a branch**, then **main** and **/ (root)**, and save. GitHub will display the published website address after deployment.
+Browser speech may send audio to the browser vendor. Sarvam speech sends the recording to Sarvam. AI requests include recent completed conversation. Each simultaneous AI task uses a snapshot of conversation at submission, so it does not see the unfinished output of another task. Local utility commands are handled in this tab. Their completed replies can become conversation context in later AI requests.
 
-## Development
+This app answers, drafts, plans and runs its built-in timer/note utilities. It does not access other apps, send messages, control your device or browse live websites.
 
-The interface, styling, and JavaScript are contained in `index.html`. There is no build step.
+AI replies and Sarvam voices require internet, a valid Sarvam API subscription key and available credits. Automatic speech recognition depends on browser support and permissions. If browser speech fails, choose Sarvam input; if Sarvam speech output fails, the optional device-voice fallback is used. If autoplay is blocked, use **Play / resume reply**.
 
-The wireframe reactor indicates permission requests, listening, transcription, AI processing, speech generation and actual audio playback. Audio meters use microphone/playback levels where available; browser recognition uses an activity animation without claiming to measure audio levels. Reduced-motion preferences are respected.
+## Hosting
 
-## Voice troubleshooting
-
-- Permission blocked: allow Microphone in the site's browser settings and reopen the HTTPS website directly in Chrome or Edge.
-- Browser speech service error: select **Sarvam speech** and try again.
-- Sarvam transcription error: select **Browser speech** where supported. The interface displays the failed stage, HTTP status and provider's error message instead of suggesting an unrelated voice change.
-- Silent input: check your device's microphone selection and input volume.
-- Audio ready but silent: click **Play audio** and check device volume.
+Upload index.html to the root of a static site. No backend, packages or build step are required. GitHub Pages: deploy main / root. Vercel: import the GitHub repository as a static site with no build command. Keep .nojekyll for GitHub Pages. Do not upload credentials or private workspace files.

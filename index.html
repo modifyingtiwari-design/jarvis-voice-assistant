@@ -1,80 +1,38 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="referrer" content="no-referrer">
-<meta name="description" content="Your personal JARVIS voice assistant. Talk, get AI answers, and hear them aloud with your Sarvam API key.">
-<meta name="theme-color" content="#030d10">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src https://api.sarvam.ai; media-src blob:; img-src data:; base-uri 'none'; form-action 'none'">
-<title>JARVIS · Direct AI & Voice</title>
-<style>
-:root{color-scheme:dark;--bg:#030d10;--panel:#07191e;--line:#21464a;--cyan:#71ffdf;--text:#e8faf7;--muted:#a3bebb}*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;color:var(--text);font:16px/1.5 system-ui,Segoe UI,sans-serif;background:radial-gradient(ellipse at 10% 0,#11393d,transparent 55%),var(--bg)}button,input,textarea,select{font:inherit}button,a,input,textarea,select{outline-offset:4px}button,a.button{cursor:pointer;border:1px solid #366c6b;border-radius:9px;padding:10px 15px;background:#103b3d;color:var(--text);text-decoration:none}button:hover,a.button:hover{background:#195053}button.primary{background:var(--cyan);color:#032421;font-weight:700}button:disabled{opacity:.4;cursor:default}input,textarea,select{background:#031115;color:var(--text);border:1px solid #34595d;border-radius:8px;padding:10px}label{display:block}small,.muted{color:var(--muted)}.wrap{max-width:1160px;margin:auto;padding:26px 24px}header{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--line);padding-bottom:20px}.brand{font-size:20px;letter-spacing:.24em;font-weight:700}.brand small{display:block;font:11px/2 ui-monospace,monospace;letter-spacing:.14em}.badge{font:12px ui-monospace,monospace;padding:9px 12px;border:1px solid #35635d;border-radius:30px;color:var(--cyan)}.layout{display:grid;grid-template-columns:300px 1fr;gap:22px;margin-top:22px}.panel{border:1px solid var(--line);border-radius:15px;background:linear-gradient(130deg,#0c2329,#061419);padding:22px}.side{align-self:start;display:grid;gap:18px}h1{font-size:26px;margin:0 0 5px}h2{font-size:16px;margin:0 0 9px}.intro{margin:0;color:var(--muted);font-size:14px}.field{margin-top:12px}.field input,.field select{width:100%;margin-top:5px}.field label{font-size:13px;color:#bdd8d2}.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.hint{font-size:12px;line-height:1.55;color:var(--muted);margin:10px 0 0}.status{font-size:13px;color:var(--cyan);overflow-wrap:anywhere}.error{color:#ffc1a3}.core{height:140px;display:grid;place-items:center;position:relative;overflow:hidden}.ring{width:120px;height:120px;border:1px dashed #5dc2b6;border-radius:50%;animation:orbit 22s linear infinite;position:absolute}.ring.two{width:170px;height:58px;animation:orbit 16s linear infinite reverse;border-style:solid;border-color:#448b83}.orb{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#e1fff7,#53bdaf 19%,#074846 46%,#02171a 74%);box-shadow:0 0 32px #41c8b847,inset -8px -8px 18px #0008}@keyframes orbit{to{transform:rotate(360deg)}}.chat{min-height:260px;max-height:460px;overflow:auto;overscroll-behavior:contain;margin:20px 0;padding:5px 8px 5px 0;display:flex;flex-direction:column;gap:14px}.empty{margin:auto;text-align:center;color:var(--muted);max-width:350px}.message{padding:14px 16px;border:1px solid #245154;border-radius:12px;max-width:94%;white-space:pre-wrap;overflow-wrap:anywhere}.message.user{align-self:flex-end;background:#0f3638}.message.assistant{align-self:flex-start;background:#0b2228}.message strong{display:block;font:11px ui-monospace,monospace;letter-spacing:.16em;color:var(--cyan);margin-bottom:7px}.composer{display:flex;gap:10px;align-items:stretch}.composer textarea{width:100%;resize:vertical;min-height:70px;max-height:200px}.composer button{align-self:stretch}.bar{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;align-items:center;margin-top:12px}.check{font-size:14px;display:flex;gap:8px;align-items:center}.voice{margin-top:22px;border-top:1px solid var(--line);padding-top:18px}.player{margin-top:12px;background:#041013;padding:12px;border-radius:10px;border:1px solid #2e5c58}audio{width:100%;display:block}.player a{display:inline-block;font-size:13px;margin-top:8px;color:var(--cyan)}.voice-options{display:flex;gap:10px;margin-top:10px}.voice-options label{font-size:12px;flex:1}.voice-options select{width:100%;margin-top:4px}.footer{font:11px/1.8 ui-monospace,monospace;color:#8caeaa;text-align:center;margin-top:20px}.footer a{color:#a2d7cc}@media(max-width:760px){.layout{grid-template-columns:1fr}.wrap{padding:18px 14px}.core{display:none}.side{order:0}.panel{padding:16px}.brand{font-size:16px}.badge{font-size:10px}.chat{min-height:200px}.composer{flex-wrap:wrap}.composer button{width:100%}}@media(prefers-reduced-motion:reduce){.ring{animation:none}}
-</style>
-<style>
-:root{--cyan:#6beaff;--text:#e1f4ff;--muted:#92b2c3;--line:#234556;--accent:#66e6ff}body{background:radial-gradient(ellipse at 50% 25%,#0c283d 0,transparent 60%),#030910}body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(#78c8ed05 1px,transparent 1px),linear-gradient(90deg,#78c8ed05 1px,transparent 1px);background-size:48px 48px}.wrap{max-width:1380px;position:relative}header{border-color:#295365}.brand{color:#e1f8ff;font-size:24px;letter-spacing:.33em}.brand small{color:#7b9eaf;letter-spacing:.15em}.badge{border-radius:3px;color:var(--accent);border-color:#30576c}.panel{border-radius:5px;background:linear-gradient(125deg,#0b1a27ed,#051019f5);box-shadow:inset 0 1px #92ddff0a}button,a.button,input,select,textarea{border-radius:4px}button{background:#102838;border-color:#315b70}button:hover{background:#183e51}button.primary{background:#9deeff;color:#03121e}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid #b4f5ff}h1{font-size:25px}h2{letter-spacing:.03em}.layout{grid-template-columns:285px 1fr;margin-top:20px}.chat{min-height:200px;max-height:340px}.message{border-radius:4px;border-color:#254759}.message.user{background:#113347}.message.assistant{background:#0a1e2b}.intro,.hint{color:#9cbbcd}.side .core{display:none}.footer{color:#7496ac}.hero{position:relative;margin-top:24px;border:1px solid #2d5266;background:linear-gradient(125deg,#081827b0,#040c16d9);display:grid;grid-template-columns:1fr minmax(280px,450px) 1fr;align-items:center;min-height:390px;padding:24px;gap:22px;overflow:hidden}.hero:before,.hero:after{content:"";position:absolute;width:60px;height:60px;border-color:var(--accent);pointer-events:none}.hero:before{left:0;top:0;border-left:2px solid;border-top:2px solid}.hero:after{right:0;bottom:0;border-right:2px solid;border-bottom:2px solid}.eyebrow{font:11px/1.8 ui-monospace,monospace;letter-spacing:.2em;color:#8cb6ce}.hero h1{font-weight:400;font-size:30px;letter-spacing:.04em;margin:10px 0}.state-word{font:700 20px/1.6 ui-monospace,monospace;letter-spacing:.22em;color:var(--accent)}.state-word:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:10px}.telemetry{margin-top:22px;border-top:1px solid #234152;padding-top:10px;display:grid;gap:10px;font:11px ui-monospace,monospace;color:#a4bfd0}.telemetry div{display:flex;justify-content:space-between;gap:12px}.telemetry b{font-weight:400;color:#d7f7ff}.reactor{position:relative;aspect-ratio:1;max-height:370px;width:100%;display:grid;place-items:center;perspective:800px}.reactor canvas{position:absolute;width:100%;height:100%}.reactor-caption{position:absolute;bottom:1%;font:10px ui-monospace,monospace;letter-spacing:.28em;color:#72a7c3}.hero-controls{position:relative;z-index:1}.hero-controls .buttons{display:grid}.hero-controls button#talk{min-height:55px;font-size:16px;font-weight:700;background:#112f41;border-color:var(--accent);color:#d6f8ff}.hero-controls button#talk:hover{background:#1b4257}.hero-controls .status{min-height:42px;font-size:13px;line-height:1.6}.hero-controls select{width:100%;font-size:13px}.hero-controls label{font-size:12px;color:#a5c8dd}.live-transcript{margin-top:14px;padding:14px;background:#06131f;border-left:2px solid var(--accent);min-height:76px;max-height:145px;overflow:auto}.live-transcript p{margin:6px 0 0;font-size:14px;color:#d9f2ff}.signal{height:28px;display:flex;gap:3px;align-items:center;margin-top:16px}.signal i{width:3px;height:3px;background:var(--accent);opacity:.55;transition:height .08s}.hero .error{color:#ffbeaa}.mic-guide{background:#221712;border:1px solid #a26341;padding:12px;margin-top:10px;font-size:13px}.mic-guide a{color:#ffe0c5}.mic-guide p{margin:0 0 8px}.voice-options{flex-wrap:wrap}.voice-options label{min-width:135px}body[data-state="listening"]{--accent:#62ffe4}body[data-state="thinking"],body[data-state="transcribing"],body[data-state="generating"]{--accent:#d3bcff}body[data-state="speaking"]{--accent:#82c9ff}body[data-state="error"]{--accent:#ffb391}.hero-note{font-size:12px;line-height:1.7;color:#a1bacb;max-width:245px}.chat-heading{display:flex;justify-content:space-between;align-items:center;gap:10px}.chat-heading span{font:10px ui-monospace,monospace;color:#82a9bf;letter-spacing:.12em}.settings-title{font:11px ui-monospace,monospace;color:#6b96ad;letter-spacing:.2em;margin-bottom:16px}@media(max-width:900px){.hero{grid-template-columns:1fr 1.3fr;padding:18px}.hero-controls{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:0 20px}.hero-controls .live-transcript,.hero-controls .mic-guide,.hero-controls .hint{grid-column:1/-1}.hero-controls .buttons{margin-top:0}.reactor{max-height:300px}.hero{min-height:0}.hero-controls .field{margin:0}}@media(max-width:760px){.layout{grid-template-columns:1fr}.side{order:2}.hero h1{font-size:23px}.hero{gap:8px;padding:14px}.reactor{min-width:0}.hero-controls{display:block}.hero-controls .buttons{margin-top:12px}.hero-note{font-size:11px}.telemetry{font-size:10px}.brand{font-size:18px}.brand small{font-size:9px}.state-word{font-size:14px}.reactor-caption{font-size:8px}.hero .eyebrow{font-size:9px}.voice-options{gap:12px}.hero-controls .field{margin-top:12px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
-</style>
-</head>
-<body data-state="idle">
-<main class="wrap">
-<header><div class="brand">J.A.R.V.I.S.<small>VOICE COMMAND SYSTEM / MARK III</small></div><span class="badge" id="connection">ADD SARVAM KEY</span></header>
-<section class="hero" aria-label="Voice command center">
-<div><span class="eyebrow">PERSONAL INTELLIGENCE SYSTEM</span><h1>At your command.</h1><div id="reactor-state" class="state-word" role="status">STANDBY</div><p class="hero-note" id="reactor-hint">Tap the microphone to give a voice instruction.</p><div class="signal" id="signal" aria-hidden="true"></div><div class="telemetry"><div>INPUT CHANNEL <b id="input-channel">READY</b></div><div>SESSION <b id="record-time">00:00</b></div><div>VOICE OUTPUT <b id="output-channel">STANDBY</b></div></div></div>
-<div class="reactor" aria-hidden="true"><canvas id="reactor"></canvas><div class="reactor-caption">NEURAL VOICE INTERFACE • 03</div></div>
-<div class="hero-controls"><div class="field"><label for="input-mode">Voice input method</label><select id="input-mode"><option value="auto">Automatic (recommended)</option><option value="browser">Browser speech · live transcript</option><option value="sarvam">Sarvam speech · recorded audio</option></select></div><div class="buttons"><button type="button" id="talk">🎙 Talk to JARVIS</button><button type="button" id="cancel-mic" hidden>Cancel recording</button></div><p id="mic-status" class="status" role="status">Click Talk and allow microphone access.</p><div class="live-transcript"><span class="eyebrow">VOICE TRANSCRIPT</span><p id="transcript">Your spoken instruction will appear here.</p></div><div id="mic-guide" class="mic-guide" hidden><p id="mic-guide-text"></p><a href="https://modifyingtiwari-design.github.io/jarvis-voice-assistant/" target="_blank" rel="noopener">Open JARVIS in a separate browser tab ↗</a></div><p class="hint">Browser speech may use your browser’s speech service. Sarvam mode sends your recording to Sarvam. Listening stops after each command.</p></div>
-</section>
-<div class="layout">
-<aside class="side panel">
-<div class="core" aria-hidden="true"><div class="ring"></div><div class="ring two"></div><div class="orb"></div></div>
-<section><h2>Connect your assistant</h2><p class="intro">Enter your Sarvam API key, then type or use Talk to JARVIS.</p>
-<form id="key-form"><div class="field"><label for="api-key">Sarvam API key</label><input id="api-key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your API key" required></div><div class="buttons"><button class="primary" id="use-key">Use key</button><button type="button" id="forget-key" disabled>Forget key</button></div></form>
-<p class="hint">Your key stays in this tab’s memory and goes only to api.sarvam.ai. Enter it again after reopening. Internet and Sarvam API credits are required.</p>
-<p class="status" id="key-status" role="status">A Sarvam subscription key is needed for chat and voice.</p>
-<a href="https://dashboard.sarvam.ai/key-management" target="_blank" rel="noopener noreferrer" style="color:var(--cyan);font-size:13px">Get a Sarvam API key ↗</a></section>
-<section><h2>Conversation</h2><p class="hint">Messages stay in this tab. Recent messages go to Sarvam when you send a request.</p><div class="buttons"><button type="button" id="new-chat">New chat</button><button type="button" id="export">Export text</button></div></section>
-</aside>
-<section class="panel"><div class="chat-heading"><h2>Command log</h2><span>TEXT + VOICE</span></div><p class="intro">Speak your instruction. JARVIS answers here and aloud.</p>
-<div class="chat" id="chat" role="log" aria-label="Conversation"><p class="empty">Connect your key to begin.<br>Try: “Explain atoms in two sentences.”</p></div>
-<form id="chat-form" class="composer"><textarea id="message" aria-label="Message JARVIS" placeholder="Type your message…" maxlength="6000" rows="2"></textarea><button class="primary" id="send">Send ↗</button></form>
-<p class="hint">Browser speech sends when you finish speaking. In Sarvam mode, click Finish & send, or pause for 2 seconds after speaking. A recording lasts at most 25 seconds.</p>
-<div class="bar"><label class="check"><input id="auto-voice" type="checkbox" checked>Speak replies</label><button type="button" id="cancel-chat" hidden>Cancel reply</button></div>
-<p id="chat-status" class="status" role="status">Enter your key to enable AI replies.</p>
-<section class="voice" aria-label="Voice replies"><h2>Voice replies</h2><p class="hint">Sarvam generates the audio. Use the player to pause or replay it.</p>
-<div class="voice-options"><label for="voice">Voice<select id="voice"><option value="shubh">Shubh</option><option value="ratan">Ratan</option><option value="priya">Priya</option></select></label><label for="language">Language<select id="language"><option value="auto">Auto detect script</option><option value="en-IN">English</option><option value="hi-IN">Hindi</option><option value="mr-IN">Marathi</option><option value="bn-IN">Bengali</option><option value="ta-IN">Tamil</option><option value="te-IN">Telugu</option><option value="kn-IN">Kannada</option><option value="ml-IN">Malayalam</option><option value="gu-IN">Gujarati</option><option value="pa-IN">Punjabi</option><option value="od-IN">Odia</option></select></label></div>
-<div class="buttons"><button id="test-voice" type="button">Test voice</button><button id="read-reply" type="button" disabled>Read reply</button><button id="stop-voice" type="button">Stop voice</button></div>
-<p id="voice-status" class="status" role="status">Connect your key, then click Test voice.</p>
-<div class="player" id="player-wrap" hidden><audio id="audio" controls preload="auto" aria-label="JARVIS audio reply"></audio><div class="buttons"><button type="button" id="play-audio">▶ Play audio</button></div><a id="download-audio" download="jarvis-voice.wav">Download this audio section</a></div>
-</section></section></div>
-<p class="footer">DIRECT CONNECTION · SARVAM CHAT + BULBUL VOICE · NO INSTALLATION<br><a href="https://docs.sarvam.ai/api-reference/text-to-speech/convert" target="_blank" rel="noopener noreferrer">Sarvam voice documentation</a></p>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><meta name="theme-color" content="#040b12"><meta name="description" content="JARVIS personal voice command center. Parallel tasks, timers, notes and conversational voice with your Sarvam key."><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src https://api.sarvam.ai; media-src blob:; img-src data:; base-uri 'none'; form-action 'none'"><title>JARVIS · Command Center</title><style>
+:root{color-scheme:dark;--bg:#040b12;--panel:#081620;--line:#1b3c4c;--cyan:#66e7fa;--text:#e2f4fc;--muted:#87a8bb;--accent:#66e7fa;--mono:ui-monospace,SFMono-Regular,Consolas,monospace}*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:radial-gradient(ellipse at 49% 20%,#0a2333,transparent 55%),var(--bg);color:var(--text);font:14px/1.6 system-ui,Segoe UI,sans-serif}body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(#77c9e804 1px,transparent 1px),linear-gradient(90deg,#77c9e804 1px,transparent 1px);background-size:36px 36px}button,input,select,textarea{font:inherit}button,a,input,textarea,select{outline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--cyan)}button{cursor:pointer;color:var(--text);border:1px solid #2a5368;background:#0d2635;padding:10px 15px;border-radius:3px}button:hover{background:#183e51;border-color:var(--cyan)}button:disabled{opacity:.4;cursor:default}.primary{background:#8ceafa;color:#03151b;font-weight:700;border-color:#8ceafa}.primary:hover{background:#bef6ff}.subtle{background:transparent;color:#a2c1d0}.small{font-size:12px;padding:6px 10px}a{color:#9deaff}input,select,textarea{background:#040f18;border:1px solid #315363;color:var(--text);border-radius:3px;padding:10px;max-width:100%}label{display:block;font-size:12px;color:var(--muted)}.wrap{max-width:1600px;padding:24px 30px;margin:auto;position:relative}header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-bottom:20px;border-bottom:1px solid var(--line)}.identity{display:flex;align-items:center;gap:16px}.logo{display:grid;place-items:center;border:1px solid #5ebace;outline:1px solid #1a4255;outline-offset:5px;border-radius:50%;width:40px;height:40px;color:var(--cyan);font:24px var(--mono)}.brand{font-size:22px;font-weight:600;letter-spacing:.28em}.eyebrow{font:10px/1.6 var(--mono);letter-spacing:.17em;color:var(--muted)}.brand small{display:block;font:9px/2 var(--mono);letter-spacing:.23em;color:var(--muted)}.top-controls{display:flex;gap:16px;align-items:center}.status-dot{font:10px var(--mono);letter-spacing:.1em;color:var(--cyan)}.status-dot:before{content:"";display:inline-block;width:5px;height:5px;margin-right:8px;background:currentColor;border-radius:50%}.clock{font:12px var(--mono);color:var(--muted)}.section-line{display:flex;align-items:center;justify-content:space-between;margin:22px 0 14px;gap:12px}.section-line span{font:10px var(--mono);color:#6e99af;letter-spacing:.13em}.desk{display:grid;grid-template-columns:235px minmax(340px,1fr) 310px;gap:22px}.panel{background:linear-gradient(135deg,#0b1d2999,#07121de6);border:1px solid var(--line);border-radius:3px;padding:19px;min-width:0}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:20px}h2{font:11px var(--mono);text-transform:uppercase;letter-spacing:.14em;font-weight:500;margin:0}h3{font-size:14px;margin:0 0 9px}.counter{font:11px var(--mono);color:var(--cyan);padding:3px 7px;border:1px solid #254451}.channel{padding:15px 0;border-bottom:1px solid #163240}.channel:last-of-type{border-bottom:0}.channel-title{display:flex;align-items:center;justify-content:space-between;font:10px var(--mono);letter-spacing:.1em}.channel-title b{font-size:9px;color:var(--muted);font-weight:400}.channel canvas{display:block;width:100%;height:45px;margin:7px 0}.channel small{font-size:11px;color:var(--muted)}.hint{font-size:11px;color:var(--muted);line-height:1.7;margin:9px 0}.legend{margin-top:16px;font:9px/1.8 var(--mono);letter-spacing:.05em;color:#7497ac}.core-panel{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:535px;text-align:center;border-top:1px solid #214356;border-bottom:1px solid #214356;background:radial-gradient(ellipse,#10364d22,transparent 70%)}.core-panel:before,.core-panel:after{content:"";position:absolute;width:28px;height:28px;border-color:#6de5f0;pointer-events:none}.core-panel:before{top:0;left:0;border-top:2px solid;border-left:2px solid}.core-panel:after{bottom:0;right:0;border-bottom:2px solid;border-right:2px solid}.core-top{position:absolute;top:15px;left:19px;right:19px;display:flex;justify-content:space-between;font:9px var(--mono);letter-spacing:.1em;color:#6c9bb3}.reactor{width:min(100%,390px);aspect-ratio:1;position:relative;margin-top:20px;flex:none}.reactor canvas{position:absolute;inset:0;width:100%;height:100%}.reactor-center{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;flex-direction:column;pointer-events:none}.reactor-center span{margin-top:135px;font:9px var(--mono);letter-spacing:.25em;color:#85c3da}.state-word{font:500 24px var(--mono);letter-spacing:.22em;color:var(--accent);margin-top:-8px}.core-hint{color:#99b9cb;font-size:13px;margin:8px 12px 17px;min-height:20px}.voice-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:0 15px}.voice-actions .primary{min-width:210px;min-height:45px}.mode-line{font:10px var(--mono);color:#7498ad;margin:13px 0 20px}.task-list{display:flex;flex-direction:column;gap:10px;max-height:461px;overflow:auto}.task-empty{padding:42px 7px;color:var(--muted);text-align:center}.task-empty .glyph{font:36px var(--mono);color:#31566b}.task-empty p{font-size:12px}.task{border:1px solid #244351;border-left:2px solid var(--task-color);padding:11px;background:#04111b}.task-top{display:flex;justify-content:space-between;gap:8px;font:9px var(--mono);letter-spacing:.1em;color:var(--task-color)}.task p{font-size:12px;margin:8px 0;overflow-wrap:anywhere}.task canvas{display:block;width:100%;height:28px}.task-bottom{display:flex;gap:8px;align-items:center;justify-content:space-between;color:var(--muted);font:10px var(--mono);margin-top:6px}.task button{font:10px var(--mono);padding:3px 7px}.quick-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}.quick-actions button{flex:1;font-size:11px;white-space:nowrap}.lower{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:22px;margin-top:22px}.conversation-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.chat{height:240px;overflow:auto;display:flex;flex-direction:column;gap:14px;margin:16px 0 20px;overscroll-behavior:contain}.message{max-width:94%;white-space:pre-wrap;overflow-wrap:anywhere;border-left:2px solid #31566b;padding:9px 13px;background:#091b28}.message strong{display:block;color:var(--cyan);font:10px var(--mono);letter-spacing:.1em;margin-bottom:5px}.message.user{align-self:flex-end;background:#102c3d;border-color:#6db3ce}.message .read{margin-top:10px;font-size:11px}.welcome{margin:auto;max-width:470px;text-align:center;color:#bad3df}.welcome p{font-size:12px;color:var(--muted)}.composer{display:flex;gap:10px}.composer textarea{flex:1;min-width:0;resize:vertical;min-height:50px;max-height:170px}.composer button{align-self:stretch}.status{font-size:12px;color:#8ddded;overflow-wrap:anywhere}.error{color:#ffbd91}.transcript{border-left:2px solid var(--accent);padding-left:12px;min-height:80px;max-height:150px;overflow:auto;margin:20px 0}.transcript p{font-size:13px;margin:6px 0;color:#d2e9f5}.telemetry{font:10px var(--mono);color:#8eafc2;display:grid;gap:12px;border-top:1px solid var(--line);padding-top:15px}.telemetry div{display:flex;justify-content:space-between;gap:10px}.telemetry b{font-weight:400;color:#d1ebf7}.signal{height:23px;display:flex;gap:3px;align-items:center}.signal i{width:3px;height:3px;background:var(--accent)}.player{margin-top:15px}audio{width:100%;height:36px}.player button{margin-top:8px}.footer{display:flex;justify-content:space-between;gap:15px;padding:20px 0 0;color:#678ca2;font:9px/1.8 var(--mono);letter-spacing:.06em}.footer a{color:#87acbc}dialog{color:var(--text);background:#081925;border:1px solid #36586a;border-radius:6px;padding:25px;width:min(540px,calc(100% - 28px));max-height:88vh;overflow:auto}dialog::backdrop{background:#010810c9;backdrop-filter:blur(4px)}.dialog-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.dialog-title h2{font-size:16px}.field{margin:15px 0}.field input,.field select{display:block;width:100%;margin-top:5px}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.check{display:flex;gap:9px;align-items:center;font-size:12px;margin:14px 0}.buttons{display:flex;gap:8px;flex-wrap:wrap}.note{border:1px solid var(--line);padding:10px;margin:9px 0;white-space:pre-wrap;overflow-wrap:anywhere}.note small{color:var(--muted)}body[data-state="listening"]{--accent:#68ffce}body[data-state="thinking"],body[data-state="transcribing"],body[data-state="generating"]{--accent:#c0a6ff}body[data-state="speaking"]{--accent:#8ce9ff}body[data-state="error"]{--accent:#ffb784}button[aria-pressed="true"]{background:#13392f;border-color:#68ffce;color:#b2ffe5}.mic-guide{border:1px solid #8b593d;background:#2b1e18;padding:10px;font-size:12px}.text-link{background:transparent;padding:0;border:0;color:var(--cyan);text-decoration:underline}a.skip{position:absolute;top:-100px;left:20px}a.skip:focus{top:5px;z-index:10;background:#123445}.noscript{padding:20px;background:#522;color:white}
+@media(min-width:1450px){.desk{grid-template-columns:260px 1fr 350px}.lower{grid-template-columns:1fr 350px}.core-panel{min-height:565px}.reactor{width:420px}.task-list{max-height:490px}}@media(max-width:1120px){.desk{grid-template-columns:180px minmax(290px,1fr) 260px;gap:14px}.wrap{padding:20px}.panel{padding:14px}.lower{grid-template-columns:1fr 260px;gap:14px}.reactor{width:330px;max-width:100%}.core-panel{min-height:505px}.voice-actions .primary{min-width:170px}}@media(max-width:860px){.desk{grid-template-columns:1fr 280px}.channels{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:15px;padding:13px 16px}.channels .panel-head{grid-column:1/-1;margin-bottom:0}.channel{border:0;padding:0}.channel small,.channels .legend{display:none}.core-panel{min-height:490px}.lower{grid-template-columns:1fr}.session-panel{display:block}.session-panel .transcript{min-height:40px;max-height:100px}.session-panel .telemetry{grid-template-columns:repeat(3,1fr)}.clock{display:none}}@media(max-width:600px){.wrap{padding:16px 12px}.brand{font-size:17px}.brand small{font-size:8px}.logo{width:29px;height:29px;font-size:20px}.identity{gap:12px}.top-controls{gap:7px}.status-dot{display:none}.top-controls button{padding:8px 10px;font-size:11px}.section-line{margin-top:18px}.section-line span:last-child{display:none}.desk{display:flex;flex-direction:column;gap:14px}.channels{order:2;display:grid;grid-template-columns:1fr 1fr}.core-panel{order:0;min-height:480px}.tasks-panel{order:1}.task-list{max-height:260px}.reactor{width:330px;margin-top:22px}.lower{margin-top:14px}.chat{height:230px}.footer{display:block}.core-top{font-size:8px}.task-empty{padding:12px}.task-empty .glyph{display:none}.task-empty p{margin:5px}.task-empty br{display:none}.mode-line{font-size:9px}.settings-grid{grid-template-columns:1fr}.composer button{padding:10px}.conversation-head h2{font-size:10px}.voice-actions{gap:8px}.core-hint{font-size:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style></head><body data-state="idle"><a href="#message" class="skip">Skip to command input</a><noscript><p class="noscript">Enable JavaScript to use JARVIS.</p></noscript><main class="wrap">
+<header><div class="identity"><div class="logo" aria-hidden="true">J</div><div class="brand">J.A.R.V.I.S.<small>PERSONAL ASSISTANT / MARK IV</small></div></div><div class="top-controls"><time class="clock" id="clock"></time><span class="status-dot" id="connection">LOCAL READY</span><button id="open-settings" class="subtle">Settings ↗</button></div></header>
+<div class="section-line"><span>01 / COMMAND CENTER</span><span>VOICE • INTELLIGENCE • EXECUTION</span></div>
+<div class="desk"><aside class="panel channels"><div class="panel-head"><h2>Signal channels</h2><span class="counter">04</span></div>
+<div class="channel" style="color:#67eedc"><div class="channel-title">VOICE <b id="voice-channel-state">OFFLINE</b></div><canvas id="wave-voice" aria-label="Voice activity visualization"></canvas><small>Input and spoken response</small></div>
+<div class="channel" style="color:#b59aff"><div class="channel-title">COGNITION <b id="think-count">0 ACTIVE</b></div><canvas id="wave-think" aria-label="Thinking task activity"></canvas><small>Answers and analysis</small></div>
+<div class="channel" style="color:#62bdff"><div class="channel-title">CREATIVE <b id="create-count">0 ACTIVE</b></div><canvas id="wave-create" aria-label="Creative task activity"></canvas><small>Writing, ideas and plans</small></div>
+<div class="channel" style="color:#ffca82"><div class="channel-title">UTILITIES <b id="utility-count">0 ACTIVE</b></div><canvas id="wave-utility" aria-label="Utility task activity"></canvas><small>Timers and quick notes</small></div><p class="legend">Each channel has its own visual rhythm. Task waves indicate activity, not measured audio frequencies.</p></aside>
+<section class="core-panel" aria-label="Voice command center"><div class="core-top"><span>NEURAL INTERFACE</span><span id="core-mode">STANDBY PROTOCOL</span></div><div class="reactor" aria-hidden="true"><canvas id="reactor"></canvas><div class="reactor-center"><span>J.A.R.V.I.S. / IV</span></div></div><div id="reactor-state" class="state-word" role="status">AT YOUR SERVICE</div><p id="reactor-hint" class="core-hint">A little initiative. A little sarcasm. Your call.</p><div class="voice-actions"><button id="voice-mode" class="primary" aria-pressed="false">◉ Enable voice mode</button><button id="talk" class="subtle">Talk once</button><button id="cancel-mic" class="subtle" hidden>Cancel input</button></div><div class="mode-line" id="mode-line">MICROPHONE OFF · YOU ARE IN CONTROL</div></section>
+<aside class="panel tasks-panel"><div class="panel-head"><h2>Task streams</h2><span class="counter" id="task-count">00</span></div><div id="tasks" class="task-list" aria-label="Tasks"><div class="task-empty"><div class="glyph">⌁</div><h3>Room for a few more ideas.</h3><p>Give me a task. Then another.<br>I can keep three AI requests moving.</p></div></div><div class="quick-actions"><button id="timer-shortcut">＋ Timer</button><button id="note-shortcut">＋ Note</button><button id="show-notes">Notes <span id="note-count">0</span></button></div><p class="hint">Timers run while this tab stays open. Tasks, notes and your key clear on refresh.</p></aside></div>
+<div class="lower"><section class="panel"><div class="conversation-head"><h2>Conversation</h2><div class="buttons"><button class="small subtle" id="export">Export</button><button class="small subtle" id="new-chat">Clear finished</button></div></div><div class="chat" id="chat" role="log" aria-label="Conversation"><div class="welcome"><h3>Ready when you are.</h3><p>“Set a timer for 5 minutes.” · “Note: call Alex.”<br>For AI answers, connect your Sarvam key in Settings.</p></div></div><form class="composer" id="chat-form"><textarea id="message" aria-label="Message JARVIS" rows="1" maxlength="6000" placeholder="Give me a task… or several, separated by a semicolon."></textarea><button class="primary" id="send">Send ↗</button></form><p class="status" id="chat-status" role="status">Timers and notes are ready. Connect a key for AI replies.</p></section>
+<aside class="panel session-panel"><div class="panel-head"><h2>Voice link</h2><span class="eyebrow" id="session-label">DISENGAGED</span></div><div class="signal" id="signal" aria-hidden="true"></div><div class="transcript"><span class="eyebrow">LAST HEARD</span><p id="transcript">Your voice instruction appears here.</p></div><div class="telemetry"><div>INPUT <b id="input-channel">STANDBY</b></div><div>CAPTURE <b id="record-time">00:00</b></div><div>OUTPUT <b id="output-channel">STANDBY</b></div></div><p class="status" id="mic-status" role="status">Enable voice mode for automatic listening between replies.</p></aside></div>
+<div id="mic-guide" class="mic-guide" hidden><p id="mic-guide-text"></p><span>Open this HTTPS website directly in Chrome or Edge. Check the site's microphone permission.</span></div>
+<div class="player" id="player-wrap" hidden><audio id="audio" controls preload="auto" aria-label="JARVIS spoken reply"></audio><div class="buttons"><button id="play-audio" class="small">Play / resume reply</button><button id="stop-voice" class="small">Skip spoken reply</button></div></div><p class="status" id="voice-status" role="status"></p>
+<footer class="footer"><span>MARK IV / VOICE COMMAND SYSTEM · <span id="summary-count">0 RUNNING</span></span><span>CHAT + SPEECH BY SARVAM · <button class="text-link" id="open-help">Capabilities & privacy</button></span></footer>
 </main>
-<script>
-'use strict';
-const $ = id => document.getElementById(id);
-const API = 'https://api.sarvam.ai';
-const SYSTEM = 'You are JARVIS, a helpful personal assistant. Be clear, warm and concise. Reply in the user\'s language. This app transcribes microphone recordings into user messages and converts your final text to spoken audio. Answer voice messages naturally and directly. Do not claim playback happened: the app controls it. You receive transcripts, not ambient sounds, and have no computer control or live web access. Never claim to perform actions beyond answering.';
-let apiKey = '', messages = [], lastReply = '', chatController = null;
-let micSession = null;
-let voiceController = null, voiceEpoch = 0, voiceUrl = '', voiceQueue = [], voiceIndex = 0;
-const audio = $('audio');
-function status(id, text, error = false) { $(id).textContent = text; $(id).classList.toggle('error', error); uiIssue = error; }
-function needKey() {
-  if (apiKey) return true;
-  status('key-status', 'Paste your Sarvam API key and click Use key first.', true);
-  $('api-key').focus(); return false;
-}
-function addMessage(role, text) {
-  $('chat').querySelector('.empty')?.remove();
-  const box = document.createElement('div'); box.className = 'message ' + role;
-  const label = document.createElement('strong'); label.textContent = role === 'user' ? 'YOU' : 'J.A.R.V.I.S.';
-  const body = document.createElement('div'); body.textContent = text; box.append(label, body);
-  $('chat').append(box); $('chat').scrollTop = $('chat').scrollHeight;
-}
-function errorText(code) {
-  if (code === 401 || code === 403) return 'Sarvam rejected the key or API access. Enter a valid Sarvam subscription key.';
-  if (code === 402 || code === 429) return 'Sarvam credits or request limit reached. Check your Sarvam account, then try again.';
-  if (code === 400 || code === 422) return 'Sarvam rejected the request. Try a shorter message or another voice.';
-  return 'Sarvam is unavailable (HTTP ' + code + '). Please try again.';
-}
+<dialog id="settings"><div class="dialog-title"><h2>Assistant settings</h2><button id="close-settings" class="small subtle" aria-label="Close settings">✕</button></div><form id="key-form"><div class="field"><label for="api-key">Sarvam API subscription key</label><input id="api-key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your key" required></div><div class="buttons"><button class="primary" id="use-key">Connect key</button><button type="button" id="forget-key" disabled>Forget key</button></div></form><p id="key-status" class="status" role="status">Your key stays in this tab's memory.</p><p class="hint">Sent only to api.sarvam.ai. Internet and Sarvam API credits are required. <a href="https://dashboard.sarvam.ai/key-management" target="_blank" rel="noopener">Get a key ↗</a></p><div class="settings-grid"><div class="field"><label for="input-mode">Speech input</label><select id="input-mode"><option value="auto">Automatic</option><option value="browser">Browser · live transcript</option><option value="sarvam">Sarvam · recorded speech</option></select></div><div class="field"><label for="voice">Sarvam voice</label><select id="voice"><option value="shubh">Shubh</option><option value="ratan">Ratan</option><option value="priya">Priya</option></select></div><div class="field"><label for="language">Spoken language</label><select id="language"><option value="auto">Auto (browser: English)</option><option value="en-IN">English</option><option value="hi-IN">Hindi</option><option value="mr-IN">Marathi</option><option value="bn-IN">Bengali</option><option value="ta-IN">Tamil</option><option value="te-IN">Telugu</option><option value="kn-IN">Kannada</option><option value="ml-IN">Malayalam</option><option value="gu-IN">Gujarati</option><option value="pa-IN">Punjabi</option><option value="od-IN">Odia</option></select></div><div class="field"><label for="personality">Personality</label><select id="personality"><option value="witty">JARVIS · dry wit</option><option value="focused">Focused · no sarcasm</option></select></div></div><label class="check"><input id="auto-voice" type="checkbox" checked>Speak replies</label><label class="check"><input id="browser-fallback" type="checkbox" checked>Use device voice if Sarvam speech fails</label><button id="test-voice" type="button">Hear voice sample</button><p class="hint">Voice mode listens between replies and pauses the microphone during playback to avoid echo. Tap “Interrupt & talk” to speak sooner. Keep this page visible. Browser speech may send audio to your browser vendor; Sarvam mode sends recordings to Sarvam.</p></dialog>
+<dialog id="notes-dialog"><div class="dialog-title"><h2>Session notes</h2><button class="small" id="close-notes" aria-label="Close notes">✕</button></div><div id="notes"></div><p class="hint">Stored only in this tab. Export the conversation to keep your notes before closing.</p></dialog>
+<dialog id="help-dialog"><div class="dialog-title"><h2>At your service</h2><button class="small" id="close-help" aria-label="Close help">✕</button></div><p>Ask questions, draft messages, plan your day, save session notes and run timers. Up to three AI requests can run together; spoken replies play one at a time.</p><p>Try “Set a timer for two minutes”, “Note: buy coffee”, or “What time is it?”. Separate independent commands with a semicolon or “and also”. Local timer and note commands currently use English phrases.</p><p>Voice mode keeps listening between turns while this tab is visible. Say “stop listening” to end it. Use “Interrupt & talk” during a response. This is automatic turn-taking, not simultaneous listening and speaking. Speech recognition, AI generation and voice synthesis add network delay.</p><p>This assistant cannot control other apps, send messages or browse the live web. It will not claim an external action was completed.</p><p>Your key is kept in memory. AI commands and recent completed conversation are sent to Sarvam; audio goes to the selected speech provider. Timers and notes stay in the tab but may be included if you explicitly ask about them. Refreshing clears the session. Export anything you want to keep.</p></dialog>
+<script>'use strict';
+const $ = id => document.getElementById(id), API = 'https://api.sarvam.ai';
+const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const audio = $('audio'), tasks = [], messages = [], notes = [], speechQueue = [];
+let apiKey='', micSession=null, audioContext=null, playbackAnalyser=null, playbackSource=null;
+let voiceMode=false, resumeTimer=null, voiceJob=null, voiceUrl='', taskSequence=0, uiIssue=false, browserFailed=false;
+const colors={think:'#b59aff',create:'#62bdff',utility:'#ffca82'};
+const activeTask = t => ['queued','running'].includes(t.state);
+function status(id,text,error=false){$(id).textContent=text;$(id).classList.toggle('error',error);if(error)uiIssue=true;}
+function needKey(){if(apiKey)return true;$('settings').showModal();status('key-status','Connect your Sarvam subscription key for AI replies.',true);$('api-key').focus();return false;}
+function errorText(code){return code===401||code===403?'Check your Sarvam key and API access.':code===402||code===429?'Check your Sarvam credits or request limit.':'Sarvam could not complete this request.';}
 async function request(path, body, parentSignal) {
   const requestKey = apiKey;
   if (!requestKey) throw Error('Enter your Sarvam API key first.');
@@ -104,54 +62,34 @@ async function request(path, body, parentSignal) {
     throw error;
   } finally { clearTimeout(timer); parentSignal?.removeEventListener('abort', abort); }
 }
-function busy(value) {
-  $('send').disabled = value; $('message').disabled = value; $('new-chat').disabled = value;
-  $('use-key').disabled = value; $('cancel-chat').hidden = !value;
-  $('talk').disabled = value;
-}
-function chatBody(input) { return {model:'sarvam-105b',messages:[{role:'system',content:SYSTEM},...input],max_tokens:1400,stream:false,reasoning_effort:null}; }
-$('key-form').onsubmit = event => {
-  event.preventDefault(); if (chatController || micSession) return; void unlockAudio();
-  const key = $('api-key').value.trim();
-  if (!/^[A-Za-z0-9_-]{20,4096}$/.test(key)) { status('key-status', 'Paste the complete Sarvam API subscription key.', true); return; }
-  stopVoice(true); apiKey = key; $('api-key').value = ''; $('forget-key').disabled = false;
-  $('connection').textContent = 'KEY LOADED';
-  status('key-status', 'Key loaded for this tab. Send a message or test voice to check it.');
-  status('chat-status', 'Ready for your message.'); status('voice-status', 'Ready. Click Test voice to generate a sample.');
-};
-$('forget-key').onclick = () => {
-  chatController?.abort(); cancelMic(); stopVoice(true); apiKey = ''; $('api-key').value = ''; $('forget-key').disabled = true;
-  $('connection').textContent = 'ADD SARVAM KEY'; status('key-status', 'Key removed from this tab.'); status('voice-status', 'Key required for voice.');
-};
-$('chat-form').onsubmit = async event => {
-  event.preventDefault(); if (chatController || micSession || !needKey()) return; void unlockAudio();
-  const text = $('message').value.trim(); if (!text) return;
-  const controller = new AbortController(); chatController = controller; stopVoice(true); busy(true);
-  status('chat-status', 'JARVIS is thinking…');
-  try {
-    const data = await request('/v1/chat/completions', chatBody([...messages.slice(-12), {role:'user',content:text}]), controller.signal);
-    if (controller.signal.aborted) return;
-    const answer = data.choices?.[0]?.message?.content;
-    if (typeof answer !== 'string' || !answer.trim()) throw Error('Sarvam returned no answer. Please try again.');
-    messages.push({role:'user',content:text}, {role:'assistant',content:answer.trim()});
-    addMessage('user', text); addMessage('assistant', answer.trim()); lastReply = answer.trim();
-    $('message').value = ''; $('read-reply').disabled = false; $('connection').textContent = 'AI CONNECTED';
-    status('chat-status', data.choices[0].finish_reason === 'length' ? 'Reply reached the limit. Ask JARVIS to continue.' : 'Reply received from Sarvam.');
-    if ($('auto-voice').checked) void speak(lastReply);
-  } catch (error) { status('chat-status', error.name === 'AbortError' ? 'Reply cancelled. Your message is still below.' : error.message, error.name !== 'AbortError'); }
-  finally { if (chatController === controller) { chatController = null; busy(false); $('message').focus(); } }
-};
-$('message').addEventListener('keydown', event => { if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) { event.preventDefault(); $('chat-form').requestSubmit(); } });
-$('cancel-chat').onclick = () => chatController?.abort();
-$('new-chat').onclick = () => {
-  if (chatController || micSession) return; stopVoice(true); messages = []; lastReply = ''; $('chat').replaceChildren();
-  $('read-reply').disabled = true; status('chat-status', 'New conversation.');
-};
-$('export').onclick = () => {
-  if (!messages.length) { status('chat-status', 'There are no messages to export yet.'); return; }
-  const url = URL.createObjectURL(new Blob([messages.map(m => m.role.toUpperCase()+'\n'+m.content).join('\n\n')], {type:'text/plain'}));
-  const link = document.createElement('a'); link.href = url; link.download = 'jarvis-conversation.txt'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
-};
+
+async function unlockAudio(){try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;audioContext ||= new C();if(audioContext.state==='suspended')await audioContext.resume();return audioContext;}catch{return null;}}
+function openDialog(id){if(!$(id).open)$(id).showModal();}
+$('open-settings').onclick=()=>openDialog('settings');$('close-settings').onclick=()=>$('settings').close();
+$('open-help').onclick=()=>openDialog('help-dialog');$('close-help').onclick=()=>$('help-dialog').close();
+$('close-notes').onclick=()=>$('notes-dialog').close();
+$('show-notes').onclick=()=>{ $('notes').replaceChildren();for(const n of notes){const row=document.createElement('div');row.className='note';row.textContent=n.text;const time=document.createElement('small');time.textContent='\n'+new Date(n.at).toLocaleTimeString();row.append(time);$('notes').append(row);}if(!notes.length)$('notes').textContent='No notes yet. Say “Note: buy coffee”.';openDialog('notes-dialog'); };
+$('key-form').onsubmit=event=>{event.preventDefault();const key=$('api-key').value.trim();if(!/^[A-Za-z0-9_-]{20,4096}$/.test(key)){status('key-status','Paste the complete Sarvam subscription key.',true);return;}if(tasks.some(t=>t.kind!=='utility'&&activeTask(t))||voiceJob||micSession){status('key-status','Stop voice mode and finish or cancel active tasks before changing keys.',true);return;}apiKey=key;$('api-key').value='';$('forget-key').disabled=false;$('connection').textContent='KEY CONNECTED';uiIssue=false;status('key-status','Key loaded in memory. Ready for your instructions.');status('chat-status','Connected. What shall we tackle first?');$('settings').close();void unlockAudio();};
+$('forget-key').onclick=()=>{setVoiceMode(false);cancelMic(true);stopVoice();for(const t of tasks)if(t.kind!=='utility'&&activeTask(t))cancelTask(t);apiKey='';$('api-key').value='';$('forget-key').disabled=true;$('connection').textContent='LOCAL READY';status('key-status','Key removed. Local timers and notes are still available.');};
+function addMessage(role,text,id){$('chat').querySelector('.welcome')?.remove();const box=document.createElement('div');box.className='message '+role;const label=document.createElement('strong');label.textContent=(role==='user'?'YOU':'J.A.R.V.I.S.')+(id?' / '+id:'');const body=document.createElement('div');body.textContent=text;box.append(label,body);if(role==='assistant'){const read=document.createElement('button');read.className='read subtle';read.textContent='Read aloud';read.onclick=()=>{void unlockAudio();queueSpeech(text,id,true);};box.append(read);} $('chat').append(box);$('chat').scrollTop=$('chat').scrollHeight;}
+function classify(text){return /\b(write|draft|poem|story|create|plan|brainstorm|design|ideas)\b/i.test(text)?'create':'think';}
+function newTask(text,kind){const t={id:'T'+String(++taskSequence).padStart(2,'0'),text,kind,state:'queued',created:Date.now(),started:0,ended:0,controller:new AbortController(),answer:''};tasks.push(t);$('tasks').querySelector('.task-empty')?.remove();const card=document.createElement('article');card.className='task';card.style.setProperty('--task-color',colors[kind]);const top=document.createElement('div');top.className='task-top';const label=document.createElement('span');label.textContent=t.id+' / '+(kind==='utility'?'UTILITY':kind==='create'?'CREATIVE':'COGNITION');const state=document.createElement('span');top.append(label,state);const title=document.createElement('p');title.textContent=text.length>90?text.slice(0,87)+'…':text;const wave=document.createElement('canvas');wave.setAttribute('aria-hidden','true');const bottom=document.createElement('div');bottom.className='task-bottom';const elapsed=document.createElement('span');const action=document.createElement('button');action.textContent='Cancel';action.setAttribute('aria-label','Cancel task '+t.id);action.onclick=()=>{if(activeTask(t))cancelTask(t);else if(t.state==='error'){submitCommands(t.text);}else{addMessage('assistant',t.answer||'Task cancelled.',t.id);}};bottom.append(elapsed,action);card.append(top,title,wave,bottom);$('tasks').prepend(card);Object.assign(t,{card,stateEl:state,elapsedEl:elapsed,action,wave});renderTask(t);return t;}
+function renderTask(t){t.stateEl.textContent=t.state.toUpperCase();t.action.textContent=activeTask(t)?'Cancel':t.state==='error'?'Retry':'View';t.action.setAttribute('aria-label',t.action.textContent+' task '+t.id);$('task-count').textContent=String(tasks.filter(activeTask).length).padStart(2,'0');}
+function cancelTask(t){t.controller.abort();t.state='cancelled';t.ended=Date.now();t.answer='Cancelled.';renderTask(t);pumpTasks();}
+function completeTask(t,answer){if(t.controller.signal.aborted)return;t.state='done';t.ended=Date.now();t.answer=answer;renderTask(t);messages.push({role:'user',content:t.text},{role:'assistant',content:answer});addMessage('assistant',answer,t.id);status('chat-status','Completed '+t.id+'. Ready for your next instruction.');if($('auto-voice').checked)queueSpeech(answer,t.id);}
+function parseLocal(text){const s=text.replace(/^(?:hey\s+)?jarvis[,.!\s]*/i,'').trim();const timer=s.match(/^(?:please\s+)?(?:set|start)\s+(?:a\s+)?timer\s+(?:for\s+)?(\d+(?:\.\d+)?|one|two|three|four|five|six|seven|eight|nine|ten|fifteen|twenty|thirty|sixty)\s*(seconds?|minutes?|hours?)\s*[.!]?$/i);if(timer){const words={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,fifteen:15,twenty:20,thirty:30,sixty:60};const n=words[timer[1].toLowerCase()]||Number(timer[1]);return{type:'timer',ms:n*(/^hour/i.test(timer[2])?3600000:/^minute/i.test(timer[2])?60000:1000)};}const note=s.match(/^(?:save (?:a )?note|take (?:a )?note|note)(?:\s*:\s*|\s+)(.+)$/is);if(note)return{type:'note',text:note[1]};if(/^(?:what(?:'s| is) the (?:time|date)(?: now| today)?|what time is it|tell me the time)[?.!]*$/i.test(s))return{type:'time'};if(/^(?:read|show|list) (?:my )?notes[?.!]*$/i.test(s))return{type:'notes'};return null;}
+function runLocal(t,op){t.state='running';t.started=Date.now();renderTask(t);if(op.type==='timer'){if(!Number.isFinite(op.ms)||op.ms<1000||op.ms>86400000){completeTask(t,'Choose a timer between one second and 24 hours.');return;}t.deadline=Date.now()+op.ms;const ack='Timer '+t.id+' set for '+formatDuration(op.ms)+'.'+($('personality').value==='witty'?' I will handle the counting. A demanding assignment.':'');addMessage('assistant',ack,t.id);if($('auto-voice').checked)queueSpeech(ack,t.id);return;}if(op.type==='note'){notes.push({text:op.text,at:Date.now()});$('note-count').textContent=notes.length;completeTask(t,'Noted: '+op.text+($('personality').value==='witty'?' A small victory against forgetting.':''));}else if(op.type==='notes'){completeTask(t,notes.length?notes.map((n,i)=>(i+1)+'. '+n.text).join('\n'):'No notes yet.'+($('personality').value==='witty'?' An unusually tidy situation.':''));}else completeTask(t,new Date().toLocaleString(undefined,{weekday:'long',hour:'numeric',minute:'2-digit',month:'long',day:'numeric'}));}
+function submitCommands(raw){const text=raw.trim();if(!text)return false;if(text.length>6000){status('chat-status','Keep a command under 6,000 characters.',true);return false;}if(/^(?:jarvis[, ]*)?(?:stop listening|disable voice mode|go to sleep)[.!]?$/i.test(text)){setVoiceMode(false);addMessage('assistant','Voice mode off. I will be here when you need me.');return true;}const parts=text.split(/;|\band also\b/i).map(s=>s.trim()).filter(Boolean);if(parts.length>6){status('chat-status','Send up to six independent commands at once.',true);return false;}if(tasks.filter(activeTask).length+parts.length>15){status('chat-status','The task list is full. Finish or cancel a task first.',true);return false;}const parsed=parts.map(p=>({text:p,local:parseLocal(p)}));if(parsed.some(p=>!p.local)&&!needKey())return false;uiIssue=false;const history=messages.slice(-12).map(m=>({...m}));for(const p of parsed){const t=newTask(p.text,p.local?'utility':classify(p.text));t.history=history;addMessage('user',p.text,t.id);if(p.local)runLocal(t,p.local);}pumpTasks();status('chat-status','Instruction received. You can give me another task.');return true;}
+function systemPrompt(){return 'You are JARVIS, the user’s dependable personal assistant. Sound natural in conversation. Be concise by default: 2–4 sentences unless the task needs detail. '+($('personality').value==='witty'?'Use occasional understated dry wit and light sarcasm. Never insult, belittle, or joke about serious distress. Do not force a joke in every reply. ':'Be focused and clear, without sarcasm. ')+'Reply in the user’s language. Start with the useful answer; avoid introductions and AI boilerplate. You only answer and draft text. The app separately implements English timer, note and clock commands. You cannot browse the web, operate devices, send messages, access accounts or perform external actions; never claim those actions happened. If asked for an unsupported action, explain briefly and offer a useful draft or next step. You receive speech transcripts, not ambient sounds. Do not claim to hear anything beyond that transcript.';}
+function pumpTasks(){let active=tasks.filter(t=>t.kind!=='utility'&&t.state==='running').length;for(const t of tasks){if(active>=3)break;if(t.state==='queued'){active++;void runTask(t);}}}
+async function runTask(t){t.state='running';t.started=Date.now();renderTask(t);try{const data=await request('/v1/chat/completions',{model:'sarvam-105b',messages:[{role:'system',content:systemPrompt()},...t.history,{role:'user',content:t.text}],max_tokens:1100,stream:false,reasoning_effort:null},t.controller.signal);if(t.controller.signal.aborted)return;const answer=data.choices?.[0]?.message?.content;if(typeof answer!=='string'||!answer.trim())throw Error('Sarvam returned no text. Retry this task.');completeTask(t,answer.trim()+(data.choices[0].finish_reason==='length'?'\n[Reply limit reached — ask me to continue.]':''));}catch(e){if(t.controller.signal.aborted)return;t.state='error';t.ended=Date.now();t.answer=e.message;renderTask(t);addMessage('assistant','Task '+t.id+' could not finish: '+e.message,t.id);status('chat-status',e.message,true);}finally{pumpTasks();scheduleListening();}}
+$('chat-form').onsubmit=e=>{e.preventDefault();void unlockAudio();if(submitCommands($('message').value))$('message').value='';};
+$('message').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();$('chat-form').requestSubmit();}};
+$('timer-shortcut').onclick=()=>{$('message').value='Set a timer for 5 minutes';$('message').focus();};$('note-shortcut').onclick=()=>{$('message').value='Note: ';$('message').focus();};
+$('new-chat').onclick=()=>{for(let i=tasks.length-1;i>=0;i--)if(!activeTask(tasks[i])){tasks[i].card.remove();tasks.splice(i,1);}messages.length=0;$('chat').replaceChildren();status('chat-status','Finished tasks and conversation cleared. Active tasks and notes remain.');};
+$('export').onclick=()=>{const content=tasks.map(t=>t.id+' / '+t.state+'\nYOU: '+t.text+'\nJARVIS: '+(t.answer||'In progress')).join('\n\n')+'\n\nNOTES\n'+notes.map(n=>n.text).join('\n');const url=URL.createObjectURL(new Blob([content],{type:'text/plain'}));const a=document.createElement('a');a.href=url;a.download='jarvis-session.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);};
+function formatDuration(ms){const total=Math.max(0,Math.ceil(ms/1000));return total>=3600?Math.floor(total/3600)+'h '+Math.floor(total%3600/60)+'m':total>=60?Math.floor(total/60)+'m '+total%60+'s':total+'s';}
+setInterval(()=>{ $('clock').textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});for(const t of tasks){if(t.deadline&&t.state==='running'&&Date.now()>=t.deadline)completeTask(t,'Timer '+t.id+' is complete.'+($('personality').value==='witty'?' Time to move, boss.':''));t.elapsedEl.textContent=t.deadline&&t.state==='running'?formatDuration(t.deadline-Date.now())+' LEFT':t.state==='queued'?'WAITING':formatDuration((t.ended||Date.now())-(t.started||t.created));}const running=tasks.filter(activeTask).length;$('summary-count').textContent=running+' RUNNING';$('task-count').textContent=String(running).padStart(2,'0');},500);
 function speechChunks(text) {
   let rest = text.replace(/```[\s\S]*?```/g, ' Code is available in the text reply. ').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/[*#`]/g, '').trim();
   const parts = [];
@@ -168,171 +106,35 @@ function languageFor(text) {
   const scripts = [[/[\u0900-\u097f]/,'hi-IN'],[/[\u0980-\u09ff]/,'bn-IN'],[/[\u0a00-\u0a7f]/,'pa-IN'],[/[\u0a80-\u0aff]/,'gu-IN'],[/[\u0b00-\u0b7f]/,'od-IN'],[/[\u0b80-\u0bff]/,'ta-IN'],[/[\u0c00-\u0c7f]/,'te-IN'],[/[\u0c80-\u0cff]/,'kn-IN'],[/[\u0d00-\u0d7f]/,'ml-IN']];
   return scripts.find(([pattern]) => pattern.test(text))?.[1] || 'en-IN';
 }
-function stopVoice(quiet = false) {
-  voiceEpoch++; voiceController?.abort(); voiceController = null; voiceQueue = []; voiceIndex = 0;
-  audio.onended = audio.onplay = audio.onerror = null; audio.pause(); audio.removeAttribute('src'); audio.load();
-  $('player-wrap').hidden = true; $('download-audio').removeAttribute('href');
-  if (voiceUrl) URL.revokeObjectURL(voiceUrl); voiceUrl = '';
-  status('voice-status', quiet ? 'Voice ready.' : 'Voice stopped.');
-}
 function wavBlob(encoded) {
   if (typeof encoded !== 'string' || encoded.length > 24000000) throw Error('Sarvam returned no usable audio.');
   const raw = atob(encoded); if (raw.length < 44 || raw.slice(0,4) !== 'RIFF' || raw.slice(8,12) !== 'WAVE') throw Error('Sarvam returned invalid audio.');
   return new Blob([Uint8Array.from(raw, character => character.charCodeAt(0))], {type:'audio/wav'});
 }
-async function playAudio(epoch = voiceEpoch) {
-  if (!audio.getAttribute('src') || micSession) return;
-  try { await audio.play(); } catch (error) { if (epoch === voiceEpoch) status('voice-status', error.name === 'NotAllowedError' ? 'Audio is ready. Click ▶ Play audio below to hear it.' : 'Audio could not play here. Download the audio section to listen.', true); }
-}
-async function playSection(epoch, options) {
-  if (epoch !== voiceEpoch) return;
-  if (voiceIndex >= voiceQueue.length) { status('voice-status', 'Finished. Use Play audio to replay the last section.'); return; }
-  const controller = new AbortController(); voiceController = controller;
-  status('voice-status', 'Generating audio · section '+(voiceIndex+1)+' of '+voiceQueue.length+'…');
-  try {
-    const text = voiceQueue[voiceIndex];
-    const data = await request('/text-to-speech', {text,model:'bulbul:v3',speaker:options.speaker,language_code:options.language === 'auto' ? languageFor(text) : options.language,output_audio_codec:'wav',speech_sample_rate:24000,pace:1}, controller.signal);
-    if (epoch !== voiceEpoch) return;
-    const blob = wavBlob(data.audios?.[0]);
-    if (voiceUrl) URL.revokeObjectURL(voiceUrl); voiceUrl = URL.createObjectURL(blob);
-    audio.src = voiceUrl; audio.muted = false; audio.volume = 1;
-    $('download-audio').href = voiceUrl; $('download-audio').download = 'jarvis-voice-'+(voiceIndex+1)+'.wav'; $('player-wrap').hidden = false;
-    audio.onplay = () => { if (epoch === voiceEpoch) status('voice-status', 'Playing audio · section '+Math.min(voiceIndex+1,voiceQueue.length)+' of '+voiceQueue.length); };
-    audio.onerror = () => { if (epoch === voiceEpoch) status('voice-status', 'Your browser could not play this audio. Use Download this audio section.', true); };
-    audio.onended = () => { if (epoch === voiceEpoch) { voiceIndex++; void playSection(epoch, options); } };
-    await playAudio(epoch);
-  } catch (error) { if (epoch === voiceEpoch && error.name !== 'AbortError') status('voice-status', error.message + ' Your text reply is still available.', true); }
-  finally { if (voiceController === controller) voiceController = null; }
-}
-async function speak(text) {
-  if (!needKey()) return;
-  if (!text?.trim()) { status('voice-status', 'There is no reply to read yet.'); return; }
-  stopVoice(true); voiceQueue = speechChunks(text); voiceIndex = 0;
-  await playSection(voiceEpoch, {speaker:$('voice').value, language:$('language').value});
-}
-$('test-voice').onclick = () => { void unlockAudio(); void speak('At your service. Your JARVIS voice connection is ready.'); };
-$('read-reply').onclick = () => { void unlockAudio(); void speak(lastReply); };
-$('stop-voice').onclick = () => stopVoice();
-$('play-audio').onclick = () => { void unlockAudio(); void playAudio(); };
-$('auto-voice').onchange = () => { if (!$('auto-voice').checked) stopVoice(); };
-// Voice input: browser recognition with an explicit Sarvam recorder alternative.
-const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-let audioContext = null, playbackAnalyser = null, playbackSource = null, uiIssue = false;
-async function unlockAudio() {
-  try {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) return null;
-    audioContext ||= new AudioCtx();
-    if (audioContext.state === 'suspended') await audioContext.resume();
-    return audioContext;
-  } catch { return null; }
-}
-function micError(text) {
-  status('mic-status', text, true);
-  $('mic-guide').hidden = false;
-  $('mic-guide-text').textContent = text;
-}
-function releaseMicrophone(session) {
-  clearTimeout(session.timer); clearTimeout(session.finishTimer); clearInterval(session.meterTimer);
-  session.source?.disconnect(); session.analyser?.disconnect();
-  session.stream?.getTracks().forEach(track => track.stop());
-}
-function micControls(active) {
-  for (const id of ['send','message','use-key','new-chat','read-reply','test-voice','input-mode','language']) $(id).disabled = active;
-  if (!active) $('read-reply').disabled = !lastReply;
-  $('talk').disabled = false; $('cancel-mic').hidden = !active;
-  $('talk').textContent = active ? '■ Finish & send' : '🎙 Talk to JARVIS';
-  $('cancel-mic').textContent = 'Cancel recording';
-}
-function cancelMic(quiet = false) {
-  const session = micSession; if (!session) return;
-  session.cancelled = true; session.controller.abort();
-  session.recognition?.abort();
-  if (session.recorder?.state === 'recording') session.recorder.stop();
-  releaseMicrophone(session); micSession = null; micControls(false);
-  if (!quiet) status('mic-status', 'Cancelled. No voice instruction was sent to chat.');
-}
-function acceptTranscript(session, transcript) {
-  if (session.cancelled || micSession !== session) return;
-  releaseMicrophone(session); micSession = null; micControls(false);
-  transcript = transcript.trim();
-  if (!transcript) { micError('No words were detected. Speak clearly, check your input language, or switch voice input method.'); return; }
-  $('transcript').textContent = transcript;
-  const text = [session.draft, transcript].filter(Boolean).join('\n');
-  $('message').value = text;
-  if (text.length > 6000) { micError('Your instruction is in the text box. Shorten it to 6,000 characters before sending.'); return; }
-  if (!apiKey) { status('mic-status', 'Voice captured. Add your Sarvam key below, then click Send to get an answer.'); return; }
-  status('mic-status', 'Instruction captured. Sending to JARVIS…');
-  $('chat-form').requestSubmit();
-}
-function sessionFor(mode) {
-  return {mode,phase:'permission',controller:new AbortController(),cancelled:false,parts:[],stream:null,recorder:null,timer:null,
-    draft:$('message').value.trim(),language:$('language').value,started:0,peak:0,heard:false,lastSpeech:0,transcript:''};
-}
-async function startMicrophone(forceMode) {
-  if (chatController || micSession) return;
-  $('mic-guide').hidden = true; uiIssue = false;
-  if (!window.isSecureContext) { micError('Microphone access needs HTTPS. Open the published JARVIS website using the link below.'); return; }
-  const chosen = forceMode || $('input-mode').value;
-  const mode = chosen === 'auto' ? (Recognition ? 'browser' : 'sarvam') : chosen;
-  if (mode === 'browser' && !Recognition) { micError('Browser speech is unavailable here. Select Sarvam speech, or open JARVIS in Chrome or Edge.'); return; }
-  if (mode === 'sarvam' && !needKey()) { micError('Sarvam speech needs your API key. Add it below, or select Browser speech to dictate without a Sarvam transcription request.'); return; }
-  stopVoice(true); void unlockAudio();
-  const session = sessionFor(mode); micSession = session; micControls(true);
-  $('talk').disabled = true; $('transcript').textContent = 'Waiting for microphone…';
-  status('mic-status', 'Choose Allow when your browser asks for microphone access.');
-  if (mode === 'browser') { startBrowserSpeech(session, chosen === 'auto'); return; }
-  await startRecorder(session);
-}
-function startBrowserSpeech(session, mayFallback) {
-  try {
-    const recognition = new Recognition(); session.recognition = recognition;
-    recognition.lang = session.language === 'auto' ? 'en-IN' : session.language;
-    recognition.interimResults = true; recognition.continuous = false; recognition.maxAlternatives = 1;
-    recognition.onstart = () => {
-      if (micSession !== session || session.cancelled) { recognition.abort(); return; }
-      session.phase = 'listening'; session.started = Date.now(); $('talk').disabled = false;
-      status('mic-status', 'Listening. Speak your instruction; it sends when you stop. Language: '+recognition.lang+'.');
-      $('transcript').textContent = 'Listening for your words…';
-      clearTimeout(session.timer);
-      session.timer = setTimeout(finishRecording,25000);
-    };
-    recognition.onresult = event => {
-      if (micSession !== session || session.cancelled) return;
-      session.transcript = Array.from(event.results, result => result[0].transcript).join(' ').trim();
-      $('transcript').textContent = session.transcript || 'Listening…';
-    };
-    recognition.onerror = event => {
-      if (micSession !== session || session.cancelled) return;
-      const code = event.error;
-      cancelMic(true);
-      if (mayFallback && apiKey && ['network','service-not-allowed','language-not-supported'].includes(code)) {
-        status('mic-status', 'Browser speech unavailable. Switching to Sarvam recording…');
-        void startMicrophone('sarvam'); return;
-      }
-      const help = code === 'not-allowed' || code === 'service-not-allowed'
-        ? 'Microphone or speech permission is blocked. In your browser’s site settings, allow Microphone, reload, then try again. You can also select Sarvam speech.'
-        : code === 'network' ? 'The browser speech service could not connect. Select Sarvam speech and try again.'
-        : code === 'audio-capture' ? 'No microphone is available. Check your device’s input settings and close other recording apps.'
-        : code === 'no-speech' ? 'No speech was heard. Speak closer to your microphone, then try again.'
-        : 'Browser speech failed ('+code+'). Select Sarvam speech and try again.';
-      micError(help);
-    };
-    recognition.onend = () => {
-      if (micSession !== session || session.cancelled) return;
-      acceptTranscript(session, session.transcript);
-    };
-    session.timer = setTimeout(() => { if (micSession === session) { cancelMic(true); micError('No response from the browser speech service. Select Sarvam speech, or open this website in Chrome or Edge.'); } },20000);
-    recognition.start();
-  } catch (error) {
-    cancelMic(true);
-    micError('Browser speech could not start ('+error.name+'). Select Sarvam speech and try again.');
-  }
-}
+
+function queueSpeech(text,id,force=false){if(!force&&!$('auto-voice').checked)return;if(speechQueue.length>=15){status('voice-status','Voice queue is full. Read this reply aloud from the conversation.',true);return;}speechQueue.push({text,id,speaker:$('voice').value,language:$('language').value});pumpVoice();}
+function stopVoice(clearQueue=true){if(clearQueue)speechQueue.length=0;const old=voiceJob;voiceJob=null;old?.controller.abort();window.speechSynthesis?.cancel();audio.pause();audio.removeAttribute('src');audio.load();if(voiceUrl)URL.revokeObjectURL(voiceUrl);voiceUrl='';$('player-wrap').hidden=true;}
+function pumpVoice(){if(voiceJob||!speechQueue.length)return;if(micSession){if(micSession.phase!=='listening'||micSession.heard||micSession.transcript)return;cancelMic(true);}clearTimeout(resumeTimer);const entry=speechQueue.shift();const job={...entry,controller:new AbortController(),phase:'generating'};voiceJob=job;void runSpeech(job);}
+async function runSpeech(job){try{if(apiKey){try{for(const text of speechChunks(job.text)){if(job.controller.signal.aborted)return;job.phase='generating';status('voice-status','Preparing '+(job.id||'voice')+'…');const data=await request('/text-to-speech',{text,model:'bulbul:v3',speaker:job.speaker,language_code:job.language==='auto'?languageFor(text):job.language,output_audio_codec:'wav',speech_sample_rate:24000,pace:1},job.controller.signal);if(job.controller.signal.aborted)return;await playBlob(wavBlob(data.audios?.[0]),job);}}catch(e){if(job.controller.signal.aborted)return;if(!$('browser-fallback').checked)throw e;status('voice-status','Sarvam voice unavailable. Using the device voice.');await deviceSpeech(job);}}else await deviceSpeech(job);}catch(e){if(!job.controller.signal.aborted)status('voice-status',e.message+' The text reply is available in the conversation.',true);}finally{if(voiceJob===job){voiceJob=null;if(voiceUrl)URL.revokeObjectURL(voiceUrl);voiceUrl='';$('player-wrap').hidden=true;audio.removeAttribute('src');if(speechQueue.length)pumpVoice();else{status('voice-status',$('voice-status').classList.contains('error')?$('voice-status').textContent:'Ready.');scheduleListening(650);}}}}
+function playBlob(blob,job){return new Promise((resolve,reject)=>{if(voiceUrl)URL.revokeObjectURL(voiceUrl);voiceUrl=URL.createObjectURL(blob);audio.src=voiceUrl;$('player-wrap').hidden=false;const cleanup=()=>{audio.removeEventListener('ended',ended);audio.removeEventListener('error',failed);job.controller.signal.removeEventListener('abort',aborted);};const ended=()=>{cleanup();resolve();};const failed=()=>{cleanup();reject(Error('Audio playback failed.'));};const aborted=()=>{cleanup();reject(new DOMException('Stopped','AbortError'));};audio.addEventListener('ended',ended);audio.addEventListener('error',failed);job.controller.signal.addEventListener('abort',aborted,{once:true});audio.play().then(()=>{if(voiceJob===job){job.phase='speaking';status('voice-status','Speaking '+(job.id||'')+'. Tap Interrupt & talk to take over.');}}).catch(()=>{if(voiceJob===job){job.phase='paused';status('voice-status','Audio is ready. Tap Play / resume reply to allow playback.');}});});}
+function deviceSpeech(job){return new Promise((resolve,reject)=>{if(!window.speechSynthesis){reject(Error('Device speech is unavailable. Connect a key for Sarvam voice.'));return;}const u=new SpeechSynthesisUtterance(job.text);u.lang=job.language==='auto'?languageFor(job.text):job.language;u.rate=1.03;let watchdog;const done=e=>{clearTimeout(watchdog);job.controller.signal.removeEventListener('abort',abort);e?reject(e):resolve();};const abort=()=>{speechSynthesis.cancel();done(new DOMException('Stopped','AbortError'));};job.controller.signal.addEventListener('abort',abort,{once:true});u.onstart=()=>{if(voiceJob===job){clearTimeout(watchdog);job.phase='speaking';status('voice-status','Speaking with your device voice.');}};u.onend=()=>done();u.onerror=e=>done(Error('Device voice could not play ('+e.error+').'));watchdog=setTimeout(()=>{speechSynthesis.cancel();done(Error('Device voice did not start. Tap Read aloud to retry.'));},15000);speechSynthesis.speak(u);});}
+$('play-audio').onclick=()=>{void unlockAudio();audio.play().then(()=>{if(voiceJob)voiceJob.phase='speaking';}).catch(()=>status('voice-status','Playback is blocked. Check browser audio permissions.',true));};
+$('stop-voice').onclick=()=>{stopVoice(false);pumpVoice();scheduleListening();};$('test-voice').onclick=()=>{void unlockAudio();queueSpeech('At your service. Four channels, several tasks, and a frankly unreasonable amount of patience.',null,true);};
+$('auto-voice').onchange=()=>{if(!$('auto-voice').checked){stopVoice();scheduleListening();}};
+function setVoiceMode(enabled){voiceMode=enabled;clearTimeout(resumeTimer);$('voice-mode').setAttribute('aria-pressed',String(enabled));$('voice-mode').textContent=enabled?'◉ Voice mode on · Stop':'◉ Enable voice mode';$('session-label').textContent=enabled?'ENGAGED':'DISENGAGED';if(!enabled){cancelMic(true);stopVoice();status('mic-status','Voice mode off. Microphone released.');}else{uiIssue=false;browserFailed=false;void unlockAudio();startMicrophone();}}
+$('voice-mode').onclick=()=>setVoiceMode(!voiceMode);
+function scheduleListening(delay=400){clearTimeout(resumeTimer);if(!voiceMode||document.hidden||micSession||voiceJob||speechQueue.length)return;resumeTimer=setTimeout(()=>{if(voiceMode&&!document.hidden&&!micSession&&!voiceJob&&!speechQueue.length)void startMicrophone();},delay);}
+function micError(text){if(voiceMode)setVoiceMode(false);status('mic-status',text,true);$('mic-guide').hidden=false;$('mic-guide-text').textContent=text;}
+function micControls(active){$('input-mode').disabled=active;$('language').disabled=active;$('talk').disabled=false;$('cancel-mic').hidden=!active;}
+function releaseMicrophone(session){clearTimeout(session.timer);clearTimeout(session.finishTimer);clearTimeout(session.silenceTimer);clearInterval(session.meterTimer);session.source?.disconnect();session.analyser?.disconnect();session.stream?.getTracks().forEach(track=>track.stop());}
+function cancelMic(quiet=false){const s=micSession;if(!s)return;micSession=null;s.cancelled=true;s.controller.abort();if(s.recognition){s.recognition.onend=s.recognition.onerror=null;s.recognition.abort();}if(s.recorder?.state==='recording')s.recorder.stop();releaseMicrophone(s);micControls(false);if(!quiet){setVoiceMode(false);status('mic-status','Input cancelled.');}}
+function acceptTranscript(s,text){if(s.cancelled||micSession!==s)return;releaseMicrophone(s);micSession=null;micControls(false);text=text.trim();if(!text){pumpVoice();if(voiceMode)scheduleListening(650);else status('mic-status','No words detected. Try again when ready.');return;}$('transcript').textContent=text;status('mic-status','Heard you. Sending the instruction.');if(!submitCommands(text)){$('message').value=text;if(voiceMode)setVoiceMode(false);}pumpVoice();scheduleListening();}
+async function startMicrophone(force){if(micSession||voiceJob)return;$('mic-guide').hidden=true;uiIssue=false;if(!window.isSecureContext){micError('Open JARVIS over HTTPS to use your microphone.');return;}const chosen=force||$('input-mode').value;const mode=chosen==='auto'?(Recognition&&!browserFailed?'browser':'sarvam'):chosen;if(mode==='browser'&&!Recognition){micError('Browser speech is unavailable. Choose Sarvam input in Settings.');return;}if(mode==='sarvam'&&!apiKey){micError('Sarvam recording needs an API key. Connect it in Settings, or choose Browser speech.');return;}void unlockAudio();const s={mode,phase:'permission',controller:new AbortController(),cancelled:false,parts:[],stream:null,recorder:null,timer:null,language:$('language').value,started:0,peak:0,heard:false,lastSpeech:0,transcript:''};micSession=s;micControls(true);$('talk').disabled=true;status('mic-status','Allow microphone access when your browser asks.');if(mode==='browser')startBrowserSpeech(s,chosen==='auto');else await startRecorder(s);}
+function startBrowserSpeech(s,mayFallback){try{const r=new Recognition();s.recognition=r;r.lang=s.language==='auto'?'en-IN':s.language;r.continuous=false;r.interimResults=true;r.maxAlternatives=1;r.onstart=()=>{if(micSession!==s)return;r.lang=s.language==='auto'?'en-IN':s.language;s.phase='listening';s.started=Date.now();$('talk').disabled=false;clearTimeout(s.timer);s.timer=setTimeout(finishRecording,25000);status('mic-status','Listening. Speak naturally; I will send when you pause.');};r.onspeechstart=()=>{if(micSession===s){s.heard=true;clearTimeout(s.silenceTimer);}};r.onresult=e=>{if(micSession!==s)return;s.heard=true;s.transcript=Array.from(e.results,result=>result[0].transcript).join(' ').trim();$('transcript').textContent=s.transcript;};r.onspeechend=()=>{if(micSession===s&&s.transcript)s.silenceTimer=setTimeout(finishRecording,350);};r.onend=()=>{if(micSession===s)acceptTranscript(s,s.transcript);};r.onerror=e=>{if(micSession!==s)return;const code=e.error;cancelMic(true);if(code==='no-speech'&&voiceMode){pumpVoice();scheduleListening(750);return;}if(mayFallback&&apiKey&&['network','service-not-allowed','language-not-supported'].includes(code)){browserFailed=true;void startMicrophone('sarvam');return;}micError(code==='not-allowed'?'Microphone permission is blocked. Allow it in browser site settings and try again.':code==='network'?'Browser speech could not connect. Select Sarvam speech in Settings.':code==='audio-capture'?'No microphone is available. Check your input device.':'Speech recognition stopped ('+code+'). Try Sarvam input or Chrome.');};s.timer=setTimeout(()=>{if(micSession===s){cancelMic(true);micError('The speech service did not start. Try Sarvam input in Settings.');}},20000);r.start();}catch(e){cancelMic(true);micError('Could not start browser speech ('+e.name+'). Try Sarvam input.');}}
 async function startRecorder(session) {
   if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) { cancelMic(true); micError('Recording is unavailable in this browser. Open the HTTPS website in Chrome or Edge.'); return; }
   try {
-    session.stream = await navigator.mediaDevices.getUserMedia({audio:true,video:false});
+    session.stream = await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},video:false});
     if (session.cancelled || micSession !== session) { releaseMicrophone(session); return; }
     const mimeType = ['audio/webm;codecs=opus','audio/mp4','audio/webm','audio/ogg;codecs=opus'].find(type => MediaRecorder.isTypeSupported(type));
     const recorder = new MediaRecorder(session.stream, mimeType ? {mimeType} : undefined); session.recorder = recorder;
@@ -355,7 +157,7 @@ async function startRecorder(session) {
         const level = Math.sqrt(session.samples.reduce((sum,x) => sum + ((x-128)/128)**2,0)/512);
         session.level = level; session.peak = Math.max(session.peak,level);
         if (level > .018) { session.heard = true; session.lastSpeech = Date.now(); }
-        if (session.heard && Date.now()-session.lastSpeech > 2200 && Date.now()-session.started > 3000) finishRecording();
+        if (session.heard && Date.now()-session.lastSpeech > 1100 && Date.now()-session.started > 1500) finishRecording();
       },100);
     } catch { /* Recording remains usable when metering is unavailable. */ }
   } catch (error) {
@@ -398,6 +200,7 @@ async function recordingBlob(session) {
 async function transcribeRecording(session) {
   releaseMicrophone(session);
   if (session.cancelled || micSession !== session) return;
+  if (voiceMode && session.analyser && !session.heard) { micSession=null; micControls(false); pumpVoice(); scheduleListening(650); return; }
   session.phase = 'transcribing'; $('talk').disabled = true; $('cancel-mic').textContent = 'Cancel transcription';
   status('mic-status', 'Transcribing your voice with Sarvam…');
   try {
@@ -417,69 +220,28 @@ async function transcribeRecording(session) {
     session.parts = [];
   }
 }
-function finishRecording() {
-  const session = micSession; if (!session || session.phase !== 'listening') return;
-  session.phase = 'transcribing'; clearTimeout(session.timer); clearInterval(session.meterTimer); $('talk').disabled = true;
-  status('mic-status','Finishing your voice instruction…');
-  if (session.recognition) {
-    session.recognition.stop();
-    session.finishTimer = setTimeout(() => { if (micSession === session) { session.recognition.onend = session.recognition.onerror = null; session.recognition.abort(); acceptTranscript(session,session.transcript); } },2500);
-  } else if (session.recorder?.state === 'recording') session.recorder.stop();
-}
-$('talk').onclick = () => micSession ? finishRecording() : startMicrophone();
-$('cancel-mic').onclick = () => cancelMic();
-$('input-mode').onchange = () => { $('mic-guide').hidden = true; status('mic-status', $('input-mode').value === 'sarvam' ? 'Sarvam mode: record your instruction, then pause or click Finish & send.' : 'Browser mode uses live speech recognition where available. Select your spoken language below.'); };
-window.addEventListener('pagehide', () => { chatController?.abort(); cancelMic(true); stopVoice(true); apiKey = ''; void audioContext?.suspend(); });
 
-// Draw projected wireframe geometry; all activity states come from the real voice/chat lifecycle.
-const canvas = $('reactor'), pen = canvas.getContext('2d');
-const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-const bars = Array.from({length:30},()=>{const bar=document.createElement('i');$('signal').append(bar);return bar;});
-const stateText = {
-  idle:['STANDBY','Tap the microphone to give a voice instruction.'],
-  permission:['MIC ACCESS','Waiting for your browser’s microphone permission.'],
-  listening:['LISTENING','Voice channel open. Speak your instruction.'],
-  transcribing:['DECODING','Converting your instruction into text.'],
-  thinking:['THINKING','JARVIS is preparing your answer.'],
-  generating:['VOICE SYNTHESIS','Preparing the spoken response.'],
-  speaking:['SPEAKING','Playing JARVIS’s spoken response.'],
-  paused:['AUDIO READY','Use Play audio to hear the response.'],
-  error:['ATTENTION','Read the highlighted message for the next step.']
-};
-let lastVisualState = '', lastFrame = 0, smoothLevel = 0;
-function reactorState() {
-  if (micSession) return micSession.phase;
-  if (!audio.paused && !audio.ended && audio.getAttribute('src')) return 'speaking';
-  if (voiceController) return 'generating';
-  if (chatController) return 'thinking';
-  if (uiIssue) return 'error';
-  if (audio.getAttribute('src') && !audio.ended) return 'paused';
-  return 'idle';
-}
-function syncReactor(state) {
-  if (lastVisualState !== state) {
-    lastVisualState = state; document.body.dataset.state = state;
-    $('reactor-state').textContent = (stateText[state] || stateText.idle)[0];
-    $('reactor-hint').textContent = (stateText[state] || stateText.idle)[1];
-  }
-  $('input-channel').textContent = micSession ? (micSession.mode === 'browser' ? 'BROWSER / LIVE' : 'SARVAM / REC') : 'READY';
-  $('output-channel').textContent = state === 'speaking' ? 'PLAYING' : state === 'generating' ? 'PROCESSING' : 'STANDBY';
-  const seconds = micSession?.started ? Math.floor((Date.now()-micSession.started)/1000) : 0;
-  $('record-time').textContent = '00:'+String(Math.min(99,seconds)).padStart(2,'0');
-}
-audio.addEventListener('play', async () => {
-  const context = await unlockAudio();
-  if (!context || context.state !== 'running' || playbackSource) return;
-  try { playbackSource = context.createMediaElementSource(audio); playbackAnalyser = context.createAnalyser();
-    playbackAnalyser.fftSize=512; playbackSource.connect(playbackAnalyser); playbackAnalyser.connect(context.destination);
-  } catch { /* Native audio remains available without a visualizer. */ }
-});
-const playbackSamples = new Uint8Array(256);
+function finishRecording(){const s=micSession;if(!s||s.phase!=='listening')return;s.phase='transcribing';clearTimeout(s.timer);clearTimeout(s.silenceTimer);clearInterval(s.meterTimer);$('talk').disabled=true;if(s.recognition){s.recognition.stop();s.finishTimer=setTimeout(()=>{if(micSession===s){s.recognition.onend=s.recognition.onerror=null;s.recognition.abort();acceptTranscript(s,s.transcript);}},2000);}else if(s.recorder?.state==='recording')s.recorder.stop();}
+$('talk').onclick=()=>{if(voiceJob||speechQueue.length){stopVoice();cancelMic(true);void startMicrophone();}else if(micSession)finishRecording();else void startMicrophone();};$('cancel-mic').onclick=()=>cancelMic();
+$('input-mode').onchange=()=>{browserFailed=false;};
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&voiceMode){setVoiceMode(false);status('mic-status','Voice mode stopped because the page was hidden. Enable it when you return.');}});
+window.addEventListener('pagehide',()=>{setVoiceMode(false);cancelMic(true);stopVoice();for(const t of tasks)t.controller.abort();apiKey='';void audioContext?.suspend();});
+const canvas=$('reactor'),pen=canvas.getContext('2d'),reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+const bars=Array.from({length:30},()=>{const b=document.createElement('i');$('signal').append(b);return b;});
+const stateText={idle:['AT YOUR SERVICE','A little initiative. A little sarcasm. Your call.'],permission:['MIC ACCESS','Allow your microphone to open the voice channel.'],listening:['LISTENING','Go ahead. I am all ears. Figuratively.'],transcribing:['DECODING','Making sense of your instruction.'],thinking:['ON IT','You can give me another task while I work.'],generating:['FORMING REPLY','Preparing the voice response.'],speaking:['SPEAKING','Tap Interrupt & talk when you want to jump in.'],paused:['AUDIO READY','Tap Play / resume reply below to hear me.'],error:['ATTENTION','There is a message below that needs your attention.']};
+let lastVisualState='',lastFrame=0,smoothLevel=0;
+function reactorState(){if(micSession)return micSession.phase;if(voiceJob)return voiceJob.phase;if(tasks.some(t=>t.kind!=='utility'&&t.state==='running'))return 'thinking';if(uiIssue)return 'error';return 'idle';}
+function syncReactor(state){if(lastVisualState!==state){lastVisualState=state;document.body.dataset.state=state;$('reactor-state').textContent=stateText[state][0];$('reactor-hint').textContent=stateText[state][1];}const listening=state==='listening';$('input-channel').textContent=micSession?(micSession.mode==='browser'?'BROWSER / LIVE':'SARVAM / REC'):'STANDBY';$('output-channel').textContent=voiceJob?state==='speaking'?'PLAYING':voiceJob.phase.toUpperCase():'STANDBY';$('record-time').textContent=micSession?.started?formatDuration(Date.now()-micSession.started):'00:00';$('core-mode').textContent=voiceMode?'VOICE MODE ENGAGED':'MANUAL CONTROL';$('mode-line').textContent=voiceMode?(listening?'MICROPHONE ON · SPEAK NATURALLY':voiceJob?'MIC PAUSED DURING REPLY · INTERRUPT TO TALK':'VOICE MODE ON · AUTOMATIC TURN-TAKING'):(micSession?'MICROPHONE ON · SINGLE COMMAND':'MICROPHONE OFF · YOU ARE IN CONTROL');$('talk').textContent=voiceJob?'Interrupt & talk':micSession?(micSession.phase==='listening'?'Finish & send':'Processing…'):'Talk once';$('voice-channel-state').textContent=micSession?'INPUT':voiceJob?'OUTPUT':'OFFLINE';for(const kind of ['think','create','utility'])$(kind+'-count').textContent=tasks.filter(t=>t.kind===kind&&activeTask(t)).length+' ACTIVE';}
+audio.addEventListener('play',async()=>{if(voiceJob)voiceJob.phase='speaking';const c=await unlockAudio();if(!c||c.state!=='running'||playbackSource)return;try{playbackSource=c.createMediaElementSource(audio);playbackAnalyser=c.createAnalyser();playbackAnalyser.fftSize=512;playbackSource.connect(playbackAnalyser);playbackAnalyser.connect(c.destination);}catch{}});
+audio.addEventListener('pause',()=>{if(voiceJob&&voiceJob.phase==='speaking'&&!audio.ended)voiceJob.phase='paused';});
+const playbackSamples=new Uint8Array(256);
+function wave(canvas,color,active,frequency,time,level=.5){const ctx=canvas.getContext('2d');if(!ctx)return;const w=canvas.clientWidth,h=canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,2);if(!w)return;if(canvas.width!==Math.round(w*dpr)||canvas.height!==Math.round(h*dpr)){canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);}ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);ctx.strokeStyle=color;ctx.globalAlpha=.12;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);ctx.stroke();ctx.globalAlpha=active?.85:.23;ctx.beginPath();for(let x=0;x<=w;x+=2){const e=Math.sin(Math.PI*x/w);const y=h/2+(active?(h*.36*(.3+level*.7)):1.5)*e*(Math.sin(x/w*Math.PI*frequency+time*4)*.7+Math.sin(x/w*Math.PI*(frequency+3)-time*2)*.3);x?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();ctx.globalAlpha=1;}
+function drawChannels(now,state){const time=reducedMotion.matches?0:now/1000;wave($('wave-voice'),'#67eedc',['listening','speaking'].includes(state),13,time,smoothLevel);for(const [kind,f] of [['think',7],['create',4],['utility',19]])wave($('wave-'+kind),colors[kind],tasks.some(t=>t.kind===kind&&activeTask(t)),f,time);for(const t of tasks.slice(-30))wave(t.wave,colors[t.kind],activeTask(t),t.kind==='think'?7:t.kind==='create'?4:19,time+Number(t.id.slice(1))*.2);}
 function drawReactor(now) {
   requestAnimationFrame(drawReactor);
   if (document.hidden || now-lastFrame < (reducedMotion.matches ? 250 : 32)) return;
   lastFrame=now;
-  const state=reactorState(); syncReactor(state);
+  const state=reactorState(); syncReactor(state); drawChannels(now,state);
   let level = state === 'listening' ? Math.min(1,(micSession?.level||0)*9) : 0;
   if (state === 'speaking' && playbackAnalyser) { playbackAnalyser.getByteFrequencyData(playbackSamples); level=playbackSamples.reduce((a,b)=>a+b,0)/(256*120); }
   smoothLevel += (Math.min(1,level)-smoothLevel)*.3;
@@ -513,6 +275,6 @@ function drawReactor(now) {
 }
 requestAnimationFrame(drawReactor);
 
-</script>
-</body>
-</html>
+
+
+</script></body></html>
