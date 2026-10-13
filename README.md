@@ -48,3 +48,11 @@ Upload index.html and JARVIS-Desktop-Companion.zip to the root of a static site.
 ## Typed app commands
 
 Voice is optional. After pairing, type a command in **Device tools → Type a command** or in the main message box, then select **Run command / Send**. For example: “Please open calculator for me”, “Can you open the downloads folder?” or “Launch notepad”. Review the action and type **yes** in the companion terminal. No microphone or Sarvam API key is needed for these local app commands. If pairing is missing or its permission does not cover the command, JARVIS keeps the task pending while you pair. Buttons for Calculator, Text editor, Documents and Downloads use the same command flow.
+
+## Chrome support — companion 5.2
+
+**Open google chrome** and **Open chrome** now request launching the installed Google Chrome application. This requires companion 5.2, the apps permission and terminal approval. Windows supports standard Program Files and per-user LocalAppData Chrome installations; macOS supports system/user Applications; Linux supports standard Google Chrome executable locations. If Chrome is absent or installed elsewhere, the companion reports that instead of claiming success.
+
+To upgrade: close the old companion terminal, download and extract the current ZIP, launch the updated copy, then pair with its new code. The website detects older companions and holds Chrome requests until you update. No need to reinstall Node.js.
+
+**Open gmail.com** or **Open google** opens an HTTPS website in the browser already displaying JARVIS; it does not launch the Chrome app and needs no companion. **Open google chrome and search gmail** requests Chrome with a Google search URL, which is shown for approval. The companion accepts HTTPS destinations only, passes them as arguments without a shell, and never reads the page or sends an email.
