@@ -44,3 +44,7 @@ AI replies and Sarvam voices require internet, a valid Sarvam API subscription k
 ## Hosting
 
 Upload index.html and JARVIS-Desktop-Companion.zip to the root of a static site. The browser assistant requires no backend, packages or build step. Only optional desktop launches require the local companion. GitHub Pages: deploy main / root. Vercel: import the GitHub repository as a static site with no build command. Keep .nojekyll for GitHub Pages. Do not upload credentials or private workspace files. If you change the published domain, review and update the exact allowed origins in the companion source.
+
+## Typed app commands
+
+Voice is optional. After pairing, type a command in **Device tools → Type a command** or in the main message box, then select **Run command / Send**. For example: “Please open calculator for me”, “Can you open the downloads folder?” or “Launch notepad”. Review the action and type **yes** in the companion terminal. No microphone or Sarvam API key is needed for these local app commands. If pairing is missing or its permission does not cover the command, JARVIS keeps the task pending while you pair. Buttons for Calculator, Text editor, Documents and Downloads use the same command flow.
