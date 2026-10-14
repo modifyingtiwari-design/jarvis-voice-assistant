@@ -1,58 +1,54 @@
-# JARVIS Radium Command Center · Mark V
+# JARVIS Radium Command Center · Mark VI
 
-A buildless, single-file personal assistant with a holographic dashboard and your own Sarvam API key.
+[Open JARVIS](https://modifyingtiwari-design.github.io/jarvis-voice-assistant/) · [Vercel version](https://jarvis-voice-assistant-bay.vercel.app/)
+
+A personal voice/text assistant using your own Sarvam API key, with radium green, cyan and violet activity channels.
+
+## New in Mark VI
+
+- **Trusted sessions:** opt in at pairing to run supported app/folder launches without repeated prompts for 30 minutes.
+- **Windows App agent:** choose an open app and give a task. JARVIS reads accessible controls, plans one step with Sarvam, operates a control, then reads the result.
+- **Visible progress and Stop:** one selected app, up to 12 actions and five minutes per run.
+- **Text and voice:** use the App agent task box, or select an app and grant task permission there before saying/typing "Agent: [your task]" in the main box.
 
 ## Start
 
-Open the published HTTPS site in Chrome or Edge. Go to **Settings**, connect your Sarvam subscription key, choose your spoken language, then select **Enable voice mode** and allow the microphone.
+Open the HTTPS site in Chrome or Edge. Connect your Sarvam subscription key in Settings. Type a message, or enable voice mode and allow your microphone.
 
-Voice mode automatically takes turns: listen, send your instruction, speak the response, then listen again. Say **stop listening** or press the voice-mode button to stop. During a reply, use **Interrupt & talk**. Keep this page visible; switching away stops voice mode and releases the microphone. It is not full-duplex audio or a background wake-word service. Network and speech-provider latency still apply.
+Voice mode listens, transcribes, replies aloud, then listens again. It is not full-duplex audio or a background wake-word service. Network/provider latency applies. Switching away stops voice mode; an explicitly started app task can continue while the tab stays open.
 
-## Tasks
+If browser speech fails, choose Sarvam input. Device-voice fallback is available when Sarvam speech fails. Tap Play / resume reply if autoplay is blocked. AI and Sarvam speech need internet, API access and credits. Keys stay in tab memory and are sent only to api.sarvam.ai, never stored in this repository.
 
-- Up to three AI requests run concurrently. Further requests queue, with individual cancel/retry controls. Send another command while earlier ones run.
-- Separate independent commands with a semicolon or “and also” (maximum six per submission, fifteen active tasks total).
-- Spoken replies play one at a time. Read any previous response aloud from its conversation entry.
-- Local commands: “Set a timer for 5 minutes”, “Note: call Alex”, “Read my notes”, “What time is it?”. These commands use English phrases; AI chat supports other languages.
-- Timers and notes work without an API key. Device speech is used for local replies without a key. Timers require this tab to remain open; suspended devices or throttled tabs can delay alerts.
-- Voice, cognition, creative and utility channels use distinct activity waveforms. These are visual task signatures, not measured sound frequencies. The central audio meter uses available microphone/playback levels.
-- Select JARVIS dry wit or focused personality in Settings.
+## Desktop setup
 
-## Privacy and limits
+Download [companion 6.0](JARVIS-Desktop-Companion-6.0.zip), close the old companion, extract the ZIP and run **START-WINDOWS.cmd**. Node.js 22+ is required; do not run as administrator. Read the included README.
 
-The API key is stored only in tab memory and sent only to api.sarvam.ai. It is never included in this repository. Refreshing removes the key, conversation, notes and timers; export the session to keep text.
+In **Device tools**, paste its pairing code, select permissions, optionally enable **Windows app access** and **Trusted session**, and approve once in the companion terminal. Windows app access compiles the included fixed C# helper using the Windows .NET Framework compiler. No npm packages are needed. Allow normal browser local-network permission if prompted.
 
-Browser speech may send audio to the browser vendor. Sarvam speech sends the recording to Sarvam. AI requests include recent completed conversation. Each simultaneous AI task uses a snapshot of conversation at submission, so it does not see the unfinished output of another task. Local utility commands are handled in this tab. Their completed replies can become conversation context in later AI requests.
+Routine commands: Open google chrome, Open calculator, Open notepad, Open home folder, Open documents, Open downloads. No AI key is needed for those launches. Standard launcher paths are required; missing/custom installations are reported. Open gmail.com or Open google requests a browser tab without the companion.
 
-This app answers, drafts, plans and runs its built-in timer/note utilities. Device tools add explicit selected-file access and optional approved desktop launches. It cannot control arbitrary apps, send messages, type into other programs, delete files, run shell commands or read live website contents.
+For a task inside an app, open the app, choose **App agent > Refresh open apps**, choose its window, enter a task, check permission to share the selected app's text with Sarvam, and start. Example: "Enter 125 multiplied by 8 in Calculator and tell me the result." Other controls and sensitive steps may still require terminal approval in trusted mode.
 
-## Device tools
+## Scope and privacy
 
-Open **Device tools** under the reactor. Voice mode stops while you use device tools.
+The Windows agent uses Microsoft UI Automation: readable accessible text, writable fields, buttons, lists, toggles and scrolling. There is no arbitrary shell, code execution or filesystem endpoint. Terminals, several system/security programs, password fields and elevated/UAC windows are unsupported. Custom/canvas interfaces may not expose controls. It cannot operate every app or control phone apps. macOS/Linux retain fixed launchers only.
 
-- **Phones and computers:** choose a UTF-8 text, Markdown, CSV or JSON file up to 1 MB, edit locally, save a copy, copy text or use the device share sheet when supported. You can also start a new note or copy the latest reply into the editor. PDF/Word editing is not included. A save picker may let you choose a destination, while other browsers use downloads; the source is never overwritten automatically.
-- **Optional AI summary:** tick the consent checkbox and select **Summarize with JARVIS**. Only then is the editor's text sent to Sarvam (up to 50,000 characters). Editing the text resets consent. The resulting summary may be included in later conversation context. Closing/reloading the page discards unsaved edits.
-- **Optional desktop companion:** download `JARVIS-Desktop-Companion.zip` from Device tools, extract it, install Node.js 22+ if needed, and run `START-WINDOWS.cmd` on Windows or `node companion.cjs` on macOS/Linux. Keep its terminal open. Paste its pairing code into Device tools, choose apps and/or folders permission, and type **yes** in the companion terminal. Each action also needs terminal approval. Do not paste the code into chat.
-- Supported companion actions: Calculator, text editor, Home, Documents and Downloads. Windows/macOS use their standard launchers; Linux requires gnome-calculator, gedit and xdg-open at the documented locations. Redirected/custom folders are not supported.
-- Commands: **Open calculator**, **Open notepad**, **Open documents**, **Open downloads**, **Open home folder**, **Choose a file**, **Save this file**, **Share this file**, **Open google**, **Open youtube**. File pickers and action confirmations need a tap, even for voice commands. Website commands request a new tab; they do not inspect the website.
-- The companion only accepts the two published JARVIS site origins, binds to `127.0.0.1:4317`, and requires a random pairing code plus an origin-bound 30-minute token. Credentials remain in memory. It provides no arbitrary-command or filesystem API. Close its terminal to revoke access. Browser local-network permission may be required; do not disable browser security. The companion is for the same computer, not remote phone control.
+The AI can make mistakes. Supervise tasks and review edits. Approval rules are conservative but labels cannot identify every sensitive operation. Stop prevents further steps and cannot undo an action already completed. Refresh the app list before each new task. Observations are bounded and may be incomplete. No background screen recording is included.
 
-The UI uses crisp text with radium green, electric cyan and violet accents. Activity animation reflects the assistant state; it does not imply device access before permission.
+The companion listens only on 127.0.0.1:4317 for the two exact published JARVIS origins. Pairing codes expire after ten minutes, sessions after thirty minutes. Disconnect or close the companion to revoke access. Credentials stay in memory. The companion makes no outbound requests; the website sends selected-app text to Sarvam for the task you start with permission checked. Summaries may enter later chat context. Avoid selecting windows containing secrets or unrelated private information.
 
-AI replies and Sarvam voices require internet, a valid Sarvam API subscription key and available credits. Automatic speech recognition depends on browser support and permissions. If browser speech fails, choose Sarvam input; if Sarvam speech output fails, the optional device-voice fallback is used. If autoplay is blocked, use **Play / resume reply**.
+## Other tools
 
-## Hosting
+- Up to three ordinary AI requests run concurrently; spoken replies queue. Separate independent commands with semicolons or "and also" (six per submission, fifteen active tasks total).
+- Local timers, notes and clock: "Set a timer for 5 minutes", "Note: call Alex", "Read my notes", "What time is it?". Keep the tab open; device sleep and browser throttling can delay timers.
+- Selected UTF-8 text-file editing up to 1 MB, save a copy, clipboard and native sharing when supported. AI summaries have a separate checkbox and 50,000-character limit. PDF/Word parsing is not included.
+- Separate voice, cognition, creative and utility waveforms are visual activity signatures, not measured task frequencies.
+- Dry wit or focused personality. AI receives recent completed conversation; simultaneous tasks do not see unfinished outputs from other tasks.
 
-Upload index.html and JARVIS-Desktop-Companion.zip to the root of a static site. The browser assistant requires no backend, packages or build step. Only optional desktop launches require the local companion. GitHub Pages: deploy main / root. Vercel: import the GitHub repository as a static site with no build command. Keep .nojekyll for GitHub Pages. Do not upload credentials or private workspace files. If you change the published domain, review and update the exact allowed origins in the companion source.
+Reloading clears keys, conversation, notes, timers and unsaved edits. Export what you want to keep. Ordinary chat answers cannot directly execute desktop actions.
 
-## Typed app commands
+## Hosting and release status
 
-Voice is optional. After pairing, type a command in **Device tools → Type a command** or in the main message box, then select **Run command / Send**. For example: “Please open calculator for me”, “Can you open the downloads folder?” or “Launch notepad”. Review the action and type **yes** in the companion terminal. No microphone or Sarvam API key is needed for these local app commands. If pairing is missing or its permission does not cover the command, JARVIS keeps the task pending while you pair. Buttons for Calculator, Text editor, Documents and Downloads use the same command flow.
+Static site: deploy index.html, companion ZIPs and .nojekyll at the root. No website backend/build step is needed. GitHub Pages uses main/root; Vercel imports this repository. New domains require review of the companion origin allowlist. Never upload keys, pairing tokens or private workspace files.
 
-## Chrome support — companion 5.2
-
-**Open google chrome** and **Open chrome** now request launching the installed Google Chrome application. This requires companion 5.2, the apps permission and terminal approval. Windows supports standard Program Files and per-user LocalAppData Chrome installations; macOS supports system/user Applications; Linux supports standard Google Chrome executable locations. If Chrome is absent or installed elsewhere, the companion reports that instead of claiming success.
-
-To upgrade: close the old companion terminal, download and extract the current ZIP, launch the updated copy, then pair with its new code. The website detects older companions and holds Chrome requests until you update. No need to reinstall Node.js.
-
-**Open gmail.com** or **Open google** opens an HTTPS website in the browser already displaying JARVIS; it does not launch the Chrome app and needs no companion. **Open google chrome and search gmail** requests Chrome with a Google search URL, which is shown for approval. The companion accepts HTTPS destinations only, passes them as arguments without a shell, and never reads the page or sends an email.
+Mark VI JavaScript syntax checks passed and the Windows helper compiled. Native app operations were not exercised in this release session; compatibility and AI task completion are not guaranteed.
