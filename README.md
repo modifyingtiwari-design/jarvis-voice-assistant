@@ -4,6 +4,14 @@
 
 A personal voice/text assistant using your own Sarvam API key, with radium green, cyan and violet activity channels.
 
+## Mark VII.2: voice conversation on phones
+
+The phone screen now opens to Voice. Tap Start voice session once and grant microphone access. JARVIS listens, replies aloud and listens again while the page stays visible. Opening its phone controls no longer switches the session off. The screen shows live transcripts, replies, listening/speaking animation, microphone errors, interrupt and audio-resume controls.
+
+Say "call" or "navigate" and answer the spoken follow-up. Say "open calculator" and give a calculation, or "send a message to [number]" and then dictate the draft. "Cancel that" clears the current phone request; "stop listening" ends the session. Local phone acknowledgments use device speech when available. General AI replies still use the configured provider. Examples and the routing of phone actions currently use English; this is not arbitrary device automation.
+
+External app links, camera and some browser permissions still require a real tap. Voice cannot replace that browser gesture. Leaving JARVIS stops listening. No background wake word, full-duplex interruption, or control of arbitrary apps is included. Voice and microphone behavior has not been exercised on a physical phone in this release.
+
 ## Mark VII.1 phone compatibility update
 
 External app actions now use a real tappable link inside the phone dialog. Camera selection has a visible native file control, hidden panels stay hidden, and feedback appears near the top. Open directly in Chrome on Android or Safari on iPhone, rather than a messaging app browser. This update has not been exercised on physical phones.
