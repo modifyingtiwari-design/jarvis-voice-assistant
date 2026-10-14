@@ -1,10 +1,27 @@
-# JARVIS Radium Command Center · Mark VI
+# JARVIS Radium Command Center · Mark VII
 
 [Open JARVIS](https://modifyingtiwari-design.github.io/jarvis-voice-assistant/) · [Vercel version](https://jarvis-voice-assistant-bay.vercel.app/)
 
 A personal voice/text assistant using your own Sarvam API key, with radium green, cyan and violet activity channels.
 
-## New in Mark VI
+## New in Mark VII: mobile control center
+
+Open **Phone** at the top of JARVIS, or **Phone** in the mobile bottom bar. The same page supports Android and iPhone. Phone actions run on the device where the page is open; a desktop tab does not remotely control a phone.
+
+- **Launch:** touch-friendly cards for calls, Messages, directions, camera capture, WhatsApp drafts, YouTube, Gmail and Spotify. Save up to 12 named HTTPS tool links in this browser. App links may open an installed app or its website.
+- **Connect:** review a phone number, SMS draft, WhatsApp message or email before handing it to the receiving app. You place calls and send messages there. SMS opens the recipient only; use Copy draft and paste it in Messages. The optional contact picker appears only where supported.
+- **Tools:** map directions, one-time location lookup, local photo preview/sharing, calculator, text sharing, explicit clipboard paste, selected text files and screen wake lock where supported. Photos stay in the tab and are not sent to Sarvam. Location goes to Google only if you choose to open it in Maps.
+- **iPhone routines:** create and review a shortcut in Apple's Shortcuts app, register its exact name under Routines, then request it from JARVIS. The shortcut can combine supported iOS actions or use Open App. JARVIS requests it but cannot inspect its result. No shortcuts are installed or permissions granted automatically.
+- **Android:** app/website handoffs, phone tools and a Chrome intent with a website fallback. There is no native Android companion in this release. The browser cannot read another app's screen, tap its controls or change Wi-Fi/Bluetooth/volume.
+- **Home Screen:** app manifest and icons, an install button when the browser offers it, and platform-specific Add to Home Screen instructions. On iPhone, open in Safari and use Share > Add to Home Screen. Installation does not grant background listening, offline AI or system-wide access.
+
+Text and voice commands include **Open mobile control center**, **Call +[country code][number]**, **Navigate to Mumbai airport**, **Take a photo**, **Keep screen awake**, and **Run shortcut [registered name]**. On phones, **Open calculator**, **Open messages**, **Open WhatsApp** and **Open [saved tool name]** route to the phone tools. External actions prepare a review card and need a tap because browsers restrict app launching without a user gesture. Handoff status is not proof of delivery or completion in another app.
+
+Saved tool names/links and registered shortcut names persist in local browser storage; remove them with the adjacent remove button. Drafts, selected contact details, photos and coordinates stay in tab memory. Mobile task results are excluded from subsequent AI conversation context. Spoken commands still use the selected browser/Sarvam transcription service. Sharing and app handoffs transmit the data shown on their review card to the chosen destination. The two hosting domains have separate browser storage.
+
+JavaScript syntax checks passed for Mark VII. Real Android/iPhone app handoffs and OS permissions have not been exercised on physical phones in this release session. Browser and installed-app support vary.
+
+## Windows features from Mark VI
 
 - **Trusted sessions:** opt in at pairing to run supported app/folder launches without repeated prompts for 30 minutes.
 - **Windows App agent:** choose an open app and give a task. JARVIS reads accessible controls, plans one step with Sarvam, operates a control, then reads the result.
@@ -13,7 +30,7 @@ A personal voice/text assistant using your own Sarvam API key, with radium green
 
 ## Start
 
-Open the HTTPS site in Chrome or Edge. Connect your Sarvam subscription key in Settings. Type a message, or enable voice mode and allow your microphone.
+Open the HTTPS site in Chrome/Edge on a computer, Chrome on Android, or Safari on iPhone. Connect your Sarvam subscription key in Settings. Type a message, or enable voice mode and allow your microphone.
 
 Voice mode listens, transcribes, replies aloud, then listens again. It is not full-duplex audio or a background wake-word service. Network/provider latency applies. Switching away stops voice mode; an explicitly started app task can continue while the tab stays open.
 
@@ -49,6 +66,6 @@ Reloading clears keys, conversation, notes, timers and unsaved edits. Export wha
 
 ## Hosting and release status
 
-Static site: deploy index.html, companion ZIPs and .nojekyll at the root. No website backend/build step is needed. GitHub Pages uses main/root; Vercel imports this repository. New domains require review of the companion origin allowlist. Never upload keys, pairing tokens or private workspace files.
+Static site: deploy index.html, manifest.webmanifest, jarvis-icon-192.png, jarvis-icon-512.png, companion ZIPs and .nojekyll at the root. No website backend/build step is needed. GitHub Pages uses main/root; Vercel imports this repository. New domains require review of the companion origin allowlist. Never upload keys, pairing tokens or private workspace files.
 
 Mark VI JavaScript syntax checks passed and the Windows helper compiled. Native app operations were not exercised in this release session; compatibility and AI task completion are not guaranteed.
