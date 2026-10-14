@@ -4,6 +4,10 @@
 
 A personal voice/text assistant using your own Sarvam API key, with radium green, cyan and violet activity channels.
 
+## Mark VII.1 phone compatibility update
+
+External app actions now use a real tappable link inside the phone dialog. Camera selection has a visible native file control, hidden panels stay hidden, and feedback appears near the top. Open directly in Chrome on Android or Safari on iPhone, rather than a messaging app browser. This update has not been exercised on physical phones.
+
 ## New in Mark VII: mobile control center
 
 Open **Phone** at the top of JARVIS, or **Phone** in the mobile bottom bar. The same page supports Android and iPhone. Phone actions run on the device where the page is open; a desktop tab does not remotely control a phone.
