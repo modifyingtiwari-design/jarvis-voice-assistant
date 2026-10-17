@@ -1,8 +1,20 @@
-# JARVIS Radium Command Center · Mark VII
+# JARVIS Radium Command Center · Mark VIII
 
 [Open JARVIS](https://modifyingtiwari-design.github.io/jarvis-voice-assistant/) · [Vercel version](https://jarvis-voice-assistant-bay.vercel.app/)
 
 A personal voice/text assistant using your own Sarvam API key, with radium green, cyan and violet activity channels.
+
+## Mark VIII: faster responses and communication commands
+
+Call, SMS, WhatsApp and email commands now route locally on PC, Android and iPhone, without an AI request. Say or type "call [number]", "text [number] saying [message]", "email [address]", or "email [address] saying [message]". Email asks for subject and body when missing. Saved contact names work too: add them under Connect > Contacts. Contacts are session-only unless Remember is selected, then saved only in this browser with a Remove control. Draft bodies are treated as one instruction even when they contain semicolons.
+
+The review card has the actual app link, Copy draft/number and an additional Gmail browser link for email. Set Gmail as the default email app on phones for mailto links. Gmail browser composition can fall back to the inbox on some devices; copy/paste remains available. iPhone SMS uses recipient plus copy/paste; Android requests body prefill where supported. PC calls/texts need a configured calling/messaging app or linked phone. Review cards stay available after an attempted handoff. No automatic sending, dialer automation, inbox access or full address-book permission is granted.
+
+Quick responses uses Sarvam's documented conversation model, streams text and can speak the first complete sentence early. If the conversation model is rejected, it falls back to the general model. Device speech is the default to avoid a separate cloud TTS request; uncheck Fast device voice in Settings for Sarvam speech. General AI still requires your key, credits and a working connection. This is not full-duplex or guaranteed real-time audio.
+
+Final browser transcripts are processed immediately. Hidden reactor canvases are not drawn behind dialogs, idle drawing is throttled, and only the newest six task waveforms animate. First-text latency is shown after AI requests. No benchmark or physical phone mic/app action has been run for this release; no guaranteed response time is claimed.
+
+References: [Sarvam chat and streaming](https://docs.sarvam.ai/api-reference/chat/chat-completions-v1), [Google default app guidance](https://support.google.com/accounts/answer/17304849?hl=en).
 
 ## Mark VII.2: voice conversation on phones
 
