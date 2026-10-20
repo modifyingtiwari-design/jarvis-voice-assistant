@@ -21,6 +21,32 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--lime)}dialog{border
 @media(max-width:720px){.wrap{padding:16px 14px 30px}.brand{font-size:16px}.brand small{font-size:8px}.top-controls{gap:6px}.status-dot,.clock{display:none}.buddy-intro{padding:6px 0 22px}.buddy-intro h1{font-size:30px}.buddy-intro p{font-size:12px}.buddy-badge{display:none}.desk{display:flex;flex-direction:column;gap:16px}.core-panel{width:100%;min-height:420px;order:0;padding:15px 10px 0}.reactor{width:240px;margin-top:18px}.reactor-center span{margin-top:90px;font-size:8px}.core-top{font-size:8px;left:20px;right:20px;top:17px}.state-word{font-size:18px}.core-hint{min-height:22px;margin:7px 10px 12px;font-size:12px}.mode-line{font-size:7px}.voice-actions .primary{min-width:190px}.voice-actions button{min-height:44px}.conversation-panel{width:100%;min-height:420px;order:1}.chat{height:270px;max-height:50dvh;flex:auto}.welcome{padding:6px}.welcome h3{font-size:24px}.composer textarea{font-size:16px}.buddy-prompts{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:16px}.buddy-prompts button{padding:14px;min-height:95px}.buddy-prompts strong{font-size:13px}.lower{display:flex;flex-direction:column;gap:16px;margin-top:16px}.channels{margin-top:16px;gap:14px}.channels .channel small{display:block}.channels .legend{display:block}.buddy-modes button{min-height:38px}.session-panel .telemetry{grid-template-columns:repeat(3,1fr)}.footer{display:block}.footer>span{display:block;margin-top:6px}}
 @media(prefers-reduced-motion:reduce){.buddy-prompts button:hover{transform:none}}
 
+/* Crimson armor accents. Decorative glow never filters the text layer. */
+:root{--crimson:#ff4155;--crimson-soft:#ffa3ad}
+body{background:radial-gradient(ellipse at 17% 35%,#53102335,transparent 50%),radial-gradient(ellipse at 85% 15%,#0d33462b,transparent 48%),#05090e}
+header{border-bottom-color:#52303b;background:linear-gradient(90deg,transparent,#ff415507,transparent)}
+.logo{color:var(--crimson-soft);border-color:var(--crimson);outline-color:#512e37;box-shadow:0 0 17px #ff415518}
+.section-line span:first-child{color:#ef8998}
+.core-panel{border-color:#633342;background:radial-gradient(ellipse at 50% 42%,#6b14202e,transparent 67%),linear-gradient(135deg,#141921,#090d14);box-shadow:inset 0 1px #ff6b7b24,0 16px 50px #0005}
+.core-panel:before,.core-panel:after{color:var(--crimson);width:30px;height:30px}
+.core-top span:first-child{color:var(--crimson-soft)}
+.reactor:before{border-color:#ff41558c;box-shadow:0 0 18px #ff415521,inset 0 0 16px #ff415514}
+.reactor:after{border-color:#ff66776b;box-shadow:0 0 16px #ff415514}
+.conversation-panel{border-top:1px solid #733544;background:linear-gradient(145deg,#141820,#080f18 65%)}
+.buddy-modes button[data-buddy-mode=roast]{color:#ffa3ad;border-color:#68303e}
+.buddy-modes button[data-buddy-mode=roast][aria-pressed=true]{color:#ffe0e5;border-color:var(--crimson);background:#ff415520}
+.buddy-prompts button:nth-child(even){border-top-color:#813646}
+.buddy-prompts button:nth-child(even)>span{color:var(--crimson-soft)}
+.buddy-prompts button:nth-child(even):hover{border-color:var(--crimson)}
+.buddy-prompts button:last-child{background:linear-gradient(135deg,#2d1720,#0b1720)}
+.composer:focus-within{border-color:#ff677c;box-shadow:0 0 0 2px #ff415512}
+body[data-state=speaking]{--accent:#ff8495}
+body[data-state=speaking] .core-panel{animation:crimson-pulse 2.4s ease-in-out infinite}
+body[data-state=thinking] .reactor:after,body[data-state=generating] .reactor:after{animation:crimson-charge 3s ease-in-out infinite}
+@keyframes crimson-pulse{0%,100%{box-shadow:inset 0 0 30px #ff415508,0 0 18px #ff415509}50%{box-shadow:inset 0 0 65px #ff415518,0 0 28px #ff41551a}}
+@keyframes crimson-charge{0%,100%{opacity:.45}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){body[data-state=speaking] .core-panel,body[data-state=thinking] .reactor:after,body[data-state=generating] .reactor:after{animation:none}}
+
 </style></head><body data-state="idle"><a href="#message" class="skip">Skip to command input</a><noscript><p class="noscript">Enable JavaScript to use JARVIS.</p></noscript><main class="wrap">
 <header><div class="identity"><div class="logo" aria-hidden="true">J</div><div class="brand">J.A.R.V.I.S.<small>PERSONAL ASSISTANT / MARK IX</small></div></div><div class="top-controls"><time class="clock" id="clock"></time><span class="status-dot" id="connection">LOCAL READY</span><button id="open-settings" class="subtle">Settings ↗</button></div></header>
 <div class="section-line"><span>PERSONAL INTELLIGENCE / IX</span><span>THINK · PLAN · TALK</span></div>
@@ -326,7 +352,7 @@ function drawReactor(now) {
   smoothLevel += (Math.min(1,level)-smoothLevel)*.3;
   const active = ['listening','speaking'].includes(state), processing=['thinking','generating','transcribing'].includes(state);
   const t=reducedMotion.matches ? 0 : now/1000;
-  const color=state==='listening' ? [98,255,228] : processing ? [200,174,255] : state==='error' ? [255,167,119] : [99,215,255];
+  const color=state==='listening' ? [98,255,228] : state==='speaking' ? [255,93,109] : processing ? [238,150,197] : state==='error' ? [255,167,119] : [99,215,255];
   for(let i=0;i<bars.length;i++) bars[i].style.height=(3+(active ? smoothLevel*24*(.3+.7*Math.abs(Math.sin(i*.7+t*4))) : 0))+'px';
   if(!pen) return;
   const size=canvas.clientWidth, dpr=Math.min(2,devicePixelRatio||1);
