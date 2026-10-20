@@ -1,95 +1,47 @@
-# JARVIS Radium Command Center · Mark VIII
+# JARVIS Mark IX — your everyday co-pilot
 
-[Open JARVIS](https://modifyingtiwari-design.github.io/jarvis-voice-assistant/) · [Vercel version](https://jarvis-voice-assistant-bay.vercel.app/)
-
-A personal voice/text assistant using your own Sarvam API key, with radium green, cyan and violet activity channels.
-
-## Mark VIII: faster responses and communication commands
-
-Call, SMS, WhatsApp and email commands now route locally on PC, Android and iPhone, without an AI request. Say or type "call [number]", "text [number] saying [message]", "email [address]", or "email [address] saying [message]". Email asks for subject and body when missing. Saved contact names work too: add them under Connect > Contacts. Contacts are session-only unless Remember is selected, then saved only in this browser with a Remove control. Draft bodies are treated as one instruction even when they contain semicolons.
-
-The review card has the actual app link, Copy draft/number and an additional Gmail browser link for email. Set Gmail as the default email app on phones for mailto links. Gmail browser composition can fall back to the inbox on some devices; copy/paste remains available. iPhone SMS uses recipient plus copy/paste; Android requests body prefill where supported. PC calls/texts need a configured calling/messaging app or linked phone. Review cards stay available after an attempted handoff. No automatic sending, dialer automation, inbox access or full address-book permission is granted.
-
-Quick responses uses Sarvam's documented conversation model, streams text and can speak the first complete sentence early. If the conversation model is rejected, it falls back to the general model. Device speech is the default to avoid a separate cloud TTS request; uncheck Fast device voice in Settings for Sarvam speech. General AI still requires your key, credits and a working connection. This is not full-duplex or guaranteed real-time audio.
-
-Final browser transcripts are processed immediately. Hidden reactor canvases are not drawn behind dialogs, idle drawing is throttled, and only the newest six task waveforms animate. First-text latency is shown after AI requests. No benchmark or physical phone mic/app action has been run for this release; no guaranteed response time is claimed.
-
-References: [Sarvam chat and streaming](https://docs.sarvam.ai/api-reference/chat/chat-completions-v1), [Google default app guidance](https://support.google.com/accounts/answer/17304849?hl=en).
-
-## Mark VII.2: voice conversation on phones
-
-The phone screen now opens to Voice. Tap Start voice session once and grant microphone access. JARVIS listens, replies aloud and listens again while the page stays visible. Opening its phone controls no longer switches the session off. The screen shows live transcripts, replies, listening/speaking animation, microphone errors, interrupt and audio-resume controls.
-
-Say "call" or "navigate" and answer the spoken follow-up. Say "open calculator" and give a calculation, or "send a message to [number]" and then dictate the draft. "Cancel that" clears the current phone request; "stop listening" ends the session. Local phone acknowledgments use device speech when available. General AI replies still use the configured provider. Examples and the routing of phone actions currently use English; this is not arbitrary device automation.
-
-External app links, camera and some browser permissions still require a real tap. Voice cannot replace that browser gesture. Leaving JARVIS stops listening. No background wake word, full-duplex interruption, or control of arbitrary apps is included. Voice and microphone behavior has not been exercised on a physical phone in this release.
-
-## Mark VII.1 phone compatibility update
-
-External app actions now use a real tappable link inside the phone dialog. Camera selection has a visible native file control, hidden panels stay hidden, and feedback appears near the top. Open directly in Chrome on Android or Safari on iPhone, rather than a messaging app browser. This update has not been exercised on physical phones.
-
-## New in Mark VII: mobile control center
-
-Open **Phone** at the top of JARVIS, or **Phone** in the mobile bottom bar. The same page supports Android and iPhone. Phone actions run on the device where the page is open; a desktop tab does not remotely control a phone.
-
-- **Launch:** touch-friendly cards for calls, Messages, directions, camera capture, WhatsApp drafts, YouTube, Gmail and Spotify. Save up to 12 named HTTPS tool links in this browser. App links may open an installed app or its website.
-- **Connect:** review a phone number, SMS draft, WhatsApp message or email before handing it to the receiving app. You place calls and send messages there. SMS opens the recipient only; use Copy draft and paste it in Messages. The optional contact picker appears only where supported.
-- **Tools:** map directions, one-time location lookup, local photo preview/sharing, calculator, text sharing, explicit clipboard paste, selected text files and screen wake lock where supported. Photos stay in the tab and are not sent to Sarvam. Location goes to Google only if you choose to open it in Maps.
-- **iPhone routines:** create and review a shortcut in Apple's Shortcuts app, register its exact name under Routines, then request it from JARVIS. The shortcut can combine supported iOS actions or use Open App. JARVIS requests it but cannot inspect its result. No shortcuts are installed or permissions granted automatically.
-- **Android:** app/website handoffs, phone tools and a Chrome intent with a website fallback. There is no native Android companion in this release. The browser cannot read another app's screen, tap its controls or change Wi-Fi/Bluetooth/volume.
-- **Home Screen:** app manifest and icons, an install button when the browser offers it, and platform-specific Add to Home Screen instructions. On iPhone, open in Safari and use Share > Add to Home Screen. Installation does not grant background listening, offline AI or system-wide access.
-
-Text and voice commands include **Open mobile control center**, **Call +[country code][number]**, **Navigate to Mumbai airport**, **Take a photo**, **Keep screen awake**, and **Run shortcut [registered name]**. On phones, **Open calculator**, **Open messages**, **Open WhatsApp** and **Open [saved tool name]** route to the phone tools. External actions prepare a review card and need a tap because browsers restrict app launching without a user gesture. Handoff status is not proof of delivery or completion in another app.
-
-Saved tool names/links and registered shortcut names persist in local browser storage; remove them with the adjacent remove button. Drafts, selected contact details, photos and coordinates stay in tab memory. Mobile task results are excluded from subsequent AI conversation context. Spoken commands still use the selected browser/Sarvam transcription service. Sharing and app handoffs transmit the data shown on their review card to the chosen destination. The two hosting domains have separate browser storage.
-
-JavaScript syntax checks passed for Mark VII. Real Android/iPhone app handoffs and OS permissions have not been exercised on physical phones in this release session. Browser and installed-app support vary.
-
-## Windows features from Mark VI
-
-- **Trusted sessions:** opt in at pairing to run supported app/folder launches without repeated prompts for 30 minutes.
-- **Windows App agent:** choose an open app and give a task. JARVIS reads accessible controls, plans one step with Sarvam, operates a control, then reads the result.
-- **Visible progress and Stop:** one selected app, up to 12 actions and five minutes per run.
-- **Text and voice:** use the App agent task box, or select an app and grant task permission there before saying/typing "Agent: [your task]" in the main box.
+A conversation-first JARVIS: work assistant, thinking partner and playful buddy. The current interface focuses on voice, chat, planning, notes and timers. It no longer presents phone or computer control panels.
 
 ## Start
 
-Open the HTTPS site in Chrome/Edge on a computer, Chrome on Android, or Safari on iPhone. Connect your Sarvam subscription key in Settings. Type a message, or enable voice mode and allow your microphone.
+Open the HTTPS website, choose Settings and connect your Sarvam subscription key. Tap Start conversation and allow the microphone, or type in the chat box. Speak naturally, pause, hear the reply, then continue. Keep the page visible. Tap Interrupt & talk to interrupt a spoken response. Say “stop listening” to end the session.
 
-Voice mode listens, transcribes, replies aloud, then listens again. It is not full-duplex audio or a background wake-word service. Network/provider latency applies. Switching away stops voice mode; an explicitly started app task can continue while the tab stays open.
+AI replies need internet, a valid Sarvam key and API credits. Your key stays in tab memory and is sent only to api.sarvam.ai. It clears when the page is refreshed or left. No key is bundled in this project.
 
-If browser speech fails, choose Sarvam input. Device-voice fallback is available when Sarvam speech fails. Tap Play / resume reply if autoplay is blocked. AI and Sarvam speech need internet, API access and credits. Keys stay in tab memory and are sent only to api.sarvam.ai, never stored in this repository.
+## Conversation styles
 
-## Desktop setup
+- **JARVIS:** capable, friendly and dryly witty.
+- **Buddy:** relaxed conversation and useful follow-up questions.
+- **Focus:** practical next steps without teasing.
+- **Roast me:** light, opt-in teasing about harmless habits. Serious topics are handled respectfully.
 
-Download [companion 6.0](JARVIS-Desktop-Companion-6.0.zip), close the old companion, extract the ZIP and run **START-WINDOWS.cmd**. Node.js 22+ is required; do not run as administrator. Read the included README.
+Quick starters help plan your day, think through work, chat casually or roast an ambitious to-do list. Settings includes an optional name and today's priorities. Recent completed conversation, the profile and up to 15 recent notes are supplied as context to Sarvam. Context is limited to the current tab; this is not persistent personal memory. Change modes at any time; the change applies to the next generated reply.
 
-In **Device tools**, paste its pairing code, select permissions, optionally enable **Windows app access** and **Trusted session**, and approve once in the companion terminal. Windows app access compiles the included fixed C# helper using the Windows .NET Framework compiler. No npm packages are needed. Allow normal browser local-network permission if prompted.
+## Local commands
 
-Routine commands: Open google chrome, Open calculator, Open notepad, Open home folder, Open documents, Open downloads. No AI key is needed for those launches. Standard launcher paths are required; missing/custom installations are reported. Open gmail.com or Open google requests a browser tab without the companion.
+- “Set a timer for two minutes.”
+- “Note: finish the presentation.”
+- “Read my notes.”
+- “What time is it?”
 
-For a task inside an app, open the app, choose **App agent > Refresh open apps**, choose its window, enter a task, check permission to share the selected app's text with Sarvam, and start. Example: "Enter 125 multiplied by 8 in Calculator and tell me the result." Other controls and sensitive steps may still require terminal approval in trusted mode.
+These commands run without an AI key. Give one instruction per message. AI requests run in order to keep conversational context coherent, while timers run independently. Timers require this tab to remain open and may be delayed by device sleep or browser throttling.
 
-## Scope and privacy
+## Voice and visuals
 
-The Windows agent uses Microsoft UI Automation: readable accessible text, writable fields, buttons, lists, toggles and scrolling. There is no arbitrary shell, code execution or filesystem endpoint. Terminals, several system/security programs, password fields and elevated/UAC windows are unsupported. Custom/canvas interfaces may not expose controls. It cannot operate every app or control phone apps. macOS/Linux retain fixed launchers only.
+Streaming text and device speech are enabled by default. Sarvam speech remains available in Settings. The interface shows an animated holographic core, different listening/thinking/speaking states, signal channels and readable cyan/lime accents. Decorative wave rhythms are visual state indicators, not measured brain or task frequencies. Reduced-motion preferences are respected.
 
-The AI can make mistakes. Supervise tasks and review edits. Approval rules are conservative but labels cannot identify every sensitive operation. Stop prevents further steps and cannot undo an action already completed. Refresh the app list before each new task. Observations are bounded and may be incomplete. No background screen recording is included.
+Browser speech may send audio to the browser vendor; Sarvam input sends recordings to Sarvam. Voice is turn-taking, not simultaneous listening and speaking. Leaving or hiding the page stops listening. This is not a background wake-word assistant. Microphone and sound permissions depend on the browser and device.
 
-The companion listens only on 127.0.0.1:4317 for the two exact published JARVIS origins. Pairing codes expire after ten minutes, sessions after thirty minutes. Disconnect or close the companion to revoke access. Credentials stay in memory. The companion makes no outbound requests; the website sends selected-app text to Sarvam for the task you start with permission checked. Summaries may enter later chat context. Avoid selecting windows containing secrets or unrelated private information.
+## Scope
 
-## Other tools
+JARVIS helps write, reason, brainstorm and suggest plans. It does not send emails, place calls, operate other apps, browse live information, schedule calendar events or act after the page closes. Suggestions are not executed tasks. The Sarvam model is unchanged; this release improves prompts, conversational context and presentation, not the model's underlying intelligence.
 
-- Up to three ordinary AI requests run concurrently; spoken replies queue. Separate independent commands with semicolons or "and also" (six per submission, fifteen active tasks total).
-- Local timers, notes and clock: "Set a timer for 5 minutes", "Note: call Alex", "Read my notes", "What time is it?". Keep the tab open; device sleep and browser throttling can delay timers.
-- Selected UTF-8 text-file editing up to 1 MB, save a copy, clipboard and native sharing when supported. AI summaries have a separate checkbox and 50,000-character limit. PDF/Word parsing is not included.
-- Separate voice, cognition, creative and utility waveforms are visual activity signatures, not measured task frequencies.
-- Dry wit or focused personality. AI receives recent completed conversation; simultaneous tasks do not see unfinished outputs from other tasks.
+## Data
 
-Reloading clears keys, conversation, notes, timers and unsaved edits. Export what you want to keep. Ordinary chat answers cannot directly execute desktop actions.
+Conversation, notes, profile and key remain in memory and clear on refresh. Export the session to keep conversation and notes. Completed conversation and local utility results may appear in later AI context. No conversation is stored by this static site; the selected API/speech providers process the data sent to them under their own policies.
 
-## Hosting and release status
+## Build
 
-Static site: deploy index.html, manifest.webmanifest, jarvis-icon-192.png, jarvis-icon-512.png, companion ZIPs and .nojekyll at the root. No website backend/build step is needed. GitHub Pages uses main/root; Vercel imports this repository. New domains require review of the companion origin allowlist. Never upload keys, pairing tokens or private workspace files.
+The workspace builder is `work/build-mark9.cjs`; sources are `mark4-app.js`, `mark4.html`, `mark3-source.html`, `mark4-reactor.js`, `mark8-stream.js`, `mark9-personality.js` and `mark9.css`. It emits a standalone `index.html`. Deploy that HTML with the manifest and icons to HTTPS static hosting.
 
-Mark VI JavaScript syntax checks passed and the Windows helper compiled. Native app operations were not exercised in this release session; compatibility and AI task completion are not guaranteed.
+Syntax checks passed. Real Sarvam responses, microphone operation and physical-device behavior were not tested for this release.
