@@ -360,7 +360,7 @@ function drawReactor(now) {
   pen.setTransform(dpr*size/440,0,0,dpr*size/440,0,0); pen.clearRect(0,0,440,440); pen.translate(220,220);
   const rgba=a=>'rgba('+color.join(',')+','+a+')';
   const glow=pen.createRadialGradient(0,0,15,0,0,175);glow.addColorStop(0,rgba(.11+smoothLevel*.12));glow.addColorStop(1,rgba(0));pen.fillStyle=glow;pen.fillRect(-220,-220,440,440);
-  function arc(radius,start,end,width,alpha){pen.beginPath();pen.lineWidth=width;pen.strokeStyle=rgba(alpha);pen.arc(0,0,radius,start,end);pen.stroke();}
+  function arc(radius,start,end,width,alpha){pen.beginPath();pen.lineWidth=width;pen.strokeStyle=radius>=160?'rgba(255,65,85,'+alpha+')':rgba(alpha);pen.arc(0,0,radius,start,end);pen.stroke();}
   arc(188,0,Math.PI*2,.7,.22);arc(177,0,Math.PI*2,.6,.3);arc(124,0,Math.PI*2,1,.45);
   for(let i=0;i<120;i++){const angle=i*Math.PI/60;pen.save();pen.rotate(angle);pen.strokeStyle=rgba(i%5===0?.7:.22);pen.lineWidth=i%5===0?2:1;pen.beginPath();pen.moveTo(181,0);pen.lineTo(i%5===0?192:186,0);pen.stroke();pen.restore();}
   const spin=t*(processing?.9:.13);
