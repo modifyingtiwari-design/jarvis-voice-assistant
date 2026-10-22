@@ -28,7 +28,9 @@ These commands run without an AI key. Give one instruction per message. AI reque
 
 ## Voice and visuals
 
-Streaming text and device speech are enabled by default. Sarvam speech remains available in Settings. Obsidian replaces neon with graphite, warm ivory and restrained oxblood accents. The animated core uses a shaded metal sphere, engraved orbital rings and a small ember center; its motion changes with listening/thinking/speaking states. Chat sits in a contrasting ivory panel. Decorative wave rhythms are visual state indicators, not measured brain or task frequencies. Reduced-motion preferences are respected.
+Streaming text and Sarvam speech are enabled by default when a key is connected. Voice settings use Bulbul v4 Flash and include multiple Hindi, Hinglish and Indian English personas. Choose **Natural Hinglish**, **Clear Hindi**, **Indian English**, or automatic language matching, then use **Preview selected voice** before starting a conversation. Hinglish replies use Devanagari for Hindi words and Latin script for English words to improve code-mixed pronunciation. An optional device-voice switch offers lower latency with less consistent quality, and the device voice remains the fallback if Sarvam speech fails.
+
+Obsidian uses graphite, warm ivory and restrained oxblood accents. The animated core uses a shaded metal sphere, engraved orbital rings and a small ember center; its motion changes with listening/thinking/speaking states. Chat sits in a contrasting ivory panel. Decorative wave rhythms are visual state indicators, not measured brain or task frequencies. Reduced-motion preferences are respected.
 
 Browser speech may send audio to the browser vendor; Sarvam input sends recordings to Sarvam. Voice is turn-taking, not simultaneous listening and speaking. Leaving or hiding the page stops listening. This is not a background wake-word assistant. Microphone and sound permissions depend on the browser and device.
 
@@ -42,6 +44,6 @@ Conversation, notes, profile and key remain in memory and clear on refresh. Expo
 
 ## Build
 
-The workspace builder is `work/build-mark10.cjs`. It builds the established Mark IX conversation engine, then applies `mark10.css`, `mark10-reactor.js` and the Obsidian layout. It emits a standalone `index.html`. Deploy that HTML with the manifest and icons to HTTPS static hosting. This release changes the presentation; the existing voice, personality, notes and timer behavior is preserved.
+The workspace builder is `work/build-mark10.cjs`. It builds the established conversation engine, including Bulbul v4 voice personas and language-aware response prompting, then applies `mark10.css`, `mark10-reactor.js` and the Obsidian layout. It emits a standalone `index.html`. Deploy that HTML with the manifest and icons to HTTPS static hosting.
 
 Syntax checks passed. Real Sarvam responses, microphone operation and physical-device behavior were not tested for this release.
