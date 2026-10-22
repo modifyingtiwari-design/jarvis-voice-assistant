@@ -1,4 +1,4 @@
-# JARVIS Mark IX — your everyday co-pilot
+# JARVIS Obsidian / Mark X
 
 A conversation-first JARVIS: work assistant, thinking partner and playful buddy. The current interface focuses on voice, chat, planning, notes and timers. It no longer presents phone or computer control panels.
 
@@ -28,7 +28,7 @@ These commands run without an AI key. Give one instruction per message. AI reque
 
 ## Voice and visuals
 
-Streaming text and device speech are enabled by default. Sarvam speech remains available in Settings. The interface shows an animated holographic core, different listening/thinking/speaking states, signal channels and readable cyan/lime accents. Decorative wave rhythms are visual state indicators, not measured brain or task frequencies. Reduced-motion preferences are respected.
+Streaming text and device speech are enabled by default. Sarvam speech remains available in Settings. Obsidian replaces neon with graphite, warm ivory and restrained oxblood accents. The animated core uses a shaded metal sphere, engraved orbital rings and a small ember center; its motion changes with listening/thinking/speaking states. Chat sits in a contrasting ivory panel. Decorative wave rhythms are visual state indicators, not measured brain or task frequencies. Reduced-motion preferences are respected.
 
 Browser speech may send audio to the browser vendor; Sarvam input sends recordings to Sarvam. Voice is turn-taking, not simultaneous listening and speaking. Leaving or hiding the page stops listening. This is not a background wake-word assistant. Microphone and sound permissions depend on the browser and device.
 
@@ -42,6 +42,6 @@ Conversation, notes, profile and key remain in memory and clear on refresh. Expo
 
 ## Build
 
-The workspace builder is `work/build-mark9.cjs`; sources are `mark4-app.js`, `mark4.html`, `mark3-source.html`, `mark4-reactor.js`, `mark8-stream.js`, `mark9-personality.js` and `mark9.css`. It emits a standalone `index.html`. Deploy that HTML with the manifest and icons to HTTPS static hosting.
+The workspace builder is `work/build-mark10.cjs`. It builds the established Mark IX conversation engine, then applies `mark10.css`, `mark10-reactor.js` and the Obsidian layout. It emits a standalone `index.html`. Deploy that HTML with the manifest and icons to HTTPS static hosting. This release changes the presentation; the existing voice, personality, notes and timer behavior is preserved.
 
 Syntax checks passed. Real Sarvam responses, microphone operation and physical-device behavior were not tested for this release.

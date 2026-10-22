@@ -1,13 +1,13 @@
 {
   "id": "./",
-  "name": "JARVIS Mobile Control Center",
+  "name": "JARVIS Obsidian",
   "short_name": "JARVIS",
-  "description": "Voice, chat and phone tools with your permission.",
-  "start_url": "./?view=phone",
+  "description": "Your voice companion for work, ideas and conversation.",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#07121e",
-  "theme_color": "#07121e",
+  "background_color": "#111214",
+  "theme_color": "#111214",
   "icons": [
     { "src": "jarvis-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
     { "src": "jarvis-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
