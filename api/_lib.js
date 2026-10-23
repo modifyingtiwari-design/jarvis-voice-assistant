@@ -5,7 +5,11 @@ function setCors(req, res) {
   const configured = (process.env.ALLOWED_ORIGINS || '')
     .split(',').map(value => value.trim()).filter(Boolean);
   const origin = req.headers.origin;
-  if (origin && configured.includes(origin)) res.setHeader('Access-Control-Allow-Origin', origin);
+  const trusted = new Set([
+    'https://modifyingtiwari-design.github.io',
+    ...configured
+  ]);
+  if (origin && trusted.has(origin)) res.setHeader('Access-Control-Allow-Origin', origin);
   res.setHeader('Vary', 'Origin');
   res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
