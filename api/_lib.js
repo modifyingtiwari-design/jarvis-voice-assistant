@@ -23,7 +23,6 @@ function requireConfig(names) {
 }
 
 async function getUser(req) {
-  requireConfig(['SUPABASE_URL', 'SUPABASE_ANON_KEY']);
   const authorization = req.headers.authorization || '';
   if (!authorization.startsWith('Bearer ')) return null;
   const response = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
@@ -34,7 +33,6 @@ async function getUser(req) {
 }
 
 async function db(path, options = {}, accessToken) {
-  requireConfig(['SUPABASE_URL', 'SUPABASE_ANON_KEY']);
   if (!accessToken) throw new Error('A signed-in session is required.');
   const response = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
     ...options,
