@@ -459,8 +459,9 @@ runStreamingTask=async function(t){
 function syncAudienceUi(){
  const signed=Boolean(audienceSession?.access_token);$('account-button').dataset.signedIn=String(signed);$('account-button').textContent=signed?'Account ✓':'Sign in ↗';
  $('account-signed-out').hidden=signed;$('account-signed-in').hidden=!signed;$('sign-out').hidden=!signed;
- $('connection').textContent=signed?'CLOUD PRIVATE':apiKey?'KEY CONNECTED':'LOCAL READY';
+ $('connection').textContent=signed?'CLOUD PRIVATE':apiKey?'KEY CONNECTED':audienceConfig?'CLOUD READY':'LOCAL READY';
  if(signed){const email=audienceSession.user?.email||'Signed-in member';$('account-email').textContent=email;status('chat-status','Private cloud session ready. Your conversations will be saved.');}
+ else if(audienceConfig&&!apiKey)status('chat-status','Sign in for private AI chat and voice. Timers and notes work immediately.');
 }
 async function hydrateAudience(){
  try{const data=await audienceApi('/api/account');if(data.profile){$('buddy-name').value=data.profile.display_name||'';$('language').value=data.profile.preferred_language||'auto';$('response-language').value=data.profile.response_language||'auto';$('voice').value=data.profile.voice||$('voice').value;$('personality').value=data.profile.personality||'witty';updateBuddyMode();}$('account-meta').textContent=(data.conversations?.length||0)+' saved conversations · '+(data.memories?.length||0)+' memories';}
@@ -482,7 +483,7 @@ for(const id of ['buddy-name','language','response-language','voice','personalit
 
 try{audienceSession=JSON.parse(localStorage.getItem(audienceStorage)||'null');}catch{audienceSession=null;}
 syncAudienceUi();
-void loadAudienceConfig().then(()=>audienceSession?refreshAudienceSession().then(session=>session&&hydrateAudience()):null).catch(error=>status('account-status',error.message,true));
+void loadAudienceConfig().then(()=>{syncAudienceUi();return audienceSession?refreshAudienceSession().then(session=>session&&hydrateAudience()):null;}).catch(error=>status('account-status',error.message,true));
 
 
 requestAnimationFrame(drawReactor);
