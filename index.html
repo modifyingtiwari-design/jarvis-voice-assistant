@@ -460,6 +460,7 @@ function syncAudienceUi(){
  const signed=Boolean(audienceSession?.access_token);$('account-button').dataset.signedIn=String(signed);$('account-button').textContent=signed?'Account ✓':'Sign in ↗';
  $('account-signed-out').hidden=signed;$('account-signed-in').hidden=!signed;$('sign-out').hidden=!signed;
  $('connection').textContent=signed?'CLOUD PRIVATE':apiKey?'KEY CONNECTED':audienceConfig?'CLOUD READY':'LOCAL READY';
+ if(audienceConfig&&!apiKey){const note=document.querySelector('.connection-note');if(note)note.textContent=signed?'Your private JARVIS cloud is connected. Chat and voice use your saved account.':'Sign in once for private AI chat, natural voice and saved conversations.';}
  if(signed){const email=audienceSession.user?.email||'Signed-in member';$('account-email').textContent=email;status('chat-status','Private cloud session ready. Your conversations will be saved.');}
  else if(audienceConfig&&!apiKey)status('chat-status','Sign in for private AI chat and voice. Timers and notes work immediately.');
 }
