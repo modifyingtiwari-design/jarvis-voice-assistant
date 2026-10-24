@@ -38,19 +38,25 @@ module.exports = async function handler(req, res) {
     if (kind === 'tts') {
       const spokenText = text(req.body?.text, 2000);
       if (!spokenText) return json(res, 400, { error: 'Text is required.' });
-      const speaker = text(req.body?.speaker, 80);
+      const legacy = new Set(['shubh','simran','ishita','sunny','ratan','ritu','priya','roopa','dev']);
+      const model = req.body?.model === 'bulbul:v3' ? 'bulbul:v3' : 'bulbul:v4-flash';
+      const requestedSpeaker = text(req.body?.speaker, 80);
+      const speaker = model === 'bulbul:v3' ? (legacy.has(requestedSpeaker) ? requestedSpeaker : 'shubh') : (/^[a-z0-9_]{3,80}$/.test(requestedSpeaker) ? requestedSpeaker : 'shubh_enhi_ads');
+      const requestedPace = Number(req.body?.pace);
+      const pace = Number.isFinite(requestedPace) ? Math.min(1.2, Math.max(0.8, requestedPace)) : 1;
       const language = LANGUAGES.has(req.body?.language_code) ? req.body.language_code : 'en-IN';
       upstream = await fetch(`${API}/text-to-speech`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'api-subscription-key': process.env.SARVAM_API_KEY },
+        signal: AbortSignal.timeout(25000),
         body: JSON.stringify({
           text: spokenText,
-          model: 'bulbul:v4-flash',
+          model,
           speaker: speaker || 'shubh_enhi_ads',
           language_code: language,
           output_audio_codec: 'wav',
           speech_sample_rate: 24000,
-          pace: 1
+          pace
         })
       });
     } else {
@@ -66,14 +72,14 @@ module.exports = async function handler(req, res) {
       form.append('mode', 'transcribe');
       if (LANGUAGES.has(req.body?.language_code)) form.append('language_code', req.body.language_code);
       upstream = await fetch(`${API}/speech-to-text`, {
-        method: 'POST', headers: { 'api-subscription-key': process.env.SARVAM_API_KEY }, body: form
+        method: 'POST', headers: { 'api-subscription-key': process.env.SARVAM_API_KEY }, body: form, signal: AbortSignal.timeout(25000)
       });
     }
 
     const result = await upstream.json().catch(() => ({}));
     if (!upstream.ok) {
       return json(res, upstream.status >= 500 ? 502 : upstream.status, {
-        error: result?.error?.message || result?.message || `Sarvam HTTP ${upstream.status}`
+        error: `Sarvam voice request failed (HTTP ${upstream.status}). Try a different voice or retry.`
       });
     }
     await recordUsage(user.id, eventType, accessToken);
