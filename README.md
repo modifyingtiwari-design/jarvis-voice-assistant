@@ -1,6 +1,6 @@
-# JARVIS / Mark XIII
+# AI Suzie / Mark XIII
 
-Open https://jarvis-voice-assistant-bay.vercel.app/?v=13-fast-voice and sign in. Your account uses the server-side Sarvam key. An optional personal key can be entered in Settings and stays in this tab.
+Open https://jarvis-voice-assistant-bay.vercel.app/?v=ai-suzie and sign in. Your account uses the server-side Sarvam key. An optional personal key can be entered in Settings and stays in this tab.
 
 ## Natural conversation
 
@@ -26,7 +26,7 @@ Supabase tables use authenticated-user ownership policies. Server environment co
 
 ## Source and checks
 
-The workspace build entry is work/build-mark13.cjs. Database additions are documented in schema-mark12.sql. JavaScript syntax checks passed. Physical microphone interruption, speaker echo cancellation and mobile audio behavior need device validation; no claim of zero latency or universal browser compatibility is made.
+The workspace build entry is work/build-ai-suzie.cjs. Database additions are documented in schema-mark12.sql. JavaScript syntax checks passed. Physical microphone interruption, speaker echo cancellation and mobile audio behavior need device validation; no claim of zero latency or universal browser compatibility is made.
 
 PDF.js and Tesseract licenses are included in assets/. PDF.js is pinned to 5.4.149, Tesseract.js to 6.0.1, and its WASM core to 6.0.0.
 ## Streaming voice update
