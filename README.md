@@ -1,6 +1,6 @@
-# AI Suzie / Mark XIII
+# AI Suzie / Atelier
 
-Open https://jarvis-voice-assistant-bay.vercel.app/?v=ai-suzie and sign in. Your account uses the server-side Sarvam key. An optional personal key can be entered in Settings and stays in this tab.
+Open https://jarvis-voice-assistant-bay.vercel.app/?v=suzie-atelier and sign in. Your account uses the server-side Sarvam key. An optional personal key can be entered in Settings and stays in this tab.
 
 ## Natural conversation
 
@@ -26,7 +26,7 @@ Supabase tables use authenticated-user ownership policies. Server environment co
 
 ## Source and checks
 
-The workspace build entry is work/build-ai-suzie.cjs. Database additions are documented in schema-mark12.sql. JavaScript syntax checks passed. Physical microphone interruption, speaker echo cancellation and mobile audio behavior need device validation; no claim of zero latency or universal browser compatibility is made.
+The workspace build entry is work/build-suzie-atelier.cjs. Database additions are documented in schema-mark12.sql. JavaScript syntax checks passed. Physical microphone interruption, speaker echo cancellation and mobile audio behavior need device validation; no claim of zero latency or universal browser compatibility is made.
 
 PDF.js and Tesseract licenses are included in assets/. PDF.js is pinned to 5.4.149, Tesseract.js to 6.0.1, and its WASM core to 6.0.0.
 ## Streaming voice update
@@ -34,3 +34,5 @@ PDF.js and Tesseract licenses are included in assets/. PDF.js is pinned to 5.4.1
 Sarvam audio now streams through an authenticated server endpoint and plays incrementally through Web Audio. Replies no longer need the whole speech file before playback. Later sentences can enter the speech queue while text is still arriving. The previous complete-file speech path remains as a compatibility fallback. The same selected Sarvam voice and pace are preserved.
 
 The voice panel shows time from submitting a task to its first scheduled audio. This includes AI generation and network time; it is not a guarantee of instant replies. Interruption stops both the network stream and scheduled audio. Offline checks cover split WAV headers/frames, unknown-length WAV data, malformed/truncated audio, and cancellation of buffered playback.
+## Atelier interface
+Custom ribbon S logo, a projected metallic voice sculpture, warm coral and ink palette, accessible focus states, mobile layout, and expandable session details. The sculpture reacts to voice activity. Reduced-motion preferences are respected.
