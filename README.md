@@ -1,49 +1,31 @@
-# JARVIS Obsidian / Mark X
+# JARVIS / Mark XII
 
-A conversation-first JARVIS: work assistant, thinking partner and playful buddy. The current interface focuses on voice, chat, planning, notes and timers. It no longer presents phone or computer control panels.
+Open https://jarvis-voice-assistant-bay.vercel.app/?v=12-conversation and sign in. Your account uses the server-side Sarvam key. An optional personal key can be entered in Settings and stays in this tab.
 
-## Start
+## Natural conversation
 
-Open the HTTPS website, choose Settings and connect your Sarvam subscription key. Tap Start conversation and allow the microphone, or type in the chat box. Speak naturally, pause, hear the reply, then continue. Keep the page visible. Tap Interrupt & talk to interrupt a spoken response. Say “stop listening” to end the session.
+Choose **Start conversation**, allow the microphone and keep the tab visible. Natural conversation is on by default. It maintains one microphone session, detects speech locally, transcribes each turn with Sarvam, streams the reply and speaks it in chunks. Speaking over a reply cancels its generation, current audio and queued speech. The page creates no beep and does not repeatedly start browser recognition in this mode. OS permission sounds remain outside its control.
 
-AI replies need internet, a valid Sarvam key and API credits. Your key stays in tab memory and is sent only to api.sarvam.ai. It clears when the page is refreshed or left. No key is bundled in this project.
+Settings lets you choose a 0.6, 0.8 or 1.2 second pause and interruption sensitivity. Headphones work best; choose Headphones sensitivity only when wearing them. Automatic speaker interruption needs browser echo cancellation. Background noise and device audio processing affect recognition. This is not background listening or a wake-word service. Hiding the page or stopping conversation releases the microphone. Internet/provider latency still applies.
 
-## Conversation styles
+## Private assistant library
 
-- **JARVIS:** capable, friendly and dryly witty.
-- **Buddy:** relaxed conversation and useful follow-up questions.
-- **Focus:** practical next steps without teasing.
-- **Roast me:** light, opt-in teasing about harmless habits. Serious topics are handled respectfully.
+- Workspaces organize conversations and saved tasks.
+- Memory supports save/edit/forget/restore. Forgotten entries are excluded from new AI requests, but old messages containing the information remain in history. The eight most recently updated active memories are currently included in model context.
+- History supports title search, continuing a conversation, renaming and moving it. Older messages load in pages; model context uses the most recent 20 cloud messages.
+- Daily briefing uses your saved tasks, dates and priorities. It does not read an external calendar or send background reminders.
+- PDF/text/image chat extracts text on this device. Review and attach it before sending. Only attached text is sent for AI reasoning and stored in signed-in chat history. Limits: 10 MB input, first 20 PDF pages, 10,000 text characters. Scanned PDFs require screenshots or pasted text. Hindi/English screenshot OCR downloads Tesseract core/language files from jsDelivr.
+- Personality, reply length, humour, language and voices can be selected in Settings.
+- Gmail and Calendar prepare reviewed drafts. Google OAuth is not configured: no inbox/calendar reading, automatic sending or event creation. Gmail opens a compose draft; calendar offers a prefilled review page or .ics download.
 
-Quick starters help plan your day, think through work, chat casually or roast an ambitious to-do list. Settings includes an optional name and today's priorities. Recent completed conversation, the profile and up to 15 recent notes are supplied as context to Sarvam. Context is limited to the current tab; this is not persistent personal memory. Change modes at any time; the change applies to the next generated reply.
+## Hosting and data
 
-## Local commands
+Deploy index.html, assets/, api/, vercel.json, the manifest and icons together. Natural conversation and PDF/OCR need the asset files; a standalone HTML copy does not include these modules. HTTPS is required for microphone access. GitHub Pages uses the Vercel API origin for cloud features.
 
-- “Set a timer for two minutes.”
-- “Note: finish the presentation.”
-- “Read my notes.”
-- “What time is it?”
+Supabase tables use authenticated-user ownership policies. Server environment configuration remains required for Supabase and Sarvam. Do not put server secrets in the frontend. Private memory and plans require an account; file extraction and draft preparation can run locally without signing in.
 
-These commands run without an AI key. Give one instruction per message. AI requests run in order to keep conversational context coherent, while timers run independently. Timers require this tab to remain open and may be delayed by device sleep or browser throttling.
+## Source and checks
 
-## Voice and visuals
+The workspace build entry is work/build-mark12.cjs. Database additions are documented in schema-mark12.sql. JavaScript syntax checks passed. Physical microphone interruption, speaker echo cancellation and mobile audio behavior need device validation; no claim of zero latency or universal browser compatibility is made.
 
-Streaming text and Sarvam speech are enabled by default when a key is connected. Voice settings use Bulbul v4 Flash and include multiple Hindi, Hinglish and Indian English personas. Choose **Natural Hinglish**, **Clear Hindi**, **Indian English**, or automatic language matching, then use **Preview selected voice** before starting a conversation. Hinglish replies use Devanagari for Hindi words and Latin script for English words to improve code-mixed pronunciation. An optional device-voice switch offers lower latency with less consistent quality, and the device voice remains the fallback if Sarvam speech fails.
-
-Obsidian uses graphite, warm ivory and restrained oxblood accents. The animated core uses a shaded metal sphere, engraved orbital rings and a small ember center; its motion changes with listening/thinking/speaking states. Chat sits in a contrasting ivory panel. Decorative wave rhythms are visual state indicators, not measured brain or task frequencies. Reduced-motion preferences are respected.
-
-Browser speech may send audio to the browser vendor; Sarvam input sends recordings to Sarvam. Voice is turn-taking, not simultaneous listening and speaking. Leaving or hiding the page stops listening. This is not a background wake-word assistant. Microphone and sound permissions depend on the browser and device.
-
-## Scope
-
-JARVIS helps write, reason, brainstorm and suggest plans. It does not send emails, place calls, operate other apps, browse live information, schedule calendar events or act after the page closes. Suggestions are not executed tasks. The Sarvam model is unchanged; this release improves prompts, conversational context and presentation, not the model's underlying intelligence.
-
-## Data
-
-Conversation, notes, profile and key remain in memory and clear on refresh. Export the session to keep conversation and notes. Completed conversation and local utility results may appear in later AI context. No conversation is stored by this static site; the selected API/speech providers process the data sent to them under their own policies.
-
-## Build
-
-The workspace builder is `work/build-mark10.cjs`. It builds the established conversation engine, including Bulbul v4 voice personas and language-aware response prompting, then applies `mark10.css`, `mark10-reactor.js` and the Obsidian layout. It emits a standalone `index.html`. Deploy that HTML with the manifest and icons to HTTPS static hosting.
-
-Syntax checks passed. Real Sarvam responses, microphone operation and physical-device behavior were not tested for this release.
+PDF.js and Tesseract licenses are included in assets/. PDF.js is pinned to 5.4.149, Tesseract.js to 6.0.1, and its WASM core to 6.0.0.
