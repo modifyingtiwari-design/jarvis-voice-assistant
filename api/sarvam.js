@@ -27,7 +27,7 @@ module.exports = async function handler(req, res) {
   try {
     requireConfig(['SARVAM_API_KEY']);
     const user = await getUser(req);
-    if (!user) return json(res, 401, { error: 'Sign in to use JARVIS voice.' });
+    if (!user) return json(res, 401, { error: 'Sign in to use AI Suzie voice.' });
     const accessToken = req.headers.authorization.slice(7);
     const kind = req.query?.kind;
     if (!['tts', 'stt'].includes(kind)) return json(res, 400, { error: 'Unknown voice operation.' });

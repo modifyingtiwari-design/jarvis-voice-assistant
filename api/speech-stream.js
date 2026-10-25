@@ -8,7 +8,7 @@ module.exports=async(req,res)=>{
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),50000);let reader,usageSave;
  const disconnect=()=>{if(!res.writableEnded)controller.abort();};res.on('close',disconnect);
  try{
-  requireConfig(['SARVAM_API_KEY']);const user=await getUser(req);if(!user)return json(res,401,{error:'Sign in to use JARVIS voice.'});
+  requireConfig(['SARVAM_API_KEY']);const user=await getUser(req);if(!user)return json(res,401,{error:'Sign in to use AI Suzie voice.'});
   const token=req.headers.authorization.slice(7),text=typeof req.body?.text==='string'?req.body.text.trim():'';
   if(!text||text.length>2000)return json(res,400,{error:'Speech text must contain 1–2000 characters.'});
   const since=encodeURIComponent(new Date(Date.now()-3600000).toISOString());
