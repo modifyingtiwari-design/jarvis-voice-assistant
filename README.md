@@ -1,12 +1,12 @@
 # AI Suzie / Atelier
 
-Open https://jarvis-voice-assistant-bay.vercel.app/?v=suzie-atelier and sign in. Your account uses the server-side Sarvam key. An optional personal key can be entered in Settings and stays in this tab.
+Open https://jarvis-voice-assistant-bay.vercel.app/?v=suzie-quick and sign in. Your account uses the server-side Sarvam key. An optional personal key can be entered in Settings and stays in this tab.
 
 ## Natural conversation
 
 Choose **Start conversation**, allow the microphone and keep the tab visible. Natural conversation is on by default. It maintains one microphone session, detects speech locally, transcribes each turn with Sarvam, streams the reply and speaks it in chunks. Speaking over a reply cancels its generation, current audio and queued speech. The page creates no beep and does not repeatedly start browser recognition in this mode. OS permission sounds remain outside its control.
 
-Settings lets you choose a 0.6, 0.8 or 1.2 second pause and interruption sensitivity. Headphones work best; choose Headphones sensitivity only when wearing them. Automatic speaker interruption needs browser echo cancellation. Background noise and device audio processing affect recognition. This is not background listening or a wake-word service. Hiding the page or stopping conversation releases the microphone. Internet/provider latency still applies.
+Settings lets you choose a 0.6 (default), 0.8 or 1.2 second pause and interruption sensitivity. Headphones work best; choose Headphones sensitivity only when wearing them. Automatic speaker interruption needs browser echo cancellation. Background noise and device audio processing affect recognition. This is not background listening or a wake-word service. Hiding the page or stopping conversation releases the microphone. Internet/provider latency still applies.
 
 ## Private assistant library
 
@@ -35,4 +35,8 @@ Sarvam audio now streams through an authenticated server endpoint and plays incr
 
 The voice panel shows time from submitting a task to its first scheduled audio. This includes AI generation and network time; it is not a guarantee of instant replies. Interruption stops both the network stream and scheduled audio. Offline checks cover split WAV headers/frames, unknown-length WAV data, malformed/truncated audio, and cancellation of buffered playback.
 ## Atelier interface
-Custom ribbon S logo, a projected metallic voice sculpture, warm coral and ink palette, accessible focus states, mobile layout, and expandable session details. The sculpture reacts to voice activity. Reduced-motion preferences are respected.
+Custom ribbon S logo, a precision glass core with silver and copper rings, warm coral and ink palette, accessible focus states, mobile layout, and expandable session details. The core reacts to voice activity. Reduced-motion preferences are respected.
+
+## Faster first response
+
+Short sentences, Hindi sentence endings and natural clauses enter speech earlier while the rest of the answer streams. Long unpunctuated openings use word boundaries. Chat history and usage writes run concurrently with generation without blocking the first text, are awaited before completion, and report save failures. Authentication, ownership checks and hourly limits still gate requests. Voice pace and audio quality are unchanged. The default end-of-turn pause is 600 ms; choose a longer pause in Settings if preferred.
