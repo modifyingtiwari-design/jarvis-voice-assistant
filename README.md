@@ -40,3 +40,13 @@ Custom ribbon S logo, a precision glass core with silver and copper rings, warm 
 ## Faster first response
 
 Short sentences, Hindi sentence endings and natural clauses enter speech earlier while the rest of the answer streams. Long unpunctuated openings use word boundaries. Chat history and usage writes run concurrently with generation without blocking the first text, are awaited before completion, and report save failures. Authentication, ownership checks and hourly limits still gate requests. Voice pace and audio quality are unchanged. The default end-of-turn pause is 600 ms; choose a longer pause in Settings if preferred.
+
+## Image studio
+
+Use **Upload image** or **Create image** above the message box. Signed-in accounts can upload JPEG, PNG or WebP files (up to 10 MB); the browser resizes to 1600 pixels and compresses below 2 MB before sending. Choose a file, drop it or paste it in the upload tab. Ask about a screenshot/photo and optionally read the answer aloud. Images and answers are session-only, not saved in chat history. Images are sent to Sarvam only on submission; generation prompts go to the image provider through AI Gateway. Download generated images to keep them.
+
+The server uses the existing `SARVAM_API_KEY` with Sarvam `/v2/chat/completions`, model `gemma4`, for vision. The account must have access to this model. Generation uses Vercel OIDC (`VERCEL_OIDC_TOKEN`, automatically provided on Vercel) or a server-only `AI_GATEWAY_API_KEY` outside Vercel. AI Gateway image-model credit/access must be active. `IMAGE_GENERATION_MODEL` optionally overrides the default `google/gemini-3.1-flash-image` with another compatible text-and-image output model. Never put these credentials in frontend code. Generation has no placeholder-image fallback: missing credit or provider errors are shown explicitly.
+
+Database function `reserve_image_request` from `suzie-images.sql` reserves each attempt atomically under the signed-in user's RLS permissions. Limits are 30 vision requests/hour and 5 generation attempts/hour, 20/day. Cancelled or failed attempts still count. No automatic retry can double-charge a request. Generated responses above the delivery size limit are rejected. Requests time out after 50 seconds; cancellation aborts the upstream request where possible, but cannot undo provider work or charges already incurred.
+
+Build sources: `work/suzie-images.{html,css,js}` are injected by `work/build-suzie-atelier.cjs`. Focused checks: `node work/check-images.cjs`, `node work/check-voice-latency.cjs`, `node work/check-streaming-wave.cjs`.
