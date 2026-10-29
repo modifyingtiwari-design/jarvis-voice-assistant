@@ -22,7 +22,9 @@ async function handler(req,res){
   if(operation==='analyze'&&!validImage(body.image))return json(res,400,{error:'Upload a valid JPEG, PNG or WebP image under 2 MB after resizing.'});
   if(operation==='generate'&&body.image)return json(res,400,{error:'Use the upload tab to ask about an image.'});
   const user=await getUser(req);if(!user)return json(res,401,{error:'Sign in to use the image studio.'});
-  const key=operation==='analyze'?process.env.SARVAM_API_KEY:(process.env.AI_GATEWAY_API_KEY||process.env.VERCEL_OIDC_TOKEN);
+  // Vercel injects a fresh runtime token in the request; the env token is for builds/local development.
+  const oidc=process.env.VERCEL==='1'&&typeof req.headers['x-vercel-oidc-token']==='string'?req.headers['x-vercel-oidc-token']:process.env.VERCEL_OIDC_TOKEN;
+  const key=operation==='analyze'?process.env.SARVAM_API_KEY:(process.env.AI_GATEWAY_API_KEY||oidc);
   if(!key)return json(res,503,{error:operation==='analyze'?'Image understanding is not configured yet.':'Image creation needs AI Gateway activation by the site owner.',code:'setup_required'});
   const allowed=await db('rpc/reserve_image_request',{method:'POST',body:JSON.stringify({operation})},req.headers.authorization.slice(7));
   if(!allowed)return json(res,429,{error:operation==='generate'?'Image creation limit reached (5 attempts per hour, 20 per day). Please try later.':'Image upload limit reached (30 requests per hour). Please try later.'});
