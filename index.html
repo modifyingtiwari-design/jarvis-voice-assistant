@@ -812,7 +812,7 @@ const latencyLine=document.createElement('p');latencyLine.id='voice-latency';lat
 document.querySelector('.console-nav a[href="#session"]').addEventListener('click',()=>{$('session').open=true;});
 // Images are deliberately session-only: never put base64 media in chat history or localStorage.
 (()=>{
- const studio=$('image-studio');let mode='analyze',attachment=null,selection=0,busy=false,controller=null,resultText='',downloadUrl=null;
+ const studio=$('image-studio');let mode='analyze',attachment=null,selection=0,busy=false,controller=null,resultText='',resultMode=null,downloadUrl=null;
  const toolbar=document.createElement('div');toolbar.className='image-tools';
  toolbar.innerHTML='<button type="button" id="open-image-upload"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 6-6 4 4 3-3 5 5"/></svg>Upload image</button><button type="button" id="open-image-create"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/></svg>Create image</button>';
  $('chat-form').before(toolbar);
@@ -823,7 +823,7 @@ document.querySelector('.console-nav a[href="#session"]').addEventListener('clic
   $('image-upload-panel').hidden=mode!=='analyze';$('image-create-panel').hidden=mode!=='generate';
   $('image-submit').textContent=mode==='analyze'?'Ask Suzie ↗':'Create image ↗';
   $('image-privacy').textContent=mode==='analyze'?'Sent to Sarvam only when you ask. Images and results stay in this tab, not your saved history.':'Your prompt is sent to the image provider through AI Gateway. Download your image to keep it; it is not saved to your account.';
-  $('image-result').hidden=true;say('');
+  $('image-result').hidden=mode!==resultMode;say('');
  }
  for(const item of ['analyze','generate'])$('image-tab-'+item).onclick=()=>switchMode(item);
  studio.querySelector('.image-tabs').onkeydown=e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();switchMode(e.key==='Home'?'analyze':e.key==='End'?'generate':mode==='analyze'?'generate':'analyze');$('image-tab-'+mode).focus();}};
@@ -880,7 +880,7 @@ document.querySelector('.console-nav a[href="#session"]').addEventListener('clic
     $('image-download').href=downloadUrl;$('image-download').download='AI-Suzie-image.'+(type==='image/jpeg'?'jpg':type.split('/')[1]);$('image-download').hidden=false;
    }
    if(resultText){const p=document.createElement('p');p.textContent=resultText;content.append(p);}
-   $('image-read').hidden=!resultText;$('image-result').hidden=false;say(mode==='analyze'?'Here’s what I see.':'Your image is ready. Download it to keep it.');$('image-result').scrollIntoView({behavior:'smooth',block:'nearest'});
+   resultMode=mode;$('image-read').hidden=!resultText;$('image-result').hidden=false;say(mode==='analyze'?'Here’s what I see.':'Your image is ready. Download it to keep it.');$('image-result').scrollIntoView({behavior:'smooth',block:'nearest'});
   }catch(error){say(current.signal.aborted?'Request stopped. You can try again.':error.message||'The image request failed.',!current.signal.aborted);}
   finally{clearTimeout(timer);controller=null;setBusy(false);}
  };
