@@ -69,25 +69,19 @@ button,input,select,textarea{border-radius:9px}button{transition:background .18s
 <dialog id="help-dialog"><div class="dialog-title"><h2>At your service</h2><button class="small" id="close-help" aria-label="Close help">✕</button></div><p>Ask questions, draft messages, plan your day, save session notes and run timers. AI replies run one at a time to keep the conversation in order; timers continue independently.</p><p>Try “Set a timer for two minutes”, “Note: buy coffee”, or “What time is it?”. Give one instruction per message; punctuation stays part of your conversation. Local timer and note commands currently use English phrases.</p><p>Natural conversation keeps the microphone open while this tab is visible, including during replies. Your speech can stop the reply; headphones give the most reliable interruption. Say “stop listening” to end it. Transcription, AI generation and speech still require network time.</p><p>This assistant cannot control other apps, send messages or browse the live web. It will not claim an external action was completed.</p><p>Signed-in conversations, memories, plans and preferences are saved privately to your account. AI context and recordings go to Sarvam. Files are extracted locally; their text is sent and saved only when you attach and send it. Session notes and timers clear on refresh. A personal API key stays in tab memory. Google drafts require your review; Google account connection is not configured.</p></dialog>
 <dialog id="image-studio" aria-labelledby="image-studio-title">
  <div class="image-heading"><div><span class="eyebrow">SUZIE / VISUAL STUDIO</span><h2 id="image-studio-title">A different way to think.</h2></div><button type="button" id="image-close" class="subtle" aria-label="Close image studio">×</button></div>
- <p class="image-intro">Show me what you see. Or imagine something new.</p>
- <div class="image-tabs" role="tablist" aria-label="Image tools"><button type="button" id="image-tab-analyze" role="tab" aria-selected="true" aria-controls="image-upload-panel">01 · Ask about an image</button><button type="button" id="image-tab-generate" role="tab" aria-selected="false" aria-controls="image-create-panel" tabindex="-1">02 · Create an image</button></div>
+ <p class="image-intro">Upload a photo or screenshot. Let’s take a closer look.</p>
  <form id="image-form">
-  <section id="image-upload-panel" role="tabpanel" aria-labelledby="image-tab-analyze">
+  <section id="image-upload-panel" aria-label="Ask about an image">
    <input type="file" id="image-file" accept="image/jpeg,image/png,image/webp" hidden>
    <button type="button" id="image-drop" class="image-drop"><span class="image-upload-icon" aria-hidden="true">↥</span><strong>Drop an image, or choose a file</strong><span>Photos, screenshots, sketches · JPG, PNG, WebP · up to 10 MB</span></button>
    <div id="image-attachment" hidden><img id="image-preview" alt="Selected image preview"><div><span id="image-file-name"></span><button type="button" id="image-remove" class="small subtle">Remove image</button></div></div>
    <label for="image-question">What would you like to know?</label><textarea id="image-question" rows="2" maxlength="2000" placeholder="Explain this screenshot, read the text, or suggest improvements…"></textarea>
   </section>
-  <section id="image-create-panel" role="tabpanel" aria-labelledby="image-tab-generate" hidden>
-   <div class="image-create-art" aria-hidden="true"><span></span><span></span><span></span><small>IDEA → IMAGE</small></div>
-   <label for="image-prompt">Describe your image</label><textarea id="image-prompt" rows="3" maxlength="2000" placeholder="A cinematic portrait of a silver robot, warm studio lighting, deep charcoal background…"></textarea>
-   <div class="image-ideas"><button type="button" data-image-idea="A refined futuristic workspace with brushed titanium, warm copper lighting and an enormous window looking out over a rainy city. Cinematic architectural photography, no text.">Future workspace ↗</button><button type="button" data-image-idea="An elegant abstract sculpture of intersecting brushed silver rings floating above black stone, soft peach studio lighting, minimalist product photography, no text.">Metal sculpture ↗</button></div>
-  </section>
   <p class="image-privacy" id="image-privacy">Sent to Sarvam only when you ask. Images and results stay in this tab, not your saved history.</p>
   <div class="image-actions"><button type="submit" id="image-submit">Ask Suzie ↗</button><button type="button" id="image-cancel" class="subtle" hidden>Cancel request</button><span>Signed-in accounts</span></div>
  </form>
  <p id="image-status" role="status" aria-live="polite"></p>
- <section id="image-result" aria-label="Image result" hidden><span class="eyebrow">FROM SUZIE</span><div id="image-result-content"></div><div class="image-result-actions"><button type="button" id="image-read" class="small subtle" hidden>Read answer aloud</button><a id="image-download" download="AI-Suzie-image.png" hidden>Download image ↓</a></div></section>
+ <section id="image-result" aria-label="Image result" hidden><span class="eyebrow">FROM SUZIE</span><div id="image-result-content"></div><div class="image-result-actions"><button type="button" id="image-read" class="small subtle" hidden>Read answer aloud</button></div></section>
 </dialog>
 
 <script>'use strict';
@@ -812,23 +806,12 @@ const latencyLine=document.createElement('p');latencyLine.id='voice-latency';lat
 document.querySelector('.console-nav a[href="#session"]').addEventListener('click',()=>{$('session').open=true;});
 // Images are deliberately session-only: never put base64 media in chat history or localStorage.
 (()=>{
- const studio=$('image-studio');let mode='analyze',attachment=null,selection=0,busy=false,controller=null,resultText='',resultMode=null,downloadUrl=null;
+ const studio=$('image-studio');let attachment=null,selection=0,busy=false,controller=null,resultText='',hasResult=false;
  const toolbar=document.createElement('div');toolbar.className='image-tools';
- toolbar.innerHTML='<button type="button" id="open-image-upload"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 6-6 4 4 3-3 5 5"/></svg>Upload image</button><button type="button" id="open-image-create"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5Z"/></svg>Create image</button>';
+ toolbar.innerHTML='<button type="button" id="open-image-upload"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.5"/><path d="m3 17 6-6 4 4 3-3 5 5"/></svg>Upload image</button>';
  $('chat-form').before(toolbar);
  function say(text,error=false){$('image-status').textContent=text;$('image-status').classList.toggle('error',error);}
- function switchMode(next){
-  if(busy)return;mode=next;
-  for(const item of ['analyze','generate']){const tab=$('image-tab-'+item);tab.setAttribute('aria-selected',String(mode===item));tab.tabIndex=mode===item?0:-1;}
-  $('image-upload-panel').hidden=mode!=='analyze';$('image-create-panel').hidden=mode!=='generate';
-  $('image-submit').textContent=mode==='analyze'?'Ask Suzie ↗':'Create image ↗';
-  $('image-privacy').textContent=mode==='analyze'?'Sent to Sarvam only when you ask. Images and results stay in this tab, not your saved history.':'Your prompt is sent to the image provider through AI Gateway. Download your image to keep it; it is not saved to your account.';
-  $('image-result').hidden=mode!==resultMode;say('');
- }
- for(const item of ['analyze','generate'])$('image-tab-'+item).onclick=()=>switchMode(item);
- studio.querySelector('.image-tabs').onkeydown=e=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();switchMode(e.key==='Home'?'analyze':e.key==='End'?'generate':mode==='analyze'?'generate':'analyze');$('image-tab-'+mode).focus();}};
- $('open-image-upload').onclick=()=>{if(!busy)switchMode('analyze');openDialog('image-studio');};
- $('open-image-create').onclick=()=>{if(!busy)switchMode('generate');openDialog('image-studio');};
+ $('open-image-upload').onclick=()=>{if(!busy){$('image-result').hidden=!hasResult;say('');}openDialog('image-studio');};
  function cancel(){controller?.abort();}
  $('image-close').onclick=()=>{cancel();studio.close();};studio.addEventListener('cancel',cancel);
  $('image-cancel').onclick=cancel;
@@ -857,30 +840,21 @@ document.querySelector('.console-nav a[href="#session"]').addEventListener('clic
  for(const event of ['dragenter','dragover'])$('image-drop').addEventListener(event,e=>{e.preventDefault();$('image-drop').classList.add('dragging');});
  $('image-drop').ondragleave=()=>$('image-drop').classList.remove('dragging');
  $('image-drop').ondrop=e=>{e.preventDefault();$('image-drop').classList.remove('dragging');void selectImage(e.dataTransfer.files[0]);};
- studio.addEventListener('paste',e=>{if(mode!=='analyze'||busy)return;const item=[...e.clipboardData.items].find(i=>i.type.startsWith('image/'));if(item){e.preventDefault();void selectImage(item.getAsFile());}});
- studio.querySelectorAll('[data-image-idea]').forEach(button=>button.onclick=()=>{$('image-prompt').value=button.dataset.imageIdea;$('image-prompt').focus();});
- function setBusy(value){busy=value;studio.classList.toggle('is-busy',value);$('image-cancel').hidden=!value;for(const input of studio.querySelectorAll('#image-form button, #image-form textarea, #image-form input, [role=tab]'))if(input.id!=='image-cancel')input.disabled=value;}
+ studio.addEventListener('paste',e=>{if(busy)return;const item=[...e.clipboardData.items].find(i=>i.type.startsWith('image/'));if(item){e.preventDefault();void selectImage(item.getAsFile());}});
+ function setBusy(value){busy=value;studio.classList.toggle('is-busy',value);$('image-cancel').hidden=!value;for(const input of studio.querySelectorAll('#image-form button, #image-form textarea, #image-form input'))if(input.id!=='image-cancel')input.disabled=value;}
  $('image-form').onsubmit=async e=>{
   e.preventDefault();if(busy)return;
-  if(mode==='analyze'&&!attachment){say('Choose an image first.',true);return;}
-  const prompt=(mode==='analyze'?$('image-question').value:$('image-prompt').value).trim()||(mode==='analyze'?'Describe this image and its important details.':'');
-  if(!prompt){say('Describe the image you want to create.',true);$('image-prompt').focus();return;}
+  if(!attachment){say('Choose an image first.',true);return;}
+  const prompt=$('image-question').value.trim()||'Describe this image and its important details.';
   if(!audienceSession){say('Sign in using Account at the top of Suzie, then return here. Your image will stay ready.',true);return;}
   controller=new AbortController();const current=controller,timer=setTimeout(()=>current.abort(),58000);setBusy(true);$('image-result').hidden=true;
-  say(mode==='analyze'?'Looking closely at your image…':'Creating your image. This can take up to 50 seconds…');
+  say('Looking closely at your image…');
   try{
-   const result=await audienceApi('/api/images',{operation:mode,prompt,...(mode==='analyze'?{image:attachment}:{})},current.signal);
+   const result=await audienceApi('/api/images',{operation:'analyze',prompt,image:attachment},current.signal);
    if(current.signal.aborted)return;
    const content=$('image-result-content');content.replaceChildren();resultText=result.text||'';
-   if(downloadUrl){URL.revokeObjectURL(downloadUrl);downloadUrl=null;}$('image-download').hidden=true;$('image-download').removeAttribute('href');
-   if(result.image){
-    if(!/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/]+=*$/.test(result.image))throw Error('The image response was not valid. Please try again.');
-    const parts=result.image.split(','),type=parts[0].slice(5,-7),binary=atob(parts[1]),bytes=new Uint8Array(binary.length);for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
-    downloadUrl=URL.createObjectURL(new Blob([bytes],{type}));const img=document.createElement('img');img.src=result.image;img.alt=prompt;content.append(img);
-    $('image-download').href=downloadUrl;$('image-download').download='AI-Suzie-image.'+(type==='image/jpeg'?'jpg':type.split('/')[1]);$('image-download').hidden=false;
-   }
    if(resultText){const p=document.createElement('p');p.textContent=resultText;content.append(p);}
-   resultMode=mode;$('image-read').hidden=!resultText;$('image-result').hidden=false;say(mode==='analyze'?'Here’s what I see.':'Your image is ready. Download it to keep it.');$('image-result').scrollIntoView({behavior:'smooth',block:'nearest'});
+   hasResult=true;$('image-read').hidden=!resultText;$('image-result').hidden=false;say('Here’s what I see.');$('image-result').scrollIntoView({behavior:'smooth',block:'nearest'});
   }catch(error){say(current.signal.aborted?'Request stopped. You can try again.':error.message||'The image request failed.',!current.signal.aborted);}
   finally{clearTimeout(timer);controller=null;setBusy(false);}
  };
