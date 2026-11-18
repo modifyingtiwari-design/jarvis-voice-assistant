@@ -6,11 +6,11 @@
   "start_url": "./?view=phone",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#101015",
-  "theme_color": "#101015",
+  "background_color": "#04060b",
+  "theme_color": "#04060b",
   "icons": [
     {
-      "src": "ai-suzie-icon.svg?v=atelier",
+      "src": "ai-suzie-icon.svg?v=nexus",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
